@@ -11,7 +11,7 @@
 // usage: +cl
 
 @mixin moz_scrl() {
-    scrollbar-color: $red $gray;
+    scrollbar-color: red gray;
     scrollbar-width: thin;
 }
 
@@ -19,7 +19,7 @@
     padding-left: 32px;
     padding-right: 32px;
     text-transform: uppercase;
-    font-family: $font;
+    font-family: Arial;
     height: 56px;
     display: flex;
     align-items: center;
@@ -27,33 +27,33 @@
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    color: $white;
+    color: #ffffff;
     border-radius: 6px;
-    background-color: $colorAccent;
+    background-color: red;
     transition-property: background-color, box-shadow;
     transition: ease-in-out 0.3s;
     border: none;
 
     &.gray {
         color: #ffffff;
-        background-color: $cTextDefault;
+        background-color: #fffff5;
 
         &:hover {
             color: #ffffff;
-            background-color: $darkGray;
+            background-color: gray;
         }
     }
 
     &:hover {
-        background-color: $colorAccentHover;
+        background-color: red;
     }
 
     &:disabled {
         cursor: not-allowed;
-        background-color: $darkGray;
+        background-color: slategray;
 
         &:hover {
-            background-color: $darkGray;
+            background-color: gray;
         }
     }
 }
@@ -77,7 +77,7 @@
 }
 
 @mixin html-description() {
-    color: $cTextDefault;
+    color: #0d71bb;
     line-height: 143%;
     transition: $trs;
     @include mobile {
@@ -87,7 +87,7 @@
     ul > li {
 
         &:before {
-            color: $colorAccent;
+            color: red;
             content: "●";
             font-size: 14px;
             padding-right: 10px;
@@ -98,14 +98,14 @@
     ol > li {
         &::marker{
             font-size: 14px;
-            color: $colorAccent;
+            color: red;
         }
         list-style: decimal;
         margin-left: 25px;
         padding-left: 5px;
     }
     strong {
-        color: $colorPrimary;
+        color: gray;
     }
     h3 {
         padding-top: 10px;

@@ -1,6 +1,3 @@
-@import "/_variables";
-@import "/_mixins";
-
 * {
     box-sizing: border-box;
     outline: none;
@@ -18,7 +15,6 @@
         background-color: transparent;
         width: 6px;
         border-radius: 3px;
-        transition: $trs5;
         opacity: 1;
 
         @include mobile {
@@ -31,7 +27,7 @@
     }
 
     &::-webkit-scrollbar-track {
-        background-color: $bgpage-body;
+        background-color: #ffffff;
         border-radius: 3px;
     }
 
@@ -40,7 +36,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: $bgScrollThumb;
+        background-color: #fffff0;
         border-radius: 6px;
 
         @include mobile {
@@ -63,24 +59,24 @@
 
 a {
     text-decoration: none;
-    font-family: $font;
+    font-family: Arial;
     font-weight: bold;
-    color: $cTextDefault;
-    transition: $trs5;
+    color: #fffff1;
+    transition: $trs;
 
     &:hover, &:active, &:visited {
         text-decoration: none;
     }
 
     &:hover {
-        color: $darkBlue;
-        transition: $trs5;
+        color: #000000;
+        transition: $trs;
     }
 }
 
 
 body {
-    font-family: $font;
+    font-family: Arial;
     font-weight: 500;
     font-size: 14px;
     min-width: 320px;
@@ -113,7 +109,7 @@ body {
 }
 
 .root {
-    background-color: $bgpage-body;
+    background-color: #fffff0;
     transition: $trs;
 }
 
@@ -143,7 +139,7 @@ body {
     position: relative;
     padding: 0;
     margin: 30px 10px 0 100px;
-    background-color: $bgpage-body;
+    background-color: #ffffff;
     transition: $trs;
     min-height: calc(100vh - 419px);
 
@@ -170,12 +166,12 @@ body {
     }
 
     h3.sub-title {
-        font-family: $font;
+        font-family: Arial;
         font-style: normal;
         font-weight: bold;
         font-size: 28px;
         line-height: 127%;
-        color: $colorPrimary;
+        color: greenyellow;
         transition: $trs;
         padding-bottom: 20px;
 
@@ -195,41 +191,6 @@ body {
 
 .ruble {
     font-family: "TTNorms", "Helvetica", "Arial", sans-serif;
-}
-
-.amo-button-holder {
-    display: $ammoButton;
-    right: 5px!important;
-    bottom: 15px!important;
-
-    @include mobile {
-        right: 3px!important;
-        bottom: 22px!important;
-    }
-
-    .amo-button--main {
-        transition: background-color $trs!important;
-
-        @include mobile {
-            width: 40px!important;
-            height: 40px!important;
-        }
-
-        &.amo_animation_waves {
-            background-color: $colorAccent!important;
-        }
-
-        &.maincollapsed {
-            border-color: $colorAccent!important;
-            background-color: $white!important;
-        }
-
-        .amo-button--close-icon {
-            path {
-                fill: $colorAccent!important;
-            }
-        }
-    }
 }
 
 .svg-inline--fa .fa-secondary {
