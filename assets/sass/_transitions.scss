@@ -1,0 +1,51 @@
+@import "mixins";
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+}
+
+.layout-enter-active,
+.layout-leave-active {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.layout-enter,
+.layout-leave-to {
+    opacity: 0;
+}
+
+.slide-bottom-enter-active,
+.slide-bottom-leave-active {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.slide-bottom-enter {
+    opacity: 0;
+    transform: translate3d(150px, 0, 0);
+    @include mobile{
+        transform: translate3d(150px, 0, 0);
+    }
+
+}
+
+.slide-bottom-leave-to {
+    opacity: 0;
+    transform: translate3d(0, 150px, 0);
+    @include mobile{
+        transform: translate3d(-150px, 0, 0);
+    }
+}
+
+
+.list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.list-leave-active {
+    position: absolute;
+}

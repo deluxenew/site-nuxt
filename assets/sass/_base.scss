@@ -1,0 +1,242 @@
+@import "/_variables";
+@import "/_mixins";
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    appearance: none;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    font-smooth: always;
+}
+
+::selection { background: #333333; color:#05AAEC }
+
+* {
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 6px;
+        border-radius: 3px;
+        transition: $trs5;
+        opacity: 1;
+
+        @include mobile {
+            width: 3px;
+        }
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $bgpage-body;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $bgScrollThumb;
+        border-radius: 6px;
+
+        @include mobile {
+            border-radius: 3px;
+        }
+
+        &:hover {
+            box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        display: none;
+    }
+
+    &::-webkit-resizer {
+        display: none;
+    }
+}
+
+a {
+    text-decoration: none;
+    font-family: $font;
+    font-weight: bold;
+    color: $cTextDefault;
+    transition: $trs5;
+
+    &:hover, &:active, &:visited {
+        text-decoration: none;
+    }
+
+    &:hover {
+        color: $darkBlue;
+        transition: $trs5;
+    }
+}
+
+
+body {
+    font-family: $font;
+    font-weight: 500;
+    font-size: 14px;
+    min-width: 320px;
+    position: relative;
+    line-height: 1;
+    overflow-x: hidden;
+}
+
+
+
+.hidden {
+    display: none;
+}
+
+.clearfix {
+    //@include clearfix;
+
+    &:before {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.root, .base {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    @include cl;
+}
+
+.root {
+    background-color: $bgpage-body;
+    transition: $trs;
+}
+
+.main {
+    flex: 1;
+    max-width: 891px;
+}
+
+%wrapper-base {
+    margin: 0 auto;
+    max-width: 1200px;
+
+    @include mobile {
+        padding: 0 20px;
+    }
+}
+
+.wrapper {
+    @extend %wrapper-base;
+    position: relative;
+
+
+
+}
+
+.page-body {
+    position: relative;
+    padding: 0;
+    margin: 30px 10px 0 100px;
+    background-color: $bgpage-body;
+    transition: $trs;
+    min-height: calc(100vh - 419px);
+
+    @include mobile {
+        margin: 0;
+
+        .dark-bg {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, .4);
+            z-index: 1;
+            transition: $trs;
+        }
+    }
+
+    &-wrapper {
+        display: flex;
+        @extend %wrapper-base;
+
+        @include mobile {
+            flex-direction: column;
+        }
+    }
+
+    h3.sub-title {
+        font-family: $font;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 127%;
+        color: $colorPrimary;
+        transition: $trs;
+        padding-bottom: 20px;
+
+        @include mobile {
+            font-size: 24px;
+        }
+    }
+}
+
+// transitions
+.fade-enter-active, .fade-leave-active {
+    transition: all .3s  cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.ruble {
+    font-family: "TTNorms", "Helvetica", "Arial", sans-serif;
+}
+
+.amo-button-holder {
+    display: $ammoButton;
+    right: 5px!important;
+    bottom: 15px!important;
+
+    @include mobile {
+        right: 3px!important;
+        bottom: 22px!important;
+    }
+
+    .amo-button--main {
+        transition: background-color $trs!important;
+
+        @include mobile {
+            width: 40px!important;
+            height: 40px!important;
+        }
+
+        &.amo_animation_waves {
+            background-color: $colorAccent!important;
+        }
+
+        &.maincollapsed {
+            border-color: $colorAccent!important;
+            background-color: $white!important;
+        }
+
+        .amo-button--close-icon {
+            path {
+                fill: $colorAccent!important;
+            }
+        }
+    }
+}
+
+.svg-inline--fa .fa-secondary {
+    fill: var(--fa-secondary-color, currentColor);
+}
+
+.svg-inline--fa .fa-primary {
+    fill: var(--fa-primary-color, currentColor);
+}
+
