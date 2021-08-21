@@ -1,6 +1,7 @@
 <template>
   <div>
-    <header-wrapper/>
+    <header-component/>
+
   </div>
 </template>
 

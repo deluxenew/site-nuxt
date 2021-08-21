@@ -1,0 +1,148 @@
+<template>
+  <div class="input-text">
+    <input
+      v-model="text"
+      type="text"
+      id="galaxy"
+      class="balloon"
+      :class="customClasses"
+      :placeholder="placeholder"
+      :style="{ textIndent: indent + 'px' }"
+      @blur="blur"
+      @focus="focus"
+    >
+    <label ref="label" for="galaxy">
+     {{ label }}
+    </label>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "SingleText",
+  props: {
+    value: {
+      type: String,
+      default: '',
+    },
+    label: {
+      type: String,
+      default: '',
+    },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    classes: {
+      type: String,
+      default: '',
+    }
+  },
+  data() {
+    return {
+      indent: 0
+    }
+  },
+  computed: {
+    text: {
+      get() {
+        return this.value
+      },
+      set(v) {
+        this.$emit('input', v)
+      }
+    },
+    customClasses() {
+      return this.classes
+    }
+  },
+  methods: {
+    blur() {
+      this.indent = this.$refs.label.clientWidth
+    },
+    focus() {
+      this.indent = 0
+    }
+  },
+  mounted() {
+    this.blur()
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.input-text {
+  position: relative;
+  margin: 32px 16px;
+}
+.balloon {
+  display: inline-block;
+  width: 100%;
+  padding: 8px 0 8px 16px;
+  font-family: $font;
+  font-weight: 500;
+  color: $default;
+  background: #efefef;
+  border: 0;
+  border-radius: 3px;
+  outline: 0;
+  transition: all .3s ease-in-out;
+
+  &::-webkit-input-placeholder {
+    color: rgba($default, .5);
+    text-indent: 50%;
+    font-weight: 300;
+    font-family: $font;
+  }
+
+  + label {
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    left: 0;
+    bottom: 0px;
+    padding: 8px 16px;
+    color: $green;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(19,74,70,0);
+    transition: all .3s ease-in-out;
+    border-radius: 3px;
+    background: rgba(122,184,147,0);
+
+    &:after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      top: 100%;
+      left: 50%;
+      margin-left: -3px;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 3px solid rgba(122,184,147,0);
+      transition: all .3s ease-in-out;
+    }
+  }
+}
+.balloon:focus,
+.balloon:active {
+  color: $default;
+  text-indent: 0;
+
+  &::-webkit-input-placeholder {
+    color: #aaa;
+  }
+  + label {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(19,74,70,.4);
+    background: $green;
+    transform: translateY(-40px);
+
+    &:after {
+      border-top: 4px solid rgba(122,184,147,1);
+    }
+  }
+}
+</style>

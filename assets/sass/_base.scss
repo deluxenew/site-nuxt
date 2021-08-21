@@ -59,7 +59,7 @@
 
 a {
     text-decoration: none;
-    font-family: Arial;
+    font-family: $font;
     font-weight: bold;
     color: #fffff1;
     transition: $trs;
@@ -76,7 +76,7 @@ a {
 
 
 body {
-    font-family: Arial;
+    font-family: $font;
     font-weight: 500;
     font-size: 14px;
     min-width: 320px;
@@ -166,7 +166,7 @@ body {
     }
 
     h3.sub-title {
-        font-family: Arial;
+        font-family: $font;
         font-style: normal;
         font-weight: bold;
         font-size: 28px;
@@ -190,7 +190,7 @@ body {
 }
 
 .ruble {
-    font-family: "TTNorms", "Helvetica", "Arial", sans-serif;
+    font-family: $font, "Helvetica", "Arial", sans-serif;
 }
 
 .svg-inline--fa .fa-secondary {

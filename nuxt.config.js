@@ -30,9 +30,48 @@ export default {
   },
   modules: [
     '@nuxtjs/style-resources',
+    ['nuxt-font-loader-strategy', {
+      ignoreLighthouse: true,
+      ignoredEffectiveTypes: ['2g', 'slow-2g'],
+      prefetchCount: 0,
+      fonts: [
+        {
+          fileExtensions: ['woff', 'ttf', 'eot'],
+          fontFamily: 'TTNorms',
+          fontFaces: [
+            {
+              preload: true,
+              src: '@/assets/fonts/TTNorms-Bold',
+              fontWeight: 700,
+              fontStyle: 'normal',
+              fontDisplay: 'auto'
+            },
+            {
+              preload: true,
+              src: '@/assets/fonts/TTNorms-Regular',
+              fontWeight: 400,
+              fontStyle: 'normal',
+              fontDisplay: 'auto'
+            },
+            {
+              preload: false,
+              src: '@/assets/fonts/TTNorms-Medium',
+              fontWeight: 500,
+              fontStyle: 'normal',
+              fontDisplay: 'auto'
+            },
+            {
+              preload: false,
+              src: '@/assets/fonts/TTNorms-Light',
+              fontWeight: 300,
+              fontStyle: 'normal',
+              fontDisplay: 'auto'
+            }
+          ]
+        },
+      ]
+    }]
   ],
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
 }
