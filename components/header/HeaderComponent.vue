@@ -1,108 +1,140 @@
 <template>
   <header class="header">
     <div ref="wrapper" class="header-wrapper">
-      <div class="contacts header-item" @click="toggleDropDown('contacts')">
+      <header-item-component
+        title="Контакты"
+        alignTitle="flex-start"
+        icon-name="contacts"
+        item-name="contacts"
+        :title-show="currentItem !== 'contacts'"
+        @click="toggleDropDown($event)"
+      >
         <transition name="bounce">
-          <div class="title" v-if="currentDropDown !== 'contacts'">
-            <div class="desktop">
-              Контакты
-            </div>
+          <fa-icon v-if="currentItem === 'contacts'" class="icon-close icon-close-contacts"
+                   :icon="['fac', 'close']"/>
+        </transition>
+      </header-item-component>
 
-            <div class="mobile">
-              <fa-icon :icon="['fac', 'contacts']"/>
-            </div>
+      <div class="center">
+        <header-item-component
+          title="Рассчитать стоимость"
+          alignTitle="center"
+          class="calc-price"
+          icon-name="calculator"
+          item-name="calc"
+          :title-show="currentItem !== 'calc'"
+          @click="toggleDropDown($event)"
+        >
+          <div class="arrow-button">
+            <transition name="bounce">
+              <fa-icon v-if="currentItem !== 'calc'" class="icon" :icon="['fac', 'chevronDown']"/>
+            </transition>
+
+            <transition name="bounce">
+              <fa-icon v-if="currentItem === 'calc'" class="icon-close icon-close-calc-price" :icon="['fac', 'close']"/>
+            </transition>
+
+            <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
           </div>
-        </transition>
-
-        <transition name="bounce">
-          <fa-icon v-if="currentDropDown === 'contacts'" class="icon-close" :icon="['fac', 'close']"/>
-        </transition>
+        </header-item-component>
       </div>
 
-      <div class="calc-price header-item" @click="toggleDropDown('calc')">
+      <header-item-component
+        title="Меню"
+        alignTitle="flex-end"
+        icon-name="burger"
+        item-name="menu"
+        :title-show="currentItem !== 'menu'"
+        @click="toggleDropDown($event)"
+      >
         <transition name="bounce">
-          <div class="title" v-if="currentDropDown !== 'calc'">
-            <div class="desktop">
-              Рассчитать стоимость
-            </div>
-            <div class="mobile">
-              <fa-icon :icon="['fac', 'calculator']"/>
-            </div>
-          </div>
+          <fa-icon v-if="currentItem === 'menu'" class="icon-close icon-close-menu" :icon="['fac', 'close']"/>
         </transition>
-
-        <div class="arrow-button">
-          <transition name="bounce">
-            <fa-icon v-if="currentDropDown !== 'calc'" class="icon" :icon="['fac', 'chevronDown']"/>
-          </transition>
-
-          <transition name="bounce">
-            <fa-icon v-if="currentDropDown === 'calc'" class="icon-close" :icon="['fac', 'close']"/>
-          </transition>
-
-          <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
-        </div>
-      </div>
-
-      <div class="menu header-item" @click="toggleDropDown('menu')">
-        <transition name="bounce">
-          <div class="title" v-if="currentDropDown !== 'menu'">
-            <div class="desktop">
-              Меню
-            </div>
-
-            <div class="mobile">
-              <fa-icon class="burger" :icon="['fac', 'burger']"/>
-            </div>
-          </div>
-        </transition>
-
-        <transition name="bounce">
-          <fa-icon v-if="currentDropDown === 'menu'" class="icon-close" :icon="['fac', 'close']"/>
-        </transition>
-      </div>
+      </header-item-component>
     </div>
 
-    <transition name="slide-top">
-      <drop-down
-        v-if="currentDropDown === 'calc'"
-        :customStyle="{
-          top: $refs.wrapper.clientHeight,
-          height: dropdownHeight
-        }"
-      >
-        <calc-project-form/>
-      </drop-down>
-    </transition>
+    <drop-down
+      ref="dropdown"
+      animationName="slide-top"
+      :show="showDropDown"
+      :customStyle="customStyleDropDown"
+    >
+      <component
+        :is="currentDropDown"
+        @close="currentItem = ''"
+      />
+    </drop-down>
   </header>
 </template>
 
 <script>
 import DropDown from "../reuse/DropDown";
 import CalcProjectForm from "../forms/CalcProjectForm";
+import HeaderItemComponent from "./items/HeaderItemComponent";
+import ContactsComponent from "./ContactsComponent";
+import HeaderMenu from "./HeaderMenu";
 
 export default {
   name: "HeaderWrapper",
-  components: {CalcProjectForm, DropDown},
+  components: {
+    HeaderMenu,
+    ContactsComponent,
+    HeaderItemComponent,
+    CalcProjectForm,
+    DropDown
+  },
   data() {
     return {
-      currentDropDown: '',
+      currentItem: '',
       dropdownHeight: 0,
+      showDropDown: false,
     }
   },
   watch: {
-    currentDropDown(v) {
+    currentItem(v) {
       if (v) {
         this.dropdownHeight = window.innerHeight - this.$refs.wrapper.clientHeight
+        this.showDropDown = false
+        const vm = this
+        setTimeout(() => {
+          vm.showDropDown = true
+        }, 100)
+        this.subscribeClick()
+      } else {
+        this.unsubscribeClick()
+        this.showDropDown = false
       }
     }
   },
   computed: {
-
+    currentDropDown() {
+      switch (this.currentItem) {
+        case "contacts": return "ContactsComponent"
+        case "calc": return "CalcProjectForm"
+        case "menu": return "HeaderMenu"
+      }
+    },
+    customStyleDropDown() {
+      return {
+        top: this.$refs.wrapper && this.$refs.wrapper.clientHeight || 0,
+        height: this.dropdownHeight || 0,
+        right: this.currentItem !== "menu" ? "auto" : 0,
+        left: this.currentItem !== "menu" ? 0 : "auto"
+      }
+    }
   },
   methods: {
     toggleDropDown(v) {
-      this.currentDropDown !== v ? this.currentDropDown = v : this.currentDropDown = ""
+      this.currentItem !== v ? this.currentItem = v : this.currentItem = ""
+    },
+    onClick(v) {
+      if (!this.$refs.dropdown.$el.contains(v.target) && this.showDropDown === true) this.currentItem = ""
+    },
+    subscribeClick() {
+      window.addEventListener('click', this.onClick)
+    },
+    unsubscribeClick() {
+      window.removeEventListener('click', this.onClick)
     }
   },
 }
@@ -114,7 +146,7 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 16px 24px;
+  padding: 0 24px;
   border-bottom: 3px solid $green;
   transition: $trs;
   color: $default;
@@ -123,26 +155,6 @@ export default {
   font-weight: 500;
   background-color: $white;
   z-index: 1;
-}
-
-
-
-.desktop {
-  text-align: center;
-  @media (max-width: 640px) {
-    display: none;
-  }
-}
-
-.mobile {
-  width: 21px;
-  height: 23px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  @media (min-width: 641px) {
-    display: none;
-  }
 }
 
 .icon-close {
@@ -155,59 +167,29 @@ export default {
   path {
     transition: $trs;
   }
+
+  &:hover {
+    path {
+      fill: $green;
+    }
+  }
+}
+.center {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 250px;
+  height: 54px;
+  left: calc(50% - 125px);
 }
 
-.header-item {
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-content: center;
-  cursor: pointer;
-  color: $default;
-  transition: $trs;
+.calc-price {
+  width: 250px;
 
   .title {
-    display: flex;
-    justify-content: center;
-  }
-
-  .arrow-button {
-    position: relative;
-    text-align: center;
-    width: 90px;
-    z-index: 1;
-    height: 16px;
-    bottom: 0;
-    left: calc(50% - 45px);
-
-    .icon {
-      width: 30px;
-      height: 10px;
-      position: absolute;
-      z-index: 2;
-      bottom: -3px;
-      left: calc(50% - 15px);
-
-      path {
-        transition: $trs;
-      }
-    }
-
-    .icon-bottom {
-      position: absolute;
-      left: calc(50% - 45px);
-      bottom: -20px;
-      z-index: 1;
-
-      path {
-        fill: $green;
-
-        &:last-child {
-          fill: $white;
-        }
-      }
-    }
+    padding: 16px 0;
   }
 
   &:hover {
@@ -224,30 +206,54 @@ export default {
   }
 }
 
-.contacts {
-  .icon-close {
-    left: 24px;
-  }
-}
-
-.calc-price {
+.arrow-button {
   position: absolute;
-  width: 250px;
+  text-align: center;
+  width: 90px;
+  z-index: 1;
+  height: 16px;
   bottom: 0;
-  left: calc(50% - 125px);
+  left: calc(50% - 45px);
 
-  .icon-close {
-    left: calc(50% - 9px);
+  .icon {
+    width: 30px;
+    height: 10px;
+    position: absolute;
+    z-index: 2;
     bottom: -3px;
+    left: calc(50% - 15px);
+
+    path {
+      transition: $trs;
+    }
+  }
+
+  .icon-bottom {
+    position: absolute;
+    left: calc(50% - 45px);
+    bottom: -20px;
+    z-index: 1;
+
+    path {
+      fill: $green;
+
+      &:last-child {
+        fill: $white;
+      }
+    }
   }
 }
 
-.menu {
-  .icon-close {
-    right: 24px;
-  }
-  .burger {
-    height: 16px;
-  }
+.icon-close-contacts {
+  left: 24px;
+}
+
+.icon-close-calc-price {
+  left: calc(50% - 9px);
+  bottom: -3px;
+}
+
+.icon-close-menu {
+  right: 24px;
 }
 </style>

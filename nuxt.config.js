@@ -1,5 +1,4 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'front',
     htmlAttrs: {
@@ -31,6 +30,7 @@ export default {
   },
   modules: [
     '@nuxtjs/style-resources',
+    'vue-yandex-maps/nuxt',
     ['nuxt-font-loader-strategy', {
       ignoreLighthouse: true,
       ignoredEffectiveTypes: ['2g', 'slow-2g'],

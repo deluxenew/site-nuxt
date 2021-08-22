@@ -9,15 +9,16 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "5.12.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "@nuxtjs/axios": "5.12.5",
     "axios": "^0.21.1",
     "core-js": "^3.16.2",
     "cross-env": "^7.0.2",
     "nuxt": "^2.15.7",
     "nuxt-font-loader-strategy": "^1.1.5",
-    "vue-js-modal": "^2.0.1"
+    "vue-js-modal": "^2.0.1",
+    "vue-yandex-maps": "^0.10.12"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",

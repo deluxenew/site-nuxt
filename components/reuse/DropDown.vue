@@ -1,10 +1,18 @@
 <template>
-  <div
-    class="dropdown"
-    :style="{top: `${customStyle.top}px`, height: `${customStyle.height}px`}"
-  >
-    <slot/>
-  </div>
+  <transition :name="animationName">
+    <div
+      v-if="show"
+      class="dropdown"
+      :style="{
+        top: `${customStyle.top}px`,
+        height: `${customStyle.height}px`,
+        right: `${customStyle.right}px`,
+        left: `${customStyle.left}px`
+      }"
+    >
+      <slot/>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -17,6 +25,14 @@ export default {
         top: 0,
         height: 0,
       }),
+    },
+    animationName: {
+      type: String,
+      default: 'slide-top'
+    },
+    show: {
+      type: Boolean,
+      default: false,
     }
   },
 }
@@ -25,9 +41,8 @@ export default {
 <style lang="scss" scoped>
 .dropdown {
   position: absolute;
-  left: 0;
-  width: 100vw;
-  padding: 24px;
+  width: auto;
   z-index: 0;
+  background-color: $white;
 }
 </style>

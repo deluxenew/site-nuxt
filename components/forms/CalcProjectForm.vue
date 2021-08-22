@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.calc-form {
+  width: 100vw;
+  padding: 32px;
+}
 .title {
   color: $default;
   font-weight: 800;
@@ -37,6 +41,6 @@ export default {
 }
 
 .calc-form {
-  height: 100%;
+  height: 50%;
 }
 </style>
