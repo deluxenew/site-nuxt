@@ -1,80 +1,110 @@
 <template>
-  <header>
+  <header class="header">
     <div ref="wrapper" class="header-wrapper">
-      <div class="header-contacts">
-        Контакты
-      </div>
-      <div class="calc-price" @click="calcOpen = !calcOpen">
+      <div class="contacts header-item" @click="toggleDropDown('contacts')">
         <transition name="bounce">
-          <div v-if="!calcOpen">Рассчитать стоимость</div>
+          <div class="title" v-if="currentDropDown !== 'contacts'">
+            <div class="desktop">
+              Контакты
+            </div>
+
+            <div class="mobile">
+              <fa-icon :icon="['fac', 'contacts']"/>
+            </div>
+          </div>
         </transition>
-        <div class="arrow-button">
-          <transition name="bounce">
-            <svg v-if="!calcOpen" class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 7">
-              <path
-                d="M20.833 1.581l-9.57 5.365c-.201.113-.507-.039-.75-.335-.244.305-.556.464-.76.35L.182 1.596C-.059 1.46-.052 1.007.199.583.449.159.848-.075 1.09.06l9.405 5.272L19.926.046c.241-.136.64.098.891.522.251.424.258.878.016 1.013z"
-                fill-rule="evenodd">
-              </path>
-            </svg>
-          </transition>
-          <transition name="bounce">
-            <svg v-if="calcOpen" class="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
-              <path
-                d="M9.877 8.506l6.84 6.837a.972.972 0 0 1-.689 1.66.97.97 0 0 1-.688-.285L8.501 9.882l-6.839 6.836a.972.972 0 0 1-1.377 0 .973.973 0 0 1 0-1.376l6.839-6.836L.285 1.671A.973.973 0 1 1 1.662.295l6.839 6.836L15.34.294a.974.974 0 0 1 1.377 1.376l-6.84 6.836z"
-                fill-rule="evenodd">
-              </path>
-            </svg>
-          </transition>
-          <svg class="icon-bottom" xmlns="http://www.w3.org/2000/svg" width="91" height="24" viewBox="0 0 91 24">
-            <g fill-rule="evenodd">
-              <path d="M0 4l44 20L91 4H0z">
-              </path>
-              <path d="M91 0L44 20 0 0h91z">
-              </path>
-            </g>
-          </svg>
-        </div>
-      </div>
-      <div class="header-menu">
-        Меню
+
+        <transition name="bounce">
+          <fa-icon v-if="currentDropDown === 'contacts'" class="icon-close" :icon="['fac', 'close']"/>
+        </transition>
       </div>
 
-    </div>
-    <transition name="slide-top">
-      <div v-if="calcOpen" class="dropdown"
-           :style="{top: `${$refs.wrapper.clientHeight}px`, height: `${dropdownHeight}px`}">
-        <div class="calc-form">
-          <h3 class="title">Рассчет стоимости проекта</h3>
-          <single-text
-            v-model="text"
-            label="двавай"
-            placeholder="вводим"
-          />
+      <div class="calc-price header-item" @click="toggleDropDown('calc')">
+        <transition name="bounce">
+          <div class="title" v-if="currentDropDown !== 'calc'">
+            <div class="desktop">
+              Рассчитать стоимость
+            </div>
+            <div class="mobile">
+              <fa-icon :icon="['fac', 'calculator']"/>
+            </div>
+          </div>
+        </transition>
+
+        <div class="arrow-button">
+          <transition name="bounce">
+            <fa-icon v-if="currentDropDown !== 'calc'" class="icon" :icon="['fac', 'chevronDown']"/>
+          </transition>
+
+          <transition name="bounce">
+            <fa-icon v-if="currentDropDown === 'calc'" class="icon-close" :icon="['fac', 'close']"/>
+          </transition>
+
+          <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
         </div>
       </div>
+
+      <div class="menu header-item" @click="toggleDropDown('menu')">
+        <transition name="bounce">
+          <div class="title" v-if="currentDropDown !== 'menu'">
+            <div class="desktop">
+              Меню
+            </div>
+
+            <div class="mobile">
+              <fa-icon class="burger" :icon="['fac', 'burger']"/>
+            </div>
+          </div>
+        </transition>
+
+        <transition name="bounce">
+          <fa-icon v-if="currentDropDown === 'menu'" class="icon-close" :icon="['fac', 'close']"/>
+        </transition>
+      </div>
+    </div>
+
+    <transition name="slide-top">
+      <drop-down
+        v-if="currentDropDown === 'calc'"
+        :customStyle="{
+          top: $refs.wrapper.clientHeight,
+          height: dropdownHeight
+        }"
+      >
+        <calc-project-form/>
+      </drop-down>
     </transition>
   </header>
 </template>
 
 <script>
-import SingleText from "../reuse/SingleText";
+import DropDown from "../reuse/DropDown";
+import CalcProjectForm from "../forms/CalcProjectForm";
+
 export default {
   name: "HeaderWrapper",
-  components: {SingleText},
+  components: {CalcProjectForm, DropDown},
   data() {
     return {
-      calcOpen: false,
+      currentDropDown: '',
       dropdownHeight: 0,
-      text: '',
     }
   },
   watch: {
-    calcOpen(v) {
+    currentDropDown(v) {
       if (v) {
         this.dropdownHeight = window.innerHeight - this.$refs.wrapper.clientHeight
       }
     }
-  }
+  },
+  computed: {
+
+  },
+  methods: {
+    toggleDropDown(v) {
+      this.currentDropDown !== v ? this.currentDropDown = v : this.currentDropDown = ""
+    }
+  },
 }
 </script>
 
@@ -95,53 +125,59 @@ export default {
   z-index: 1;
 }
 
-.header-contacts {
-  display: block;
-}
 
-.dropdown {
-  position: absolute;
-  left: 0;
-  width: 100vw;
-  padding: 24px;
-  z-index: 0;
 
-  .title {
-    color: $default;
-    font-weight: 800;
-    display: block;
-    font-family: $font;
-    font-size: 4em;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-right: 20px;
-  }
-
-  .calc-form {
-    height: 100%;
+.desktop {
+  text-align: center;
+  @media (max-width: 640px) {
+    display: none;
   }
 }
 
-.calc-price {
-  width: 250px;
+.mobile {
+  width: 21px;
+  height: 23px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  @media (min-width: 641px) {
+    display: none;
+  }
+}
+
+.icon-close {
+  width: 18px;
+  height: 18px;
   position: absolute;
+  z-index: 2;
+  top: calc(50% - 9px);
+
+  path {
+    transition: $trs;
+  }
+}
+
+.header-item {
   bottom: 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-content: center;
-  text-align: center;
-  left: calc(50% - 125px);
   cursor: pointer;
   color: $default;
   transition: $trs;
+
+  .title {
+    display: flex;
+    justify-content: center;
+  }
 
   .arrow-button {
     position: relative;
     text-align: center;
     width: 90px;
     z-index: 1;
-    height: 20px;
+    height: 16px;
     bottom: 0;
     left: calc(50% - 45px);
 
@@ -152,19 +188,6 @@ export default {
       z-index: 2;
       bottom: -3px;
       left: calc(50% - 15px);
-
-      path {
-        transition: $trs;
-      }
-    }
-
-    .icon-close {
-      width: 18px;
-      height: 18px;
-      position: absolute;
-      z-index: 2;
-      left: calc(50% - 9px);
-      bottom: -3px;
 
       path {
         transition: $trs;
@@ -198,6 +221,33 @@ export default {
         }
       }
     }
+  }
+}
+
+.contacts {
+  .icon-close {
+    left: 24px;
+  }
+}
+
+.calc-price {
+  position: absolute;
+  width: 250px;
+  bottom: 0;
+  left: calc(50% - 125px);
+
+  .icon-close {
+    left: calc(50% - 9px);
+    bottom: -3px;
+  }
+}
+
+.menu {
+  .icon-close {
+    right: 24px;
+  }
+  .burger {
+    height: 16px;
   }
 }
 </style>

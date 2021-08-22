@@ -98,9 +98,9 @@ export default {
   + label {
     display: inline-block;
     position: absolute;
-    top: 4px;
+    top: 3px;
     left: 0;
-    bottom: 0px;
+    bottom: 0;
     padding: 8px 16px;
     color: $green;
     font-size: 11px;
