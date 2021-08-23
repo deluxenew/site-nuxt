@@ -40,7 +40,7 @@ export default {
 
 <style lang="scss" scoped>
 .dropdown {
-  position: absolute;
+  position: fixed;
   width: auto;
   z-index: 0;
   background-color: $white;

@@ -31,10 +31,10 @@ export default {
 }
 .title {
   color: $default;
-  font-weight: 800;
+  font-weight: 500;
   display: block;
   font-family: $font;
-  font-size: 4em;
+  font-size: 32px;
   text-align: center;
   margin-bottom: 20px;
   margin-right: 20px;

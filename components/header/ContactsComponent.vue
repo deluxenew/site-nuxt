@@ -44,10 +44,10 @@ export default {
   width: 50vw;
 
   .title {
-    font-size: 4vw;
+    font-size: 32px;
     line-height: normal;
     margin-bottom: 40px;
-    font-weight: 700;
+    font-weight: 500;
     text-align: center;
     color: $default;
     width: 100%;

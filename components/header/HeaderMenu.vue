@@ -69,7 +69,7 @@ export default {
 </script>
 <style>
 :root {
-  --base-grid: calc(8px - (1080px - 100vh) / 200);
+  --base-grid: calc(8px - (1080px - 100vh) / 50);
 }
 </style>
 <style lang="scss" scoped>
@@ -77,7 +77,7 @@ export default {
 
 .top-menu {
   padding: 32px;
-  min-width: 100vw;
+  min-width: 50vw;
   width: 100%;
   transition: $trs;
   height: 100%;
@@ -99,7 +99,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 64px);
     top: 50vh;
     padding-top: 32px;
   }
