@@ -13,7 +13,7 @@
 
     &::-webkit-scrollbar {
         background-color: transparent;
-        width: 6px;
+        width: 0;
         border-radius: 3px;
         opacity: 1;
 
@@ -115,7 +115,6 @@ body {
 
 .main {
     flex: 1;
-    max-width: 891px;
 }
 
 %wrapper-base {

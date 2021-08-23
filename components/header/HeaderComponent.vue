@@ -7,13 +7,9 @@
         icon-name="contacts"
         item-name="contacts"
         :title-show="currentItem !== 'contacts'"
+        :currentItem="currentItem"
         @click="toggleDropDown($event)"
-      >
-        <transition name="bounce">
-          <fa-icon v-if="currentItem === 'contacts'" class="icon-close icon-close-contacts"
-                   :icon="['fac', 'close']"/>
-        </transition>
-      </header-item-component>
+      />
 
       <div class="center">
         <header-item-component
@@ -22,21 +18,10 @@
           class="calc-price"
           icon-name="calculator"
           item-name="calc"
+          :currentItem="currentItem"
           :title-show="currentItem !== 'calc'"
           @click="toggleDropDown($event)"
-        >
-          <div class="arrow-button">
-            <transition name="bounce">
-              <fa-icon v-if="currentItem !== 'calc'" class="icon" :icon="['fac', 'chevronDown']"/>
-            </transition>
-
-            <transition name="bounce">
-              <fa-icon v-if="currentItem === 'calc'" class="icon-close icon-close-calc-price" :icon="['fac', 'close']"/>
-            </transition>
-
-            <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
-          </div>
-        </header-item-component>
+        />
       </div>
 
       <header-item-component
@@ -44,13 +29,10 @@
         alignTitle="flex-end"
         icon-name="burger"
         item-name="menu"
+        :currentItem="currentItem"
         :title-show="currentItem !== 'menu'"
         @click="toggleDropDown($event)"
-      >
-        <transition name="bounce">
-          <fa-icon v-if="currentItem === 'menu'" class="icon-close icon-close-menu" :icon="['fac', 'close']"/>
-        </transition>
-      </header-item-component>
+      />
     </div>
 
     <drop-down
@@ -137,6 +119,9 @@ export default {
       window.removeEventListener('click', this.onClick)
     }
   },
+  beforeDestroy() {
+    this.unsubscribeClick()
+  }
 }
 </script>
 
@@ -157,23 +142,7 @@ export default {
   z-index: 1;
 }
 
-.icon-close {
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  z-index: 2;
-  top: calc(50% - 9px);
 
-  path {
-    transition: $trs;
-  }
-
-  &:hover {
-    path {
-      fill: $green;
-    }
-  }
-}
 .center {
   position: absolute;
   display: flex;
@@ -206,54 +175,4 @@ export default {
   }
 }
 
-.arrow-button {
-  position: absolute;
-  text-align: center;
-  width: 90px;
-  z-index: 1;
-  height: 16px;
-  bottom: 0;
-  left: calc(50% - 45px);
-
-  .icon {
-    width: 30px;
-    height: 10px;
-    position: absolute;
-    z-index: 2;
-    bottom: -3px;
-    left: calc(50% - 15px);
-
-    path {
-      transition: $trs;
-    }
-  }
-
-  .icon-bottom {
-    position: absolute;
-    left: calc(50% - 45px);
-    bottom: -20px;
-    z-index: 1;
-
-    path {
-      fill: $green;
-
-      &:last-child {
-        fill: $white;
-      }
-    }
-  }
-}
-
-.icon-close-contacts {
-  left: 24px;
-}
-
-.icon-close-calc-price {
-  left: calc(50% - 9px);
-  bottom: -3px;
-}
-
-.icon-close-menu {
-  right: 24px;
-}
 </style>

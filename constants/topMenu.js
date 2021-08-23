@@ -1,28 +1,66 @@
 export const topMenu = [
   {
     id: 1,
-    title: "ГЛАВНАЯ",
+    title: "Главная",
     link: "/",
     children: [],
+    background: "",
     iconName: "home",
   },
   {
     id: 2,
-    title: "ПРОЕКТЫ",
+    title: "Проекты",
     link: "/",
-    children: [],
+    children: [
+      {
+        id: 1,
+        title: "Брусовые",
+        link: "/projects",
+        iconName: "home",
+      },
+      {
+        id: 2,
+        title: "Бревенчатые",
+        link: "/",
+        iconName: "home",
+      },
+      {
+        id: 3,
+        title: "Конструктор",
+        link: "/",
+        iconName: "home"
+      },
+      {
+        id: 4,
+        title: "Премиум",
+        link: "/",
+        iconName: "home"
+      },
+      {
+        id: 5,
+        title: "Эконом",
+        link: "/",
+        iconName: "home"
+      },
+      {
+        id: 6,
+        title: "Каменные",
+        link: "/",
+        iconName: "home"
+      }
+    ],
     iconName: "home",
   },
   {
     id: 3,
-    title: "ГАЛЕРЕЯ",
+    title: "Галерея",
     link: "/",
-    children: [],
+
     iconName: "photo",
   },
   {
     id: 4,
-    title: "СТАТЬИ",
+    title: "Статьи",
     link: "/",
     children: [],
     iconName: "articles",
@@ -36,7 +74,7 @@ export const topMenu = [
   },
   {
     id: 6,
-    title: "УСЛУГИ",
+    title: "Услуги",
     link: "/",
     children: [],
     iconName: "services",

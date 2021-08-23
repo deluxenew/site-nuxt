@@ -12,6 +12,24 @@
       </div>
     </transition>
 
+    <div class="arrow-button" v-if="itemName ==='calc'">
+      <transition name="bounce">
+        <fa-icon v-if="currentItem !== 'calc'" class="icon" :icon="['fac', 'chevronDown']"/>
+      </transition>
+
+      <transition name="bounce">
+        <fa-icon v-if="currentItem === 'calc'" class="icon-close calc" :icon="['fac', 'close']"/>
+      </transition>
+
+      <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
+    </div>
+
+    <template v-else>
+      <transition name="bounce">
+        <fa-icon v-if="currentItem === itemName" class="icon-close" :class="itemName"
+                 :icon="['fac', 'close']"/>
+      </transition>
+    </template>
     <slot/>
   </div>
 </template>
@@ -20,6 +38,10 @@
 export default {
   name: "HeaderItemComponent",
   props: {
+    currentItem: {
+      type: String,
+      default: ''
+    },
     alignTitle: {
       type: String,
       default: 'flex-start'
@@ -74,6 +96,75 @@ export default {
   }
 }
 
+.icon-close {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  z-index: 2;
+  top: calc(50% - 9px);
+
+  path {
+    transition: $trs;
+  }
+
+  &:hover {
+    path {
+      fill: $green;
+    }
+  }
+
+  &.contacts {
+    left: 24px;
+  }
+
+  &.calc {
+    left: calc(50% - 9px);
+    bottom: -3px;
+  }
+
+  &.menu {
+    right: 24px;
+  }
+}
+
+.arrow-button {
+  position: absolute;
+  text-align: center;
+  width: 90px;
+  z-index: 1;
+  height: 16px;
+  bottom: 0;
+  left: calc(50% - 45px);
+
+  .icon {
+    width: 30px;
+    height: 10px;
+    position: absolute;
+    z-index: 2;
+    bottom: -3px;
+    left: calc(50% - 15px);
+
+    path {
+      transition: $trs;
+    }
+  }
+
+  .icon-bottom {
+    position: absolute;
+    left: calc(50% - 45px);
+    bottom: -20px;
+    z-index: 1;
+
+    path {
+      fill: $green;
+
+      &:last-child {
+        fill: $white;
+      }
+    }
+  }
+}
+
 .header-item {
   padding: 16px 0;
   display: flex;
@@ -82,19 +173,19 @@ export default {
   align-content: center;
   cursor: pointer;
   color: $default;
+  min-width: 150px;
 
   .title {
     display: flex;
     justify-content: center;
+    height: 21px;
   }
 
   &:hover {
-    .arrow-button {
-        .icon, .icon-close {
-          path {
-            fill: $green;
-          }
-        }
+    .icon, .icon-close {
+      path {
+        fill: $green;
+      }
     }
 
     .desktop {
