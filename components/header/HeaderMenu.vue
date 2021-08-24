@@ -90,6 +90,7 @@ export default {
     text-align: center;
     color: $default;
     width: 100%;
+    min-width: 512px;
   }
 
   .links {

@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .contacts {
   padding: 32px;
-  width: 50vw;
+  min-width: 50vw;
 
   .title {
     font-size: 32px;
@@ -51,6 +51,7 @@ export default {
     text-align: center;
     color: $default;
     width: 100%;
+    min-width: 512px;
   }
 
   .contact-item {
