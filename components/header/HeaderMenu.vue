@@ -89,6 +89,7 @@ export default {
     font-size: $h1;
     line-height: normal;
     font-weight: 500;
+    font-family: $font;
     text-align: center;
     color: $default;
     width: 100%;

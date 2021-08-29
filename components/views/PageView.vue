@@ -4,15 +4,11 @@
       class="main"
       :style="`--main-height: ${wrapHeight + 'px'}`"
       v-for="(item, index) in sections"
-      :key="index"
+      :key="JSON.stringify(item)"
       :id="index + 1"
     >
       <div class="container">
-        <div class="title">
-          {{ item.title }}
-        </div>
-
-        <slot :name="item.slotName" />
+        <slot :name="item.slotName"/>
       </div>
     </section>
     <aside class="navigator">
@@ -22,8 +18,7 @@
            :class="{ active: currentId === index}"
            @click="onScrollTOBlock(index)"
       >
-        <span>{{ item.title }}</span>
-
+        <span>{{ item.navTitle }}</span>
       </div>
     </aside>
   </div>
@@ -31,7 +26,7 @@
 
 <script>
 
-const MOVE_COUNT = 2
+const MOVE_COUNT = 3
 
 export default {
   name: 'PageView',
@@ -50,6 +45,7 @@ export default {
       touchPosition: 0,
       touchHold: false,
       moveCount: 0,
+      touchRange: 0
     }
   },
   watch: {
@@ -60,8 +56,9 @@ export default {
       })
     },
     touchPosition(newV, oldV) {
-      this.moveCount++
-      if (!this.isScrolling && this.touchHold && this.moveCount === MOVE_COUNT) {
+
+     if (this.touchHold ) this.moveCount++
+      if (!this.isScrolling && this.touchHold && this.moveCount === MOVE_COUNT && this.touchRange > 50) {
         this.getPosition(oldV - newV)
       }
     },
@@ -72,13 +69,22 @@ export default {
   methods: {
     getTouchPosition(event) {
       this.touchHold = true
+      setTimeout(() => {
+
+      }, 0)
+      if (this.touchPosition !== event.touches[0].clientY) {
+        if (event.touches[0].clientY - this.touchPosition > 0) this.touchRange = event.touches[0].clientY - this.touchPosition
+        else this.touchRange = this.touchPosition - event.touches[0].clientY
+      }
       this.touchPosition = event.touches[0].clientY
     },
     getTouchMove(event) {
       if (!this.isScrolling) this.touchPosition = event.touches[0].clientY
+      setTimeout(() => this.moveCount = 0, 100)
     },
     getCurrentPositionWheel(event) {
       if (!this.isScrolling) this.getPosition(event.deltaY)
+      this.isScrolling = true
     },
     getPosition(deltaY) {
       const winHeight = this.wrapHeight
@@ -116,6 +122,7 @@ export default {
     this.$refs.wrap.addEventListener('touchend', () => {
       this.moveCount = 0
       this.touchHold = false
+      this.touchRange = 0
     }, {passive: true})
     this.$refs.wrap.addEventListener('touchmove', this.getTouchMove, {passive: true})
   },
@@ -127,6 +134,7 @@ export default {
     this.$refs.wrap.removeEventListener('touchend', () => {
       this.moveCount = 0
       this.touchHold = false
+      this.touchRange = 0
     })
     this.$refs.wrap.removeEventListener('touchmove', this.getTouchMove)
   }
@@ -139,6 +147,7 @@ export default {
   width: 100vw;
   height: 100%;
   overflow: hidden;
+
 }
 
 .navigator {
@@ -153,6 +162,7 @@ export default {
   align-items: center;
   justify-content: center;
   transition: $trs;
+  z-index: 10;
 
   .nav-item {
     display: flex;
@@ -160,7 +170,7 @@ export default {
     justify-content: center;
     flex-grow: 1;
     color: $white;
-    width: 8px;
+    width: $rate;
     height: 0;
     cursor: pointer;
     user-select: none;
@@ -199,26 +209,18 @@ export default {
 
 .main {
   width: 100vw;
-  background-image: url('/images/bg2.png');
-  background-size: auto auto;
-  background-position: center top;
-  background-repeat: repeat-y;
   min-height: calc(100vh - 56px);
   height: var(--main-height);
+  padding-right: $rate;
 
   .container {
-    padding: $largePadding;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     height: 100%;
     width: 100%;
-  }
-
-  .title {
-    color: $default;
-    font-size: $h1;
   }
 }
 </style>

@@ -39,5 +39,6 @@ export default {
   padding-top: 56px;
   height: 100vh;
   overflow-y: auto;
+  z-index: 0;
 }
 </style>

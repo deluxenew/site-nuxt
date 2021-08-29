@@ -128,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 .header {
   overflow: visible;
+  z-index: 9001;
 }
 .header-wrapper {
   position: fixed;
@@ -141,8 +142,9 @@ export default {
   font-size: 20px;
   line-height: 1;
   font-weight: 500;
+  font-family: $font;
   background-color: $white;
-  z-index: 1;
+  z-index: 9002;
   overflow: visible;
 }
 
@@ -153,7 +155,7 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 250px;
+  width: 300px;
   height: 54px;
   left: calc(50% - 125px);
 
@@ -164,7 +166,7 @@ export default {
 }
 
 .calc-price {
-  width: 250px;
+  width: 300px;
 
   .title {
     padding: 16px 0;

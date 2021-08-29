@@ -52,6 +52,7 @@ export default {
     line-height: normal;
     margin-bottom: 40px;
     font-weight: 500;
+    font-family: $font;
     text-align: center;
     color: $default;
     width: 100%;
@@ -63,6 +64,7 @@ export default {
     align-items: center;
     font-size: $h2;
     font-weight: 500;
+    font-family: TTNormss;
 
     .text {
       padding-left: 24px;

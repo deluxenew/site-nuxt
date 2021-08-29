@@ -38,37 +38,23 @@ export default {
       prefetchCount: 0,
       fonts: [
         {
-          fileExtensions: ['woff', 'ttf', 'eot'],
+          fileExtensions: ['woff'],
           fontFamily: 'TTNorms',
           fontFaces: [
             {
               preload: true,
-              src: '@/assets/fonts/TTNorms-Bold',
-              fontWeight: 700,
-              fontStyle: 'normal',
-              fontDisplay: 'swap'
-            },
-            {
-              preload: true,
-              src: '@/assets/fonts/TTNorms-Regular',
-              fontWeight: 400,
-              fontStyle: 'normal',
-              fontDisplay: 'swap'
-            },
-            {
-              preload: false,
-              src: '@/assets/fonts/TTNorms-Medium',
+              src: '@/assets/fonts/WaffleSoft',
               fontWeight: 500,
               fontStyle: 'normal',
               fontDisplay: 'swap'
             },
             {
-              preload: false,
-              src: '@/assets/fonts/TTNorms-Light',
-              fontWeight: 300,
+              preload: true,
+              src: '@/assets/fonts/WaffleSlab',
+              fontWeight: 400,
               fontStyle: 'normal',
               fontDisplay: 'swap'
-            }
+            },
           ]
         },
       ]

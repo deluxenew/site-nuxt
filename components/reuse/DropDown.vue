@@ -42,7 +42,7 @@ export default {
 .dropdown {
   position: fixed;
   width: auto;
-  z-index: 0;
+  z-index: 9000;
   background-color: $white;
 }
 </style>
