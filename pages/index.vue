@@ -1,62 +1,39 @@
 <template>
-  <div class="main">
-    <div class="main">
-      <div class="container">
-        <div class="title">
-          Первый экран
-        </div>
-      </div>
-    </div>
-    <div class="main">
-      <div class="container">
-        <div class="title">
-          Второй экран
-        </div>
-      </div>
-    </div>
-    <div class="main">
-      <div class="container">
-        <div class="title">
-          Третий экран
-        </div>
-      </div>
-    </div>
-    <div class="main">
-      <div class="container">
-        <div class="title">
-          Четвертый экран
-        </div>
-      </div>
-    </div>
-  </div>
+  <page-view :sections="sections">
+    <div :slot="sections[0].slotName">123123</div>
+  </page-view>
 </template>
 
 <script>
-export default {}
+import PageView from "../components/views/PageView";
+
+export default {
+  name: "IndexPage",
+  components: {PageView},
+  data() {
+    return {
+      sections: [
+        {
+          title: 'Первый экран',
+          slotName: 'one',
+        },
+        {
+          title: 'Второй экран',
+          slotName: 'two',
+        },
+        {
+          title: 'Третий экран',
+          slotName: 'tree',
+        },
+        {
+          title: 'Четвертый экран',
+          slotName: 'four',
+        }]
+    }
+  },
+}
 </script>
 
-<style lang="scss">
+<style scoped>
 
-.main {
-  width: 100vw;
-  background-image: url('/images/header.jpg');
-  background-size: auto auto;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: 100%;
-
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-  }
-
-  .title {
-    color: $white;
-    font-size: 32px;
-  }
-}
 </style>

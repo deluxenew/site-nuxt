@@ -5,9 +5,10 @@
     </div>
 
     <div class="links">
-      <ul class="links__list" :style="`--item-total:${items.length}`">
+      <ul class="links__list" :style="`--item-total:${items.filter(el => !el.isParent).length}`">
         <li v-for="item in items"
             class="links__item"
+            :class="{ parent: item.isParent }"
             :style="`--item-count:${item.id}`"
             :key="item.title"
         >
@@ -69,28 +70,28 @@ export default {
 </script>
 <style>
 :root {
-  --base-grid: calc(8px - (1080px - 100vh) / 50);
+  --base-grid: calc(8px - (1080px - 100vmin) / 180);
 }
 </style>
 <style lang="scss" scoped>
-
-
 .top-menu {
   padding: 32px;
   min-width: 50vw;
   width: 100%;
   transition: $trs;
   height: 100%;
+  @media (max-width: 640px) {
+    width: 100vw;
+  }
 
   .title {
     padding-top: 32px;
-    font-size: 32px;
+    font-size: $h1;
     line-height: normal;
     font-weight: 500;
     text-align: center;
     color: $default;
     width: 100%;
-    min-width: 512px;
   }
 
   .links {
@@ -122,6 +123,10 @@ export default {
     --rotation: calc(120deg + var(--angle) * var(--item-count));
     transform: rotate(var(--rotation)) translate(calc(var(--link-size) + var(--base-grid) * 8 - (1080px - 100vh) / 32)) rotate(calc(var(--rotation) * -1));
     cursor: pointer;
+
+    &.parent {
+     transform: translate(0);
+    }
   }
 
   .links__link {
@@ -168,10 +173,10 @@ export default {
     text-align: center;
     height: calc(var(--base-grid) * 2);
     font-size: calc(var(--base-grid) * 2);
-    display: none;
     bottom: calc(var(--base-grid) * 8.5);
     animation: text .3s ease-in-out forwards;
     text-transform: uppercase;
+    transition: all .3s cubic-bezier(.53, -.67, .73, .74);
   }
 
   .links__link:after {
@@ -197,6 +202,7 @@ export default {
 
   .links__link:hover .links__text {
     display: block;
+    color: $green;
   }
 
   .links__link:hover:after {

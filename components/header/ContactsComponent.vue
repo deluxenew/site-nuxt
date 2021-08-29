@@ -42,22 +42,26 @@ export default {
 .contacts {
   padding: 32px;
   min-width: 50vw;
+  @media (max-width: 640px) {
+    width: 100vw;
+  }
+
 
   .title {
-    font-size: 32px;
+    font-size: $h1;
     line-height: normal;
     margin-bottom: 40px;
     font-weight: 500;
     text-align: center;
     color: $default;
     width: 100%;
-    min-width: 512px;
+
   }
 
   .contact-item {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: $h2;
     font-weight: 500;
 
     .text {

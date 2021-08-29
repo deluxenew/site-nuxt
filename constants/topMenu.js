@@ -1,17 +1,25 @@
 export const topMenu = [
   {
-    id: 1,
+    id: 0,
     title: "Главная",
     link: "/",
     children: [],
     background: "",
     iconName: "home",
+    isParent: true,
   },
   {
     id: 2,
     title: "Проекты",
     link: "/",
     children: [
+      {
+        id: 0,
+        title: "Все проекты",
+        link: "/projects",
+        iconName: "home",
+        isParent: true,
+      },
       {
         id: 1,
         title: "Брусовые",

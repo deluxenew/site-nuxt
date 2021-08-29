@@ -1,0 +1,117 @@
+<template>
+  <footer class="footer" :class="{ active: openFooter }">
+    <div class="hover-line" @click="getFooter">
+      <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
+      <fa-icon class="icon-chevron" :class="{ opened: openFooter }" :icon="['fac', 'chevronDown']"/>
+    </div>
+  </footer>
+</template>
+
+<script>
+export default {
+  name: "FooterComponent",
+  data() {
+    return {
+      openFooter: false
+    }
+  },
+  methods: {
+    getFooter() {
+      this.openFooter = !this.openFooter
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.footer {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  background: #ffffff;
+  transition: $trs;
+  height: 0;
+  border-top: none;
+
+  &.active {
+    height: 300px;
+    border-top: 3px solid $green;
+
+    .hover-line {
+      .icon-bottom {
+        transform: scale(-1) translateY(0px);
+      }
+    }
+  }
+
+  .hover-line {
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    height: 30px;
+    top: -20px;
+
+    .icon-bottom {
+      position: absolute;
+      width: 90px;
+      transform: scale(-1) translateY(-50px);
+      z-index: 1;
+      left: calc(50% - 45px);
+      transition: $trs;
+      cursor: pointer;
+
+      path {
+        fill: $green;
+
+        &:last-child {
+          fill: $white;
+        }
+      }
+    }
+
+    .icon-chevron {
+      position: absolute;
+      width: 24px;
+      z-index: 1;
+      top: 10px;
+      transform: scale(-1) translateY(-50px);
+      left: calc(50% - 12px);
+      opacity: 0;
+      transition: $trs;
+      cursor: pointer;
+
+      path {
+        transition: $trs;
+      }
+
+      &.opened {
+        opacity: 1;
+        transform: scale(1);
+        top: 14px;
+      }
+    }
+
+    &:hover {
+      .icon-bottom {
+        transform: scale(-1) translateY(0px);
+      }
+      .icon-chevron {
+        opacity: 1;
+        transform: scale(-1) translateY(0px);
+        path {
+          fill: $green;
+        }
+
+        &.opened {
+          opacity: 1;
+          transform: scale(1);
+
+          path {
+            fill: $green;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

@@ -175,7 +175,7 @@ body {
         padding-bottom: 20px;
 
         @include mobile {
-            font-size: 24px;
+            font-size: $h3;
         }
     }
 }

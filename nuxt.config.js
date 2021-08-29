@@ -1,13 +1,13 @@
 export default {
   head: {
-    title: 'front',
+    title: 'Строительство из дерева и камня',
     htmlAttrs: {
       lang: 'ru'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Недорогое строительство под ключ с использованием современных материалов и технологий.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -29,6 +29,7 @@ export default {
     ]
   },
   modules: [
+    '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     'vue-yandex-maps/nuxt',
     ['nuxt-font-loader-strategy', {
@@ -45,28 +46,28 @@ export default {
               src: '@/assets/fonts/TTNorms-Bold',
               fontWeight: 700,
               fontStyle: 'normal',
-              fontDisplay: 'auto'
+              fontDisplay: 'swap'
             },
             {
               preload: true,
               src: '@/assets/fonts/TTNorms-Regular',
               fontWeight: 400,
               fontStyle: 'normal',
-              fontDisplay: 'auto'
+              fontDisplay: 'swap'
             },
             {
               preload: false,
               src: '@/assets/fonts/TTNorms-Medium',
               fontWeight: 500,
               fontStyle: 'normal',
-              fontDisplay: 'auto'
+              fontDisplay: 'swap'
             },
             {
               preload: false,
               src: '@/assets/fonts/TTNorms-Light',
               fontWeight: 300,
               fontStyle: 'normal',
-              fontDisplay: 'auto'
+              fontDisplay: 'swap'
             }
           ]
         },
@@ -74,5 +75,24 @@ export default {
     }]
   ],
   build: {
-  }
+  },
+  pwa: {
+    manifest: {
+      name: 'Строительство',
+      short_name: 'BrusKing',
+      description: 'Строительна платформа для заказчиков и клиентов',
+      lang: 'ru',
+      theme_color: '#4dce00',
+      background_color: '#F2F4F5',
+      useWebmanifestExtension: false,
+      display: 'standalone',
+    },
+    meta: {
+      mobileAppIOS: true,
+      author: 'Саня',
+      description: 'Приложение для строителей',
+      lang: 'ru',
+      ogSiteName: 'BrusKing'
+    }
+  },
 }

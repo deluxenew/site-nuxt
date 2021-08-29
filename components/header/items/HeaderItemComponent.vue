@@ -175,6 +175,10 @@ export default {
   color: $default;
   min-width: 150px;
 
+  @media (max-width: 640px) {
+    min-width: 100px;
+  }
+
   .title {
     display: flex;
     justify-content: center;

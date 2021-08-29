@@ -126,6 +126,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+  overflow: visible;
+}
 .header-wrapper {
   position: fixed;
   display: flex;
@@ -140,6 +143,7 @@ export default {
   font-weight: 500;
   background-color: $white;
   z-index: 1;
+  overflow: visible;
 }
 
 
@@ -152,6 +156,11 @@ export default {
   width: 250px;
   height: 54px;
   left: calc(50% - 125px);
+
+  @media (max-width: 640px) {
+    width: 150px;
+    left: calc(50% - 75px);
+  }
 }
 
 .calc-price {
