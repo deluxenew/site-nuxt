@@ -19,7 +19,8 @@
     "nuxt": "^2.15.7",
     "nuxt-font-loader-strategy": "^1.1.5",
     "vue-js-modal": "^2.0.1",
-    "vue-yandex-maps": "^0.10.12"
+    "vue-yandex-maps": "^0.10.12",
+    "webpack-require_context": "^0.0.2"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",

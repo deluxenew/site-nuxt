@@ -1,26 +1,26 @@
 <template>
   <page-view :sections="sections">
-    <div class="view-block" :slot="sections[0].slotName">
-      <welcome-block />
+    <div class="view-block" v-for="section in sections" :slot="section.slotName" :key="section.slotName">
+      <component
+        v-for="component in Object.keys(blockComponents[section.slotName][0].componentsProps || {})"
+        :key="JSON.stringify(component)"
+        :is="component"
+        v-bind="section.componentsProps[component]"
+      />
     </div>
-    <div :slot="sections[1].slotName">2</div>
-    <div :slot="sections[2].slotName">3</div>
-    <div :slot="sections[3].slotName">4</div>
   </page-view>
 </template>
 
 <script>
-import PageView from "../components/views/PageView";
-import WelcomeBlock from "../components/viewBoxes/WelcomeBlock";
+import { views } from "~/constants/views";
+const { content: { components }} = views
 
 export default {
   name: "IndexPage",
-  components: {
-    WelcomeBlock,
-    PageView
-  },
+  components,
   data() {
     return {
+      ret: components,
       sections: [
         {
           navTitle: 'Приветствие',
@@ -37,7 +37,34 @@ export default {
         {
           navTitle: 'Четвертый экран',
           slotName: 'four',
+          componentsProps: {
+            test: {
+              title: 'sadasd'
+            },
+            WelcomeBlock: {},
+            PageView: {},
+          }
         }]
+    }
+  },
+  computed: {
+    blockComponents() {
+      const groupBy = (list, key) => {
+        return list.reduce(function (rv, x) {
+          (rv[x[key]] = rv[x[key]] || []).push(x)
+          return rv
+        }, {})
+      }
+      return groupBy(this.sections, 'slotName')
+    }
+  },
+  methods: {
+    getComponentName(section, component) {
+      if (section) {
+        const sec = this.sections.find((el) => el.slotName === section.slotName)
+        if (sec) if (sec.componentsProps && sec.componentsProps.hasOwnProperty(component)) return component
+      }
+      return ''
     }
   },
 }

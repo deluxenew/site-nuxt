@@ -5,8 +5,12 @@
 </template>
 
 <script>
+
 export default {
-  name: "projects"
+  name: "projects",
+  components: {
+
+  }
 }
 </script>
 

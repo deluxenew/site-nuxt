@@ -15,7 +15,7 @@ export default {
     ]
   },
   plugins: [
-    { mode: 'all', src: '~/plugins/fontawesome' },
+    { mode: 'all', src: '~/plugins/fontawesome' }
   ],
   components: true,
   buildModules: [

@@ -56,8 +56,7 @@ export default {
       })
     },
     touchPosition(newV, oldV) {
-
-     if (this.touchHold ) this.moveCount++
+     if (this.touchHold) this.moveCount++
       if (!this.isScrolling && this.touchHold && this.moveCount === MOVE_COUNT && this.touchRange > 50) {
         this.getPosition(oldV - newV)
       }
@@ -68,18 +67,19 @@ export default {
   },
   methods: {
     getTouchPosition(event) {
+      const { touches } = event
+      const { clientY } = touches[0]
       this.touchHold = true
-      setTimeout(() => {
-
-      }, 0)
-      if (this.touchPosition !== event.touches[0].clientY) {
-        if (event.touches[0].clientY - this.touchPosition > 0) this.touchRange = event.touches[0].clientY - this.touchPosition
-        else this.touchRange = this.touchPosition - event.touches[0].clientY
+      if (this.touchPosition !== clientY) {
+        if (clientY - this.touchPosition > 0) this.touchRange = clientY - this.touchPosition
+        else this.touchRange = this.touchPosition - clientY
       }
-      this.touchPosition = event.touches[0].clientY
+      this.touchPosition = clientY
     },
     getTouchMove(event) {
-      if (!this.isScrolling) this.touchPosition = event.touches[0].clientY
+      const { touches } = event
+      const { clientY } = touches[0]
+      if (!this.isScrolling) this.touchPosition = clientY
       setTimeout(() => this.moveCount = 0, 100)
     },
     getCurrentPositionWheel(event) {
@@ -97,25 +97,26 @@ export default {
       this.scrollToPosition(this.currentPosition)
     },
     setIsScrolling(event) {
-      this.isScrolling = event.target.scrollTop !== this.currentPosition;
+      const { target: { scrollTop }} = event
+      this.isScrolling = scrollTop !== this.currentPosition;
     },
     onScrollTOBlock(id) {
       this.currentPosition = id * this.wrapHeight
       this.scrollToPosition(this.currentPosition)
     },
     scrollToPosition(top) {
-      this.$refs.wrap.scrollTo({top, behavior: "smooth"})
+      this.$refs.wrap.scrollTo({ top, behavior: "smooth" })
+      setTimeout(() => {
+        this.isScrolling = false
+      }, 100)
     },
-    setResize(event) {
-      if (event) this.wrapHeight = window.innerHeight - 56
-      else this.wrapHeight = window.innerHeight - 56
+    setResize() {
+      this.wrapHeight = window.innerHeight - 56
     }
   },
-  beforeMount() {
-    this.setResize()
-    window.addEventListener('resize', this.setResize, {passive: true})
-  },
   mounted() {
+    this.setResize()
+    window.addEventListener('resize', this.setResize, { passive: true })
     this.$refs.wrap.addEventListener('scroll', this.setIsScrolling, {passive: true})
     this.$refs.wrap.addEventListener('wheel', this.getCurrentPositionWheel, {passive: true})
     this.$refs.wrap.addEventListener('touchstart', this.getTouchPosition, {passive: true})
