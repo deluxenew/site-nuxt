@@ -1,28 +1,30 @@
-export default {
+const pkg = require('../package')
+
+module.exports = {
+  telemetry: false,
+  target: 'server',
+  htmlAttrs: {
+    lang: 'ru'
+  },
   head: {
-    title: 'Строительство из дерева и камня',
-    htmlAttrs: {
-      lang: 'ru'
-    },
+    title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Недорогое строительство под ключ с использованием современных материалов и технологий.' },
-      { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  plugins: [
-    { mode: 'all', src: '~/plugins/fontawesome' }
-  ],
-  components: true,
-  buildModules: [
-  ],
+  loading: { color: '#fff' },
   css: [
     '@/assets/sass/main.scss',
   ],
+  plugins: [
+    { mode: 'all', src: '~/plugins/fontawesome' }
+  ],
+
   styleResources: {
     scss: [
       '@/assets/vars/variables.scss',
@@ -61,7 +63,11 @@ export default {
       ]
     }]
   ],
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+  },
   build: {
+
   },
   pwa: {
     manifest: {

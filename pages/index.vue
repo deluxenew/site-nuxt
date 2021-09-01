@@ -37,7 +37,6 @@ export default {
           navTitle: 'Третий экран',
           slotName: 'tree',
           componentsProps: {
-
           }
         },
         {

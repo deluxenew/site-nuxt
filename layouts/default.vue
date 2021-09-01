@@ -3,6 +3,8 @@
     <header-component />
 
     <div class="content">
+      <button @click="addRouteName(123)">13132</button>
+      <button @click="setModel('photo')">13132</button>
       <nuxt/>
     </div>
 
@@ -11,21 +13,35 @@
 </template>
 
 <script>
-import FooterComponent from "../components/footer/FooterComponent";
+ import FooterComponent from "../components/footer/FooterComponent";
+import HeaderComponent from "../components/header/HeaderComponent";
+import api from '~/src/api'
+
 export default {
   name: "default",
-  components: {FooterComponent},
+  components: {FooterComponent, HeaderComponent},
   methods: {
-    onScroll(e) {
-      console.log(e)
+    setModel(val) {
+
+    },
+    getRouteName: function() {
+      api.request('GET', 'user/all').then(function(response){
+        if (response.data) {
+          console.log(response)
+        }else{
+          console.log('No instances found in the database')
+        }
+      })
+    },
+    addRouteName: function(name) {
+      api.request('POST', 'user/add', { name: name }).then(function (response) {
+        console.log(response)
+      })
     },
   },
   mounted() {
-    document.addEventListener('scroll', this.onScroll)
+    this.getRouteName()
   },
-  beforeDestroy() {
-    document.removeEventListener('scroll', this.onScroll)
-  }
 }
 </script>
 
