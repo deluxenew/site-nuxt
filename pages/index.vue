@@ -25,6 +25,9 @@ export default {
         {
           navTitle: 'Приветствие',
           slotName: 'one',
+          componentsProps: {
+            WelcomeBlock: {},
+          }
         },
         {
           navTitle: 'Второй экран',
@@ -33,6 +36,9 @@ export default {
         {
           navTitle: 'Третий экран',
           slotName: 'tree',
+          componentsProps: {
+
+          }
         },
         {
           navTitle: 'Четвертый экран',
@@ -41,8 +47,6 @@ export default {
             test: {
               title: 'sadasd'
             },
-            WelcomeBlock: {},
-            PageView: {},
           }
         }]
     }
@@ -56,15 +60,6 @@ export default {
         }, {})
       }
       return groupBy(this.sections, 'slotName')
-    }
-  },
-  methods: {
-    getComponentName(section, component) {
-      if (section) {
-        const sec = this.sections.find((el) => el.slotName === section.slotName)
-        if (sec) if (sec.componentsProps && sec.componentsProps.hasOwnProperty(component)) return component
-      }
-      return ''
     }
   },
 }
