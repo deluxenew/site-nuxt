@@ -21,11 +21,15 @@ export default {
   name: "default",
   components: {FooterComponent, HeaderComponent},
   methods: {
+    async autoAuth() {
+      await this.$store.dispatch('auth/autoAuth')
+    },
     setModel(val) {
 
     },
     getRouteName: function() {
-      api.request('GET', 'user/all').then(function(response){
+
+      api.request('GET', 'auth/user/all').then(function(response){
         if (response.data) {
           console.log(response)
         }else{
@@ -34,13 +38,14 @@ export default {
       })
     },
     addRouteName: function(name) {
-      api.request('POST', 'user/add', { name: name }).then(function (response) {
+      api.request('POST', 'user/add', { email: name, password: 123123123 }).then(function (response) {
         console.log(response)
       })
     },
   },
-  mounted() {
+  async mounted() {
     this.getRouteName()
+    await this.autoAuth()
   },
 }
 </script>

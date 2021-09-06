@@ -1,4 +1,6 @@
+const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 export default {
+  mode: 'universal',
   head: {
     title: 'Строительство из дерева и камня',
     htmlAttrs: {
@@ -15,7 +17,9 @@ export default {
     ]
   },
   plugins: [
-    { mode: 'all', src: '~/plugins/fontawesome' }
+    { mode: 'all', src: '~/plugins/fontawesome' },
+    { mode: 'all', src: '~/plugins/api-plugin' },
+    { mode: 'all', src: '~/plugins/utils-plugin' }
   ],
   components: true,
   buildModules: [
@@ -61,7 +65,24 @@ export default {
       ]
     }]
   ],
+  router: {
+    // middleware: ['auth']
+  },
   build: {
+    // optimization: {
+    //   splitChunks: {
+    //     maxSize: 249856 * 2,
+    //   },
+    // },
+    // splitChunks: {
+    //   name: debug,
+    //   layouts: true,
+    //   pages: true,
+    //   commons: true,
+    // },
+    // extractCSS: {
+    //   ignoreOrder: true,
+    // },
   },
   pwa: {
     manifest: {

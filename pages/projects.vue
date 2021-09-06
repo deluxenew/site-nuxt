@@ -8,6 +8,7 @@
 
 export default {
   name: "projects",
+  middleware: 'auth',
   components: {
 
   }

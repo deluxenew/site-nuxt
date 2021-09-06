@@ -1,13 +1,9 @@
 const mongoose = require('mongoose')
-// Define collection and schema for todo item
+const Schema = mongoose.Schema
 
-const User = new mongoose.Schema({
-    name: {
-      type: String
-    }
-  },
-  {
-    collection: 'Users'
+const UserSchema = new Schema({
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
   }
 )
-module.exports = mongoose.model('Users', User)
+module.exports =  mongoose.model('User', UserSchema)

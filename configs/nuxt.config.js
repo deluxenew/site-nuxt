@@ -1,13 +1,13 @@
-const pkg = require('../package')
+const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 module.exports = {
   telemetry: false,
-  target: 'server',
-  htmlAttrs: {
-    lang: 'ru'
-  },
+  mode: 'universal',
   head: {
-    title: pkg.name,
+    title: 'Строительство из дерева и камня',
+    htmlAttrs: {
+      lang: 'ru'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -22,9 +22,10 @@ module.exports = {
     '@/assets/sass/main.scss',
   ],
   plugins: [
-    { mode: 'all', src: '~/plugins/fontawesome' }
+    { mode: 'all', src: '~/plugins/fontawesome' },
+    { mode: 'all', src: '~/plugins/api-plugin' },
+    { mode: 'all', src: '~/plugins/utils-plugin' }
   ],
-
   styleResources: {
     scss: [
       '@/assets/vars/variables.scss',
@@ -63,11 +64,29 @@ module.exports = {
       ]
     }]
   ],
+  router: {
+   // middleware: ['auth']
+  },
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.HOST_URL,
+    withCredentials: true,
+    debug,
   },
   build: {
-
+    // optimization: {
+    //   splitChunks: {
+    //     maxSize: 249856 * 2,
+    //   },
+    // },
+    // splitChunks: {
+    //   name: debug,
+    //   layouts: true,
+    //   pages: true,
+    //   commons: true,
+    // },
+    // extractCSS: {
+    //   ignoreOrder: true,
+    // },
   },
   pwa: {
     manifest: {
