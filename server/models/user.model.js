@@ -10,8 +10,11 @@ const userSchema = new Schema({
     type: String,
     minLength: 6,
     required: true
+  },
+  tokens: {
+    type: Array,
+    default: () => []
   }
-
 })
 
 module.exports = model('User', userSchema)

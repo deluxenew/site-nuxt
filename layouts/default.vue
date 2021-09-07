@@ -3,8 +3,6 @@
     <header-component />
 
     <div class="content">
-      <button @click="addRouteName(123)">13132</button>
-      <button @click="setModel('photo')">13132</button>
       <nuxt/>
     </div>
 
@@ -24,22 +22,13 @@ export default {
     async autoAuth() {
       await this.$store.dispatch('auth/autoAuth')
     },
-    setModel(val) {
-
-    },
     getRouteName: function() {
-
       api.request('GET', 'auth/user/all').then(function(response){
         if (response.data) {
           console.log(response)
-        }else{
+        } else {
           console.log('No instances found in the database')
         }
-      })
-    },
-    addRouteName: function(name) {
-      api.request('POST', 'user/add', { email: name, password: 123123123 }).then(function (response) {
-        console.log(response)
       })
     },
   },

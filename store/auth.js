@@ -2,28 +2,39 @@ const axios = require('axios')
 import Cookie from 'cookie'
 import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
+
 export const state = () => ({
-  token: false
+  token: false,
+  user: null,
 })
 
 export const mutations = {
-  setToken(state, token) {
-    state.token = token
-  },
-  clearToken(state) {
-    state.token = null
-  }
+  setUser(state, user)    { state.user = user },
+  clearUser(state)        { state.user = null },
+  setToken(state, token)  { state.token = token },
+  clearToken(state)       { state.token = null }
 }
 
 export const actions = {
   async login({ dispatch, commit }, { login, password }) {
     try {
-      const { token } = await this.$api.login({ login, password })
+      const { token, user } = await this.$api.login({ login, password })
       if (token) {
         dispatch('setToken', token)
+        commit('setUser', user)
       }
     } catch (e) {
       this.$utils.formatError(e)
+    }
+  },
+  async logoutAll({ dispatch, getters }) {
+    const { user } = getters
+    if (user) {
+      const { login } = user
+      const data = await this.$api.logoutAll({ login })
+      if (data) {
+        dispatch('logout')
+      }
     }
   },
   async signup({ commit, dispatch }, formData) {
@@ -45,6 +56,7 @@ export const actions = {
   },
   logout({ commit }) {
     commit('clearToken')
+    commit('clearUser')
     Cookies.remove('jwt-token')
 
   },
@@ -65,7 +77,8 @@ export const actions = {
 
 export const getters = {
   isAuthenticated: state => !!state.token,
-  token: state => state.token
+  token: state => state.token,
+  user: state => state.user
 }
 
 function isTokenValid(token) {

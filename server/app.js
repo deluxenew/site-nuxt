@@ -6,12 +6,7 @@ const app = express()
 
 async function connect() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/admin', {
-      useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      // useFindAndModify: false,
-      // useCreateIndex: true
-    })
+    await mongoose.connect('mongodb://localhost:27017/admin')
 
     console.log('MONGO_DB_CONNECTED')
   }

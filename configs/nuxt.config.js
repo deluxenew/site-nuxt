@@ -24,7 +24,8 @@ module.exports = {
   plugins: [
     { mode: 'all', src: '~/plugins/fontawesome' },
     { mode: 'all', src: '~/plugins/api-plugin' },
-    { mode: 'all', src: '~/plugins/utils-plugin' }
+    { mode: 'all', src: '~/plugins/utils-plugin' },
+    {mode: 'client', src: '~/plugins/vue-js-modal'},
   ],
   styleResources: {
     scss: [
