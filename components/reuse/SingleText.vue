@@ -71,14 +71,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.input-text + .input-text {
+  margin-top: 24px;
+}
 .input-text {
   position: relative;
-  margin: 32px 16px;
+  margin-top: 24px;
 }
 .balloon {
   display: inline-block;
   width: 100%;
-  padding: 8px 0 8px 16px;
+  padding: 16px 0 16px 16px;
   font-family: $font;
   font-weight: 500;
   color: $default;
@@ -98,12 +102,11 @@ export default {
   + label {
     display: inline-block;
     position: absolute;
-    top: 3px;
+    top: calc(50% - 14px);
     left: 0;
-    bottom: 0;
     padding: 8px 16px;
     color: $green;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(19,74,70,0);
@@ -138,7 +141,7 @@ export default {
     color: #fff;
     text-shadow: 0 1px 0 rgba(19,74,70,.4);
     background: $green;
-    transform: translateY(-40px);
+    transform: translateY(-30px);
 
     &:after {
       border-top: 4px solid rgba(122,184,147,1);

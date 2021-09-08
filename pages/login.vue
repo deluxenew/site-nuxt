@@ -15,16 +15,21 @@
     <button @click="showModal">
       showModal
     </button>
-    {{isAuth}}
+    {{ isAuth }}
   </div>
 </template>
 
 <script>
-import AuthRegister from "../components/modals/AuthRegister";
-import {visible} from "chalk";
+import AuthRegisterModal from "../components/modals/AuthRegisterModal";
+
 export default {
   name: "login",
-  components: {AuthRegister},
+  components: {AuthRegisterModal},
+  data() {
+    return {
+
+    }
+  },
   computed: {
     isAuth() {
       return this.$store.getters['auth/isAuthenticated']
@@ -43,7 +48,7 @@ export default {
         password: 'scaner12'
       });
     },
-    async register () {
+    async register() {
       try {
         await this.$axios.post('/api/auth/user/register', {
           login: 'deluxenew',
@@ -55,15 +60,19 @@ export default {
     },
     showModal() {
       this.$modal.show(
-         AuthRegister,
-      {},
+        AuthRegisterModal,
+        {},
         {
-          height: 'auto',
-          width: `${window.innerWidth - 16}px`,
-          shiftY: 0.95,
-          styles: "overflow: visible; border-radius: 8px;"
-        }
-        // modal_events
+          classes: 'modal-custom',
+          transition: 'modal',
+          overlayTransition: 'modal-bg',
+          adaptive: true,
+          height: `${window.innerHeight - 120}px`,
+          width: `${window.innerWidth}px`,
+          shiftY: 1,
+          styles: "overflow: visible; border-radius: 8px; box-shadow: none"
+        },
+        {}
       )
     },
   },

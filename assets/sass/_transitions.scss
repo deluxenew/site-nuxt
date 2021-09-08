@@ -1,3 +1,95 @@
+.modal-bg-enter-active {
+  animation-name: modal-bg-in;
+  animation-timing-function: linear;
+  animation-duration: 30s;
+
+  &:before {
+    content: '';
+    position: absolute;
+    animation-name: modal-bg-in;
+    animation-timing-function: linear;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    bottom: -600px;
+    right: -300px;
+    width: 600px;
+    height: 600px;
+    z-index: -1;
+    background: radial-gradient(100% 100% at 50% 50%, rgba($green, 0.1) 0, transparent 50%);
+    transition: $trs;
+  }
+}
+
+.modal-bg-leave-active {
+  animation-name: modal-bg-out;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+  transition: $trs;
+}
+
+@keyframes modal-bg-in {
+  0% {
+    bottom: -300px;
+    right: -300px;
+  }
+  25% {
+    bottom: calc(100vh - 300px);
+    right: -300px;
+  }
+  50% {
+    bottom: calc(100vh - 300px);
+    right: calc(100vw - 300px);
+  }
+  75% {
+    bottom: -300px;
+    right: calc(100vw - 300px);
+  }
+  100% {
+    bottom: -300px;
+    right: -300px;
+  }
+}
+
+@keyframes modal-bg-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.modal-enter-active {
+  animation: modal-in .3s;
+  transition: $trs;
+}
+
+.modal-leave-active {
+  animation: modal-out .3s;
+  transition: $trs;
+}
+
+@keyframes modal-in {
+  0% {
+    transform: scale(0);
+  }
+  75% {
+    transform: scale(1.1)
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
 .bounce-enter-active {
   animation: bounce-in .6s;
 }
