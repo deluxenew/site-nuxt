@@ -27,11 +27,11 @@ export default {
 .footer {
   position: fixed;
   width: 100vw;
-  bottom: 0;
+  bottom: -3px;
   background: #ffffff;
   transition: $trs;
   height: 0;
-  border-top: none;
+  border-top: 3px solid $white;
 
   &.active {
     height: 300px;

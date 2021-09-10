@@ -1,41 +1,24 @@
 <template>
   <div class="layout-wrapper">
-    <header-component />
+    <header-component/>
 
     <div class="content">
       <nuxt/>
     </div>
 
-    <footer-component />
+    <footer-component/>
   </div>
 </template>
 
 <script>
- import FooterComponent from "../components/footer/FooterComponent";
+import FooterComponent from "../components/footer/FooterComponent";
 import HeaderComponent from "../components/header/HeaderComponent";
-import api from '~/src/api'
 
 export default {
   name: "default",
+  fetchOnServer: false,
+  fetchDelay: 0,
   components: {FooterComponent, HeaderComponent},
-  methods: {
-    async autoAuth() {
-      await this.$store.dispatch('auth/autoAuth')
-    },
-    getRouteName: function() {
-      api.request('GET', 'auth/user/all').then(function(response){
-        if (response.data) {
-          console.log(response)
-        } else {
-          console.log('No instances found in the database')
-        }
-      })
-    },
-  },
-  async mounted() {
-    this.getRouteName()
-    await this.autoAuth()
-  },
 }
 </script>
 

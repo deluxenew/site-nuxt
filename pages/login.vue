@@ -24,7 +24,9 @@ import AuthRegisterModal from "../components/modals/AuthRegisterModal";
 
 export default {
   name: "login",
-  components: {AuthRegisterModal},
+  components: {
+    AuthRegisterModal
+  },
   data() {
     return {
 
@@ -32,18 +34,18 @@ export default {
   },
   computed: {
     isAuth() {
-      return this.$store.getters['auth/isAuthenticated']
+      return this.$auth && this.$auth.loggedIn
     },
   },
   methods: {
     async logout() {
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch('logout')
     },
     async logoutAll() {
-      await this.$store.dispatch('auth/logoutAll')
+      await this.$store.dispatch('logoutAll')
     },
     login() {
-      this.$store.dispatch("auth/login", {
+      this.$store.dispatch("SIGN_IN_USER_ACTION", {
         login: 'deluxenew',
         password: 'scaner12'
       });

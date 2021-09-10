@@ -13,40 +13,36 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "@nuxtjs/auth-next": "^5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "5.12.5",
     "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/style-resources": "^1.0.0",
     "axios": "^0.21.1",
-    "babel-eslint": "^10.1.0",
     "bcrypt": "^5.0.1",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
-    "chalk": "^4.1.2",
     "consola": "^2.15.3",
     "cookie": "^0.4.1",
-    "core-js": "^3.16.2",
+    "core-js": "^3.17.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
-    "eslint-loader": "^4.0.2",
     "express": "^4.17.1",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "mongoose": "^6.0.3",
+    "node-sass": "^4.14.1",
     "nuxt": "^2.15.8",
     "nuxt-font-loader-strategy": "^1.1.5",
     "vue-js-modal": "^2.0.1",
     "vue-yandex-maps": "^0.10.12"
   },
   "devDependencies": {
-    "@nuxtjs/style-resources": "^1.0.0",
+    "babel-eslint": "^10.1.0",
     "figlet": "^1.5.2",
-    "shelljs": "^0.8.4",
     "inquirer": "^8.1.2",
-    "node-sass": "^4.14.1",
     "nodemon": "^2.0.12",
-    "sass-loader": "^10.0.1"
-  },
-  "bin": {
-    "spicy": "./spicy.js"
+    "sass-loader": "^10.0.1",
+    "shelljs": "^0.8.4"
   }
 }

@@ -3,7 +3,7 @@
     <input
       v-model="text"
       type="text"
-      id="galaxy"
+      :id="id"
       class="balloon"
       :class="customClasses"
       :placeholder="placeholder"
@@ -11,7 +11,7 @@
       @blur="blur"
       @focus="focus"
     >
-    <label ref="label" for="galaxy">
+    <label ref="label" :for="id">
      {{ label }}
     </label>
   </div>
@@ -22,6 +22,10 @@ export default {
   name: "SingleText",
   props: {
     value: {
+      type: String,
+      default: '',
+    },
+    id: {
       type: String,
       default: '',
     },

@@ -1,17 +1,22 @@
 const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
+const {omit, isTokenValid} = require('../common/helper')
 
-module.exports.all = async (req, res, next) => {
-  User.find(function (err, users) {
-    if (err) {
-      return next(new Error(err))
-    } else if (users.length === 0) {
-      res.send(null)
+const excludedFields = ['tokens', 'password', '__v', '_id']
+
+module.exports.me = async (req, res) => {
+  const rawToken = req.header("Authorization")
+  const token = rawToken.replace("Bearer ", "");
+  const {userId} = jwt.verify(token, "str123scan");
+  const {'_doc': user} = await User.findOne({'_id': userId})
+  if (user) {
+    if (isTokenValid(rawToken)) {
+      res.json({id: user['_id'], ...omit(user, excludedFields)})
     } else {
-      res.json(users)
+      res.status(402).json({message: 'Истёк срок действия токена. Необходимо заново авторизоавться'})
     }
-  })
+  }
 }
 
 module.exports.login = async (req, res) => {
@@ -28,16 +33,30 @@ module.exports.login = async (req, res) => {
 
       const headerUserAgent = req.headers["user-agent"]
 
+      const refreshToken = jwt.sign({
+        login: candidate.login,
+        userId: candidate._id,
+        userAgent: headerUserAgent
+      }, 'str123scan', {expiresIn: 60 * 60})
+
       const findUserAgent = tokens.find(({userAgent}) => userAgent === headerUserAgent)
       if (!findUserAgent) {
-        await User.findOneAndUpdate({login: req.body.login}, {$push: {tokens: {token, userAgent: headerUserAgent}}})
-        const {'_doc': newUser} = await User.findOne({login: req.body.login})
+        await User.findOneAndUpdate(
+          {login: req.body.login},
+          {$push: {tokens: {token, refreshToken, userAgent: headerUserAgent}}}
+        )
 
-        res.json({user: newUser, token})
+        res.json({
+          token,
+          refreshToken
+        })
       } else {
-        res.json({is: 'est uzhe', user: oldUser, token})
+        res.json({
+          token,
+          refreshToken,
+          status: 'Сессия с этого устройства уже активна, непонятно зачем, а главное как ты так смог сделать... :)',
+        })
       }
-
     } else {
       res.status(403).json({message: 'Проверьте имя пользователя или пароль'})
     }
@@ -47,7 +66,9 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.logoutAll = async (req, res) => {
-  const {body: {login}} = req
+  console.log(req)
+  const {user: {login}} = req
+
   const findUser = await User.findOne({login})
 
   if (findUser) {
@@ -57,8 +78,27 @@ module.exports.logoutAll = async (req, res) => {
     if (updatedUser) {
       const {'_doc': {tokens}} = updatedUser
 
-      if (tokens && tokens.length === 0) res.json({tokens, message: 'Congratulation! All your devices is not logged!!'})
+      if (tokens && tokens.length === 0) res.json({message: 'Поздравляем, вы успешно разлогинились во всех устройствах'})
       else res.status(500).json({message: 'При попытке разлогиниться на всех устройствах произошла ошибка'})
+    }
+  }
+}
+
+module.exports.logout = async (req, res) => {
+  const {user: {login}, userAgent} = req
+  const findUser = await User.findOne({login})
+
+  if (findUser) {
+    let {'_doc': {tokens}} = findUser
+    const idx = tokens.findIndex(el => userAgent === el.userAgent)
+    if (idx > -1) {
+      tokens.splice(idx, 1)
+      await User.findOneAndUpdate({login}, {tokens})
+    }
+    const updatedUser = await User.findOne({login})
+
+    if (updatedUser) {
+      res.json({message: 'Вы успешно разлогинились, возвращайтесь к нам снова! :-)'})
     }
   }
 }

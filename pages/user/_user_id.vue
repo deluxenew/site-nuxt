@@ -1,16 +1,13 @@
 <template>
 <div>
-  Проекты
+adadad
 </div>
 </template>
 
 <script>
-
 export default {
-  name: "projects",
-  components: {
-
-  }
+  name: "_user_id",
+  layout: 'personal'
 }
 </script>
 

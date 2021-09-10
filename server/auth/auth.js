@@ -1,18 +1,19 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user.model");
 
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, "SignThisPassword");
-
-    const user = await User.findOne({ id: decoded, "tokens.token": token });
+    const { userId } = jwt.verify(token, "str123scan");
+    const user = await User.findOne({ '_id': userId });
+    const userAgent = req.headers['user-agent']
 
     if (!user) {
       throw new Error();
     }
     req.user = user;
     req.token = token;
+    req.userAgent = userAgent
     next();
   } catch (e) {
     res.status(401).send("Not autheticated");

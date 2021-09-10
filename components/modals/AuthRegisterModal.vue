@@ -9,7 +9,22 @@
     </template>
 
     <template slot="modal-body">
-      <auth-form v-model="authForm" />
+      <tabs-component
+        v-model="component"
+        :tabs="{
+          auth: {
+            title: 'Авторизация'
+          },
+          register: {
+            title: 'Регистрация'
+          },
+          registerUser: {
+            title: 'Регистрация покупателя'
+          }
+        }"
+      >
+          <auth-form slot="auth" v-model="authForm" />
+      </tabs-component>
     </template>
 
     <template slot="modal-footer">
@@ -21,10 +36,11 @@
 <script>
 import ModalWrapper from "./ModalWrapper";
 import AuthForm from "../forms/AuthForm";
+import TabsComponent from "../contentComponents/TabsComponent";
 
 export default {
   name: "AuthRegisterModal",
-  components: {AuthForm, ModalWrapper},
+  components: {TabsComponent, AuthForm, ModalWrapper},
   props: {
     handleFn: {
       type: Function,
@@ -51,6 +67,7 @@ export default {
       switch (this.component) {
         case 'auth': return 'Авторизация'
         case 'register': return 'Регистрация'
+        case 'registerUser': return 'Регистрация покупателя'
       }
     }
   },

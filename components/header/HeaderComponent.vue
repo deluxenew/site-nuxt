@@ -157,7 +157,7 @@ export default {
   text-align: center;
   width: 300px;
   height: 54px;
-  left: calc(50% - 125px);
+  left: calc(50% - 150px);
 
   @media (max-width: 640px) {
     width: 150px;

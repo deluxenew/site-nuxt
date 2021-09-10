@@ -3,6 +3,7 @@
     <single-text
       v-for="fieldName in Object.keys(value)"
       :key="fieldName"
+      :id="fieldName"
       v-bind="modelForm[fieldName]"
       @input="modelForm[fieldName].value = $event"
     />

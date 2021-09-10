@@ -36,6 +36,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    '@nuxtjs/auth-next',
     'vue-yandex-maps/nuxt',
     ['nuxt-font-loader-strategy', {
       ignoreLighthouse: true,
@@ -72,6 +73,40 @@ module.exports = {
     baseURL: process.env.HOST_URL,
     withCredentials: true,
     debug,
+  },
+  auth: {
+    redirect: false,
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: 7 * 24 * 60 * 60,
+        },
+        user: {
+          property: false,
+          autoFetch: false
+        },
+        refreshToken: {
+          property: 'refreshToken',
+          // required: true,
+          maxAge: 30 * 24 * 60 * 60,
+          data: 'refreshToken',
+          type: 'Bearer',
+        },
+        endpoints: {
+          login: {url: '/api/auth/user/login', method: 'post', propertyName: 'jwt-token'},
+          refresh: {url: '/api/auth/refresh', method: 'post', propertyName: 'refresh_token'},
+          logout: {url: '/api/auth/user/logout', method: 'post'},
+          user: {url: '/api/auth/user/me', method: 'get', propertyName: ''}
+        },
+
+        tokenRequired: true,
+        tokenType: 'JWT'
+      }
+    },
   },
   build: {
     // optimization: {
