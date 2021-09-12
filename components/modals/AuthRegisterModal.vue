@@ -48,7 +48,6 @@
 
 <script>
 
-
 export default {
   name: "AuthRegisterModal",
   components: {
@@ -112,8 +111,12 @@ export default {
     async setRegister() {
       const {name: {value: name}, login: {value: login}, password: {value: password}} = this.registerForm
       await this.$store.dispatch('SIGN_UP_USER_ACTION', {name, login, password})
-        .then(() => {
-          this.$emit('close')
+        .then((data) => {
+          if (data) this.$emit('close')
+        })
+        .catch((err) => {
+          let msg = this.$utils.formatError(err)
+          this.$notify({...msg, title: 'Ошибка регистрации'})
         })
     },
     async setLogin() {

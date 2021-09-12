@@ -13,7 +13,7 @@
         classes="notify"
         width="100%"
         :max="3"
-        :duration="300000"
+        :duration="3000"
       >
         <template slot="body" slot-scope="props">
           <div class="custom-notify">

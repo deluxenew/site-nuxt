@@ -115,6 +115,8 @@ module.exports.register = async (req, res) => {
 
   if (candidate) {
     res.status(409).json({message: 'Пользователь с таким логином уже существует'})
+  } else if (!name || !login || !sendPassword) {
+    res.status(400).json({message: 'Заполните все обязадельные поля'})
   } else {
     const user = new User({ name, login, password })
     user.save()

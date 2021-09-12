@@ -50,38 +50,42 @@ export default {
   -ms-border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
-&.cssload-one {
-   left: 0%;
-   top: 0%;
-   animation: cssload-rotate-one 1.15s linear infinite;
-   -o-animation: cssload-rotate-one 1.15s linear infinite;
-   -ms-animation: cssload-rotate-one 1.15s linear infinite;
-   -webkit-animation: cssload-rotate-one 1.15s linear infinite;
-   -moz-animation: cssload-rotate-one 1.15s linear infinite;
-   border-bottom: 3px solid $green;
- }
-&.cssload-two {
-   right: 0%;
-   top: 0%;
-   animation: cssload-rotate-two 1.15s linear infinite;
-   -o-animation: cssload-rotate-two 1.15s linear infinite;
-   -ms-animation: cssload-rotate-two 1.15s linear infinite;
-   -webkit-animation: cssload-rotate-two 1.15s linear infinite;
-   -moz-animation: cssload-rotate-two 1.15s linear infinite;
-   border-right: 3px solid $gray;
- }
-&.cssload-three {
-   right: 0%;
-   bottom: 0%;
-   animation: cssload-rotate-three 1.15s linear infinite;
-   -o-animation: cssload-rotate-three 1.15s linear infinite;
-   -ms-animation: cssload-rotate-three 1.15s linear infinite;
-   -webkit-animation: cssload-rotate-three 1.15s linear infinite;
-   -moz-animation: cssload-rotate-three 1.15s linear infinite;
-   border-top: 3px solid $default;
- }
+
+  &.cssload-one {
+    left: 0%;
+    top: 0%;
+    animation: cssload-rotate-one 1.15s linear infinite;
+    -o-animation: cssload-rotate-one 1.15s linear infinite;
+    -ms-animation: cssload-rotate-one 1.15s linear infinite;
+    -webkit-animation: cssload-rotate-one 1.15s linear infinite;
+    -moz-animation: cssload-rotate-one 1.15s linear infinite;
+    border-bottom: 3px solid $green;
+  }
+
+  &.cssload-two {
+    right: 0%;
+    top: 0%;
+    animation: cssload-rotate-two 1.15s linear infinite;
+    -o-animation: cssload-rotate-two 1.15s linear infinite;
+    -ms-animation: cssload-rotate-two 1.15s linear infinite;
+    -webkit-animation: cssload-rotate-two 1.15s linear infinite;
+    -moz-animation: cssload-rotate-two 1.15s linear infinite;
+    border-right: 3px solid $gray;
+  }
+
+  &.cssload-three {
+    right: 0%;
+    bottom: 0%;
+    animation: cssload-rotate-three 1.15s linear infinite;
+    -o-animation: cssload-rotate-three 1.15s linear infinite;
+    -ms-animation: cssload-rotate-three 1.15s linear infinite;
+    -webkit-animation: cssload-rotate-three 1.15s linear infinite;
+    -moz-animation: cssload-rotate-three 1.15s linear infinite;
+    border-top: 3px solid $default;
+  }
 
 }
+
 @keyframes cssload-rotate-one {
   0% {
     transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);

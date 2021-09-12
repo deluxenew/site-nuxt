@@ -1,7 +1,9 @@
 .modal-bg-enter-active {
-  animation-name: modal-bg-in;
+  animation-name: modal-bg-in, modal-bg-out;
   animation-timing-function: linear;
-  animation-duration: 30s;
+  animation-direction: normal, reverse;
+  animation-duration: 1000s, 1s;
+  animation-iteration-count: infinite, 1;
 
   &:before {
     content: '';
@@ -21,9 +23,9 @@
 }
 
 .modal-bg-leave-active {
-  animation-name: modal-bg-out;
+  animation-name: bounce-fast-out, modal-bg-out;
   animation-timing-function: ease;
-  animation-duration: 1s;
+  animation-duration: $trs, 1s;
   transition: $trs;
 }
 
@@ -32,9 +34,25 @@
     bottom: -300px;
     right: -300px;
   }
-  25% {
+  10% {
+    bottom: calc(85vh - 300px);
+    right: calc(12.5vw - 300px);
+  }
+  20% {
+    bottom: calc(90vh - 300px);
+    right: calc(25vw - 300px);
+  }
+  30% {
+    bottom: calc(95vh - 300px);
+    right: calc(37.5vw - 300px)
+  }
+  40%{
     bottom: calc(100vh - 300px);
-    right: -300px;
+    right: calc(50vw - 300px)
+  }
+  45% {
+    bottom: calc(95vh - 300px);
+    right: calc(62.5vw - 300px);
   }
   50% {
     bottom: calc(100vh - 300px);
@@ -60,7 +78,8 @@
 }
 
 .modal-enter-active {
-  animation: modal-in .3s;
+  animation-name: modal-in;
+  animation-duration: .3s;
   transition: $trs;
 }
 
@@ -177,8 +196,9 @@
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: all .3s  cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
+
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }

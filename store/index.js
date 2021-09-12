@@ -5,7 +5,6 @@ export const state = () => ({
 })
 
 export const actions = {
-
   async SIGN_IN_USER_ACTION({commit, dispatch, getters}, {login, password}) {
     commit('SET_LOADING', true)
     await this.$auth.loginWith('local', {
@@ -23,19 +22,15 @@ export const actions = {
       })
       .finally(() => commit('SET_LOADING', false))
   },
-  SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
+  async SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
     commit('SET_LOADING', true)
-    this.$api.register({name, login, password,})
+    await this.$api.register({name, login, password,})
       .then(() => {
-        return dispatch("SIGN_IN_USER_ACTION", {login, password})
+        dispatch("SIGN_IN_USER_ACTION", {login, password})
       })
       .finally(() => {
         commit('SET_LOADING', false)
       })
-      .catch(function (error) {
-        // commit('setError', error, {root: true})
-        throw error
-      });
   },
   async logoutAll({commit, dispatch}) {
     commit('SET_LOADING', true)
@@ -44,12 +39,12 @@ export const actions = {
       if (data) {
         dispatch('logout')
       }
-      commit('SET_LOADING', false)
     }
+    commit('SET_LOADING', false)
   },
-  logout({commit}) {
+  async logout({commit}) {
     commit('SET_LOADING', true)
-    return this.$auth.logout('local')
+    await this.$auth.logout('local')
       .finally(() => {
         commit('SET_LOADING', false)
       })

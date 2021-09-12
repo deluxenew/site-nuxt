@@ -157,7 +157,7 @@ export default {
           {},
           {
             classes: 'modal-custom',
-            transition: 'modal',
+            // transition: 'modal',
             overlayTransition: 'modal-bg',
             adaptive: true,
             height: `${window.innerHeight - 120}px`,

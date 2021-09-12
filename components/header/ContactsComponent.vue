@@ -54,6 +54,8 @@ export default {
     font-weight: 500;
     font-family: $font;
     text-align: center;
+    display: flex;
+
     color: $default;
     width: 100%;
 

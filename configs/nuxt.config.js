@@ -5,7 +5,7 @@ module.exports = {
   ssr: true,
   server: {
     port: 3000, // default: 3000
-    host: 'localhost', // default: localhost,
+    host: '217.107.219.109', // default: http://217.107.219.109,
     timing: false
   },
   head: {
