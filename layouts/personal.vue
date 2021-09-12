@@ -7,8 +7,6 @@
 <script>
 export default {
   name: "personal",
-  fetchOnServer: false,
-  fetchDelay: 0,
   mounted() {
     this.$auth.$storage.watchState('loggedIn', isLogin => {
       if (isLogin) {

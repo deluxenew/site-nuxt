@@ -16,8 +16,6 @@ import HeaderComponent from "../components/header/HeaderComponent";
 
 export default {
   name: "default",
-  fetchOnServer: false,
-  fetchDelay: 0,
   components: {FooterComponent, HeaderComponent},
 }
 </script>

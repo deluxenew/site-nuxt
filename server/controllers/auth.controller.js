@@ -9,13 +9,17 @@ module.exports.me = async (req, res) => {
   const rawToken = req.header("Authorization")
   const token = rawToken.replace("Bearer ", "");
   const {userId} = jwt.verify(token, "str123scan");
-  const {'_doc': user} = await User.findOne({'_id': userId})
-  if (user) {
+  const candidate = await User.findOne({'_id': userId})
+
+  if (candidate) {
+    const {'_doc': user} = candidate
     if (isTokenValid(rawToken)) {
       res.json({id: user['_id'], ...omit(user, excludedFields)})
     } else {
       res.status(402).json({message: 'Истёк срок действия токена. Необходимо заново авторизоавться'})
     }
+  } else {
+    res.status(404).json({message: 'Авторизационные данные в Вашем браузере более не актуальны. Пожалуйтса, авторизуйтесь'})
   }
 }
 
@@ -103,18 +107,16 @@ module.exports.logout = async (req, res) => {
   }
 }
 
-module.exports.signup = async (req, res) => {
-  const candidate = await User.findOne({login: req.body.login})
+module.exports.register = async (req, res) => {
+  const { body: { login, name, password: sendPassword } } = req
+  const salt = bcrypt.genSaltSync(10)
+  const password = bcrypt.hashSync(sendPassword, salt)
+  const candidate = await User.findOne({login})
 
   if (candidate) {
     res.status(409).json({message: 'Пользователь с таким логином уже существует'})
   } else {
-    const salt = bcrypt.genSaltSync(10)
-    const user = new User({
-      login: req.body.login,
-      password: bcrypt.hashSync(req.body.password, salt)
-    })
-
+    const user = new User({ name, login, password })
     user.save()
     res.status(201).json(user)
   }

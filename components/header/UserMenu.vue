@@ -1,7 +1,7 @@
 <template>
   <div class="top-menu">
     <div class="title">
-      Главное меню
+      Меню пользователя
     </div>
 
     <div class="links">
@@ -17,12 +17,7 @@
             class="links__link"
             @click.stop="itemClick({children: item.children})"
           >
-            <project-icon
-              v-if="item.id === 2"
-              class="pro"
-            />
             <fa-icon
-              v-else
               class="links__icon"
               :icon="['fac', item.iconName]"
               :key="item.iconName"
@@ -45,25 +40,38 @@
         </li>
       </ul>
     </div>
+    <div class="row bottom">
+      <ui-button
+        class="button"
+        :style="`--item-count:${items.length + 1}`"
+        text="выход"
+        @click="logout"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import {mainMenu} from "../../constants/mainMenu";
-import ProjectIcon from "../customSvgIcons/ProjectIcon";
+
+import {userMenu} from "../../constants/userMenu";
+import UiButton from "../reuse/UiButton";
 
 export default {
-  name: "HeaderMenu",
-  components: {ProjectIcon},
+  name: "UserMenu",
+  components: {UiButton},
   props: {},
   data() {
     return {
-      items: mainMenu,
+      items: userMenu,
     }
   },
   methods: {
     async itemClick({children}) {
       this.items = children
+    },
+    async logout() {
+      await this.$store.dispatch('logout')
+      this.$emit('close')
     },
   }
 }
@@ -73,13 +81,22 @@ export default {
   --base-grid: calc(8px - (1080px - 100vmin) / 50);
 }
 </style>
+
 <style lang="scss" scoped>
+.button {
+  opacity: 0;
+  animation: on-load .3s ease-in-out forwards;
+  animation-delay: calc(var(--item-count) * 150ms);
+}
 .top-menu {
   padding: 32px;
   min-width: 50vw;
   width: 100%;
   transition: $trs;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
   @media (max-width: 640px) {
     width: 100vw;
   }
@@ -126,7 +143,7 @@ export default {
     cursor: pointer;
 
     &.parent {
-     transform: translate(0);
+      transform: translate(0);
     }
   }
 

@@ -1,21 +1,6 @@
 <template>
   <div>
-    <button @click="login">
-      login
-    </button>
-    <button @click="logout">
-      logout
-    </button>
-    <button @click="register">
-      register
-    </button>
-    <button @click="logoutAll">
-      logoutAll
-    </button>
-    <button @click="showModal">
-      showModal
-    </button>
-    {{ isAuth }}
+
   </div>
 </template>
 
@@ -38,9 +23,7 @@ export default {
     },
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch('logout')
-    },
+
     async logoutAll() {
       await this.$store.dispatch('logoutAll')
     },
@@ -60,23 +43,7 @@ export default {
         console.log(error.response.data.message)
       }
     },
-    showModal() {
-      this.$modal.show(
-        AuthRegisterModal,
-        {},
-        {
-          classes: 'modal-custom',
-          transition: 'modal',
-          overlayTransition: 'modal-bg',
-          adaptive: true,
-          height: `${window.innerHeight - 120}px`,
-          width: `${window.innerWidth}px`,
-          shiftY: 1,
-          styles: "overflow: visible; border-radius: 8px; box-shadow: none"
-        },
-        {}
-      )
-    },
+
   },
 }
 </script>

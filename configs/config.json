@@ -1,14 +1,13 @@
 {
   "DB": {
-    "host": "mongodb://localhost",
+    "host": "mongodb+srv://deluxenew:<password>@deluxenewcluster.utabx.mongodb.net",
     "port": "27017",
-    "db_name":"admin",
+    "db_name":"myFirstDatabase",
     "USER": "",
     "PASS": ""
   },
   "SERVER": {
-    "HOST": "127.0.0.1",
-    "PORT": 3000,
-    "serverURL": "http://localhost:3000/api/"
+    "HOST": "ovz2.79536632322.m61kn.vps.myjino.ru",
+    "PORT": 49351
   }
 }

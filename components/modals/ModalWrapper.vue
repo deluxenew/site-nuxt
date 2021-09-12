@@ -221,6 +221,8 @@ $bodyHeightMobile: calc(100vh - var(--modal-header-height) - var(--modal-footer-
   }
 
   .modal-footer {
+    display: flex;
+    align-items: center;
     padding: $padding;
     border-top: 1px solid rgba($gray, 0.3);
     box-sizing: border-box;

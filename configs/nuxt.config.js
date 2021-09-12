@@ -2,7 +2,12 @@ const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 module.exports = {
   telemetry: false,
-  mode: 'universal',
+  ssr: true,
+  server: {
+    port: 3000, // default: 3000
+    host: 'localhost', // default: localhost,
+    timing: false
+  },
   head: {
     title: 'Строительство из дерева и камня',
     htmlAttrs: {
@@ -25,7 +30,7 @@ module.exports = {
     { mode: 'all', src: '~/plugins/fontawesome' },
     { mode: 'all', src: '~/plugins/api-plugin' },
     { mode: 'all', src: '~/plugins/utils-plugin' },
-    {mode: 'client', src: '~/plugins/vue-js-modal'},
+    { mode: 'client', src: '~/plugins/vue-js-modal'},
   ],
   styleResources: {
     scss: [
@@ -109,20 +114,6 @@ module.exports = {
     },
   },
   build: {
-    // optimization: {
-    //   splitChunks: {
-    //     maxSize: 249856 * 2,
-    //   },
-    // },
-    // splitChunks: {
-    //   name: debug,
-    //   layouts: true,
-    //   pages: true,
-    //   commons: true,
-    // },
-    // extractCSS: {
-    //   ignoreOrder: true,
-    // },
   },
   pwa: {
     manifest: {
@@ -142,5 +133,13 @@ module.exports = {
       lang: 'ru',
       ogSiteName: 'BrusKing'
     }
+  },
+  render: {
+    http2: {
+      push: true,
+      pushAssets: (req, res, publicPath, preloadFiles) => preloadFiles
+        .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`),
+    },
+    compressor: false,
   },
 }

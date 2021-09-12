@@ -2,7 +2,7 @@
   <div class="input-text">
     <input
       v-model="text"
-      type="text"
+      :type="type"
       :id="id"
       class="balloon"
       :class="customClasses"
@@ -40,6 +40,10 @@ export default {
     classes: {
       type: String,
       default: '',
+    },
+    type: {
+      type: String,
+      default: 'text',
     }
   },
   data() {
@@ -77,11 +81,11 @@ export default {
 <style lang="scss" scoped>
 
 .input-text + .input-text {
-  margin-top: 24px;
+
 }
 .input-text {
   position: relative;
-  margin-top: 24px;
+  width: 100%;
 }
 .balloon {
   display: inline-block;

@@ -1,6 +1,13 @@
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+
 export default {
-  mode: 'universal',
+  ssr: true,
+  telemetry: false,
+  server: {
+    port: 3000, // default: 3000
+    host: 'localhost', // default: localhost,
+    timing: false
+  },
   head: {
     title: 'Строительство из дерева и камня',
     htmlAttrs: {
@@ -10,22 +17,20 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Недорогое строительство под ключ с использованием современных материалов и технологий.' },
-      { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  loading: { color: '#fff' },
+  css: [
+    '@/assets/sass/main.scss',
+  ],
   plugins: [
     { mode: 'all', src: '~/plugins/fontawesome' },
     { mode: 'all', src: '~/plugins/api-plugin' },
-    { mode: 'all', src: '~/plugins/utils-plugin' }
-  ],
-  components: true,
-  buildModules: [
-  ],
-  css: [
-    '@/assets/sass/main.scss',
+    { mode: 'all', src: '~/plugins/utils-plugin' },
+    { mode: 'client', src: '~/plugins/vue-js-modal'},
   ],
   styleResources: {
     scss: [
@@ -36,6 +41,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    '@nuxtjs/auth-next',
     'vue-yandex-maps/nuxt',
     ['nuxt-font-loader-strategy', {
       ignoreLighthouse: true,
@@ -68,21 +74,46 @@ export default {
   router: {
     // middleware: ['auth']
   },
+  axios: {
+    baseURL: process.env.HOST_URL,
+    withCredentials: true,
+    debug,
+  },
+  auth: {
+    redirect: false,
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: 7 * 24 * 60 * 60,
+        },
+        user: {
+          property: false,
+          autoFetch: false
+        },
+        refreshToken: {
+          property: 'refreshToken',
+          // required: true,
+          maxAge: 30 * 24 * 60 * 60,
+          data: 'refreshToken',
+          type: 'Bearer',
+        },
+        endpoints: {
+          login: {url: '/api/auth/user/login', method: 'post', propertyName: 'jwt-token'},
+          refresh: {url: '/api/auth/refresh', method: 'post', propertyName: 'refresh_token'},
+          logout: {url: '/api/auth/user/logout', method: 'post'},
+          user: {url: '/api/auth/user/me', method: 'get', propertyName: ''}
+        },
+
+        tokenRequired: true,
+        tokenType: 'JWT'
+      }
+    },
+  },
   build: {
-    // optimization: {
-    //   splitChunks: {
-    //     maxSize: 249856 * 2,
-    //   },
-    // },
-    // splitChunks: {
-    //   name: debug,
-    //   layouts: true,
-    //   pages: true,
-    //   commons: true,
-    // },
-    // extractCSS: {
-    //   ignoreOrder: true,
-    // },
   },
   pwa: {
     manifest: {
@@ -102,5 +133,13 @@ export default {
       lang: 'ru',
       ogSiteName: 'BrusKing'
     }
+  },
+  render: {
+    http2: {
+      push: true,
+      pushAssets: (req, res, publicPath, preloadFiles) => preloadFiles
+        .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`),
+    },
+    compressor: false,
   },
 }

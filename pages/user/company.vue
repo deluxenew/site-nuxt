@@ -1,13 +1,12 @@
 <template>
-<div>
-adadad
-</div>
+  <div>
+    Моя компания
+  </div>
 </template>
 
 <script>
 export default {
-  name: "_user_id",
-  layout: 'personal'
+  name: "company"
 }
 </script>
 

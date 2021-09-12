@@ -1,4 +1,4 @@
-export const topMenu = [
+export const mainMenu = [
   {
     id: 0,
     title: "Главная",

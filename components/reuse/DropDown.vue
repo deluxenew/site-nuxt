@@ -44,5 +44,7 @@ export default {
   width: auto;
   z-index: 9000;
   background-color: $white;
+  box-shadow: inset 0 0 16px rgba($green, 0.4);
+
 }
 </style>

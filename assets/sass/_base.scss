@@ -7,10 +7,9 @@
     font-smooth: always;
 }
 
-::selection { background: #333333; color:#05AAEC }
+::selection { background: $green; color:#1b1b1b }
 
 * {
-
     &::-webkit-scrollbar {
         background-color: transparent;
         width: 0;
@@ -74,7 +73,6 @@ a {
     }
 }
 
-
 body {
     font-family: $font;
     font-weight: 500;
@@ -85,118 +83,27 @@ body {
     overflow-x: hidden;
 }
 
-
-
-.hidden {
-    display: none;
-}
-
-.clearfix {
-    //@include clearfix;
-
-    &:before {
-        content: '';
-        display: table;
-        clear: both;
-    }
-}
-
-.root, .base {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    @include cl;
-}
-
-.root {
-    background-color: #fffff0;
-    transition: $trs;
-}
-
 .main {
     flex: 1;
-}
-
-%wrapper-base {
-    margin: 0 auto;
-    max-width: 1200px;
-
-    @include mobile {
-        padding: 0 20px;
-    }
-}
-
-.wrapper {
-    @extend %wrapper-base;
-    position: relative;
-
-
-
-}
-
-.page-body {
-    position: relative;
-    padding: 0;
-    margin: 30px 10px 0 100px;
-    background-color: #ffffff;
-    transition: $trs;
-    min-height: calc(100vh - 419px);
-
-    @include mobile {
-        margin: 0;
-
-        .dark-bg {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background-color: rgba(0, 0, 0, .4);
-            z-index: 1;
-            transition: $trs;
-        }
-    }
-
-    &-wrapper {
-        display: flex;
-        @extend %wrapper-base;
-
-        @include mobile {
-            flex-direction: column;
-        }
-    }
-
-    h3.sub-title {
-        font-family: $font;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 28px;
-        line-height: 127%;
-        color: greenyellow;
-        transition: $trs;
-        padding-bottom: 20px;
-
-        @include mobile {
-            font-size: $h3;
-        }
-    }
-}
-
-// transitions
-.fade-enter-active, .fade-leave-active {
-    transition: all .3s  cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.fade-enter, .fade-leave-to {
-    opacity: 0;
 }
 
 .ruble {
     font-family: $font, "Helvetica", "Arial", sans-serif;
 }
 
-.svg-inline--fa .fa-secondary {
-    fill: var(--fa-secondary-color, currentColor);
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.svg-inline--fa .fa-primary {
-    fill: var(--fa-primary-color, currentColor);
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
+.bottom {
+  margin-top: auto;
+}

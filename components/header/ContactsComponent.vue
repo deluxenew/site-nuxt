@@ -48,7 +48,7 @@ export default {
 
 
   .title {
-    font-size: $h1;
+    font-size: $h2;
     line-height: normal;
     margin-bottom: 40px;
     font-weight: 500;

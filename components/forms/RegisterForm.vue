@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-form">
+  <div class="register-form">
     <div class="row field input" v-for="fieldName in Object.keys(value)" :key="fieldName">
       <single-text
         :id="fieldName"
@@ -10,8 +10,8 @@
     <div class="row field">
       <ui-button
         :loading="loading"
-        text="Войти"
-        @click="$emit('setLogin')"
+        text="Зарегистрироваться"
+        @click="$emit('setRegister')"
       />
       <ui-button
         :loading="loading"
@@ -22,9 +22,8 @@
 </template>
 
 <script>
-
 export default {
-  name: "AuthForm",
+  name: "RegisterForm",
   components: {
     SingleText: () => import('../reuse/SingleText'),
     UiButton: () => import('../reuse/UiButton')
@@ -53,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.auth-form {
+.register-form {
   .field {
     padding-top: 24px;
   }

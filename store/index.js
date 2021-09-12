@@ -18,6 +18,16 @@ export const actions = {
         return vm.$auth.setUserToken(token, refreshToken)
       })
   },
+  async SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
+    await this.$api.register({name, login, password, })
+      .then(() => {
+        return dispatch("SIGN_IN_USER_ACTION", {login, password})
+      })
+      .catch(function (error) {
+        // commit('setError', error, {root: true})
+        throw error
+      });
+  },
   async logoutAll({ dispatch }) {
     if (this.$auth.user) {
       const data = await this.$api.logoutAll()

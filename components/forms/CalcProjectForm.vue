@@ -34,7 +34,7 @@ export default {
   font-weight: 500;
   display: block;
   font-family: $font;
-  font-size: $h1;
+  font-size: $h2;
   text-align: center;
   margin-bottom: 20px;
   margin-right: 20px;

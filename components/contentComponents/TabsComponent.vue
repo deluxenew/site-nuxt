@@ -73,7 +73,7 @@ $left: calc(#{$labelWidth} * #{$index});
 .tabs-component {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  background: #31A66C;
+  background: #BEE3D1;
   width: 100%;
   max-width: 100%;
   min-width: 390px;

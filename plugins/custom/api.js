@@ -5,6 +5,9 @@ export default (axios) => ({
   login({login, password}) {
     return axios.post('/api/auth/user/login', { login, password }).then(({ data }) => data)
   },
+  register({name, login, password}) {
+    return axios.post('/api/auth/user/register', { name, login, password }).then(({ data }) => data)
+  },
   logoutAll() {
     return axios.post('/api/auth/user/logout-all').then(({ data }) => data)
   },

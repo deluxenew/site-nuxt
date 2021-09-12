@@ -198,7 +198,7 @@ export default {
 
   &:hover {
     .nav-item {
-      padding: 16px 16px;
+      padding: 16px 24px;
       transition: $trs;
 
       span {

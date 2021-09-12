@@ -2,23 +2,23 @@
   <div class="header-item" @click="$emit('click', itemName)">
     <transition name="bounce">
       <div class="title" v-if="titleShow" :style="{ justifyContent: alignTitle }">
-        <div class="desktop">
-          {{ title }}
-        </div>
-
         <div class="mobile">
           <fa-icon class="item-icon" :icon="['fac', iconName]"/>
+        </div>
+
+        <div class="desktop">
+          {{ title }}
         </div>
       </div>
     </transition>
 
-    <div class="arrow-button" v-if="itemName ==='calc'">
+    <div class="arrow-button" v-if="arrowDown">
       <transition name="bounce">
-        <fa-icon v-if="currentItem !== 'calc'" class="icon" :icon="['fac', 'chevronDown']"/>
+        <fa-icon v-if="currentItem !== itemName" class="icon" :icon="['fac', 'chevronDown']"/>
       </transition>
 
       <transition name="bounce">
-        <fa-icon v-if="currentItem === 'calc'" class="icon-close calc" :icon="['fac', 'close']"/>
+        <fa-icon v-if="currentItem === itemName" class="icon-close calc" :icon="['fac', 'close']"/>
       </transition>
 
       <fa-icon class="icon-bottom" :icon="['fac', 'arrowHeader']"/>
@@ -61,6 +61,10 @@ export default {
     titleShow: {
       type: Boolean,
       default: false,
+    },
+    arrowDown: {
+      type: Boolean,
+      default: false,
     }
   }
 }
@@ -71,6 +75,7 @@ export default {
   text-align: center;
   transition: $trs;
   user-select: none;
+  padding-left: 16px;
 
   @media (max-width: 640px) {
     display: none;
@@ -78,8 +83,8 @@ export default {
 }
 
 .mobile {
-  width: 21px;
-  height: 23px;
+  width: 24px;
+  height: 24px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -88,11 +93,16 @@ export default {
   .item-icon {
     path {
       transition: $trs;
+
+      &:nth-child(2) {
+        fill: $green;
+      }
     }
   }
 
   @media (min-width: 641px) {
-    display: none;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -102,6 +112,7 @@ export default {
   position: absolute;
   z-index: 2;
   top: calc(50% - 9px);
+  left: calc(50% - 9px);
 
   path {
     transition: $trs;
@@ -111,19 +122,6 @@ export default {
     path {
       fill: $green;
     }
-  }
-
-  &.contacts {
-    left: 24px;
-  }
-
-  &.calc {
-    left: calc(50% - 9px);
-    bottom: -3px;
-  }
-
-  &.menu {
-    right: 24px;
   }
 }
 
@@ -135,6 +133,10 @@ export default {
   height: 16px;
   bottom: 0;
   left: calc(50% - 45px);
+
+  @media (min-width: 641px) {
+    left: calc(50% - 24px);
+  }
 
   .icon {
     width: 30px;
@@ -173,16 +175,17 @@ export default {
   align-content: center;
   cursor: pointer;
   color: $default;
-  min-width: 150px;
 
   @media (max-width: 640px) {
-    min-width: 100px;
+
   }
 
   .title {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 21px;
+    font-size: calc(#{$p} - 4px);
   }
 
   &:hover {

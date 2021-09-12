@@ -1,34 +1,65 @@
 <template>
   <header class="header">
     <div ref="wrapper" class="header-wrapper">
+
+        <transition name="bounce-fast" mode="out-in">
+          <div v-if="!isAuth">
+            <header-item-component
+              title="Вход / Регистрация"
+              alignTitle="center"
+              class="calc-price"
+              icon-name="login"
+              item-name="login"
+              :currentItem="currentItem"
+              :title-show="currentItem !== 'login'"
+              @click="showAuthModal"
+            />
+          </div>
+          <template v-else>
+            <header-item-component
+              :title="userName || ''"
+              alignTitle="center"
+              class="calc-price"
+              icon-name="profile"
+              item-name="profile"
+              :arrow-down="true"
+              :currentItem="currentItem"
+              :title-show="currentItem !== 'profile'"
+              @click="toggleDropDown($event)"
+            />
+          </template>
+        </transition>
       <header-item-component
         title="Контакты"
-        alignTitle="flex-start"
+        class="calc-price"
+        alignTitle="center"
         icon-name="contacts"
         item-name="contacts"
+        :arrow-down="true"
         :title-show="currentItem !== 'contacts'"
         :currentItem="currentItem"
         @click="toggleDropDown($event)"
       />
 
-      <div class="center">
-        <header-item-component
-          title="Рассчитать стоимость"
-          alignTitle="center"
-          class="calc-price"
-          icon-name="calculator"
-          item-name="calc"
-          :currentItem="currentItem"
-          :title-show="currentItem !== 'calc'"
-          @click="toggleDropDown($event)"
-        />
-      </div>
+      <header-item-component
+        title="Калькулятор"
+        alignTitle="center"
+        class="calc-price"
+        icon-name="calculator"
+        item-name="calc"
+        :arrow-down="true"
+        :currentItem="currentItem"
+        :title-show="currentItem !== 'calc'"
+        @click="toggleDropDown($event)"
+      />
 
       <header-item-component
         title="Меню"
-        alignTitle="flex-end"
+        class="calc-price"
+        alignTitle="center"
         icon-name="burger"
         item-name="menu"
+        :arrow-down="true"
         :currentItem="currentItem"
         :title-show="currentItem !== 'menu'"
         @click="toggleDropDown($event)"
@@ -50,26 +81,25 @@
 </template>
 
 <script>
-import DropDown from "../reuse/DropDown";
-import CalcProjectForm from "../forms/CalcProjectForm";
-import HeaderItemComponent from "./items/HeaderItemComponent";
-import ContactsComponent from "./ContactsComponent";
-import HeaderMenu from "./HeaderMenu";
+import AuthRegisterModal from "~/components/modals/AuthRegisterModal";
 
 export default {
   name: "HeaderWrapper",
   components: {
-    HeaderMenu,
-    ContactsComponent,
-    HeaderItemComponent,
-    CalcProjectForm,
-    DropDown
+    HeaderMenu: () => import('./HeaderMenu'),
+    UserMenu: () => import('./UserMenu'),
+    ContactsComponent: () => import('./ContactsComponent'),
+    HeaderItemComponent: () => import('./items/HeaderItemComponent'),
+    CalcProjectForm: () => import('~/components/forms/CalcProjectForm'),
+    DropDown: () => import('~/components/reuse/DropDown'),
+    AuthRegisterModal
   },
   data() {
     return {
       currentItem: '',
       dropdownHeight: 0,
       showDropDown: false,
+      openModal: false
     }
   },
   watch: {
@@ -89,11 +119,24 @@ export default {
     }
   },
   computed: {
+    isAuth() {
+      return this.$auth && this.$auth.loggedIn
+    },
+    userName() {
+      return this.$auth && this.$auth.user && this.$auth.user.login
+    },
     currentDropDown() {
       switch (this.currentItem) {
-        case "contacts": return "ContactsComponent"
-        case "calc": return "CalcProjectForm"
-        case "menu": return "HeaderMenu"
+        case "contacts":
+          return "ContactsComponent"
+        case "login":
+          return "CalcProjectForm"
+        case "calc":
+          return "CalcProjectForm"
+        case "menu":
+          return "HeaderMenu"
+        case "profile":
+          return "UserMenu"
       }
     },
     customStyleDropDown() {
@@ -106,6 +149,30 @@ export default {
     }
   },
   methods: {
+    showAuthModal() {
+      const vm = this
+      if (!this.openModal) {
+        this.$modal.show(
+          AuthRegisterModal,
+          {},
+          {
+            classes: 'modal-custom',
+            transition: 'modal',
+            overlayTransition: 'modal-bg',
+            adaptive: true,
+            height: `${window.innerHeight - 120}px`,
+            width: `${window.innerWidth}px`,
+            shiftY: 1,
+            styles: "overflow: visible; border-radius: 8px; box-shadow: none"
+          },
+          {
+            'before-open': () => vm.openModal = true,
+            'before-close': () => vm.openModal = false,
+          }
+        )
+      }
+    },
+
     toggleDropDown(v) {
       this.currentItem !== v ? this.currentItem = v : this.currentItem = ""
     },
@@ -130,6 +197,7 @@ export default {
   overflow: visible;
   z-index: 9001;
 }
+
 .header-wrapper {
   position: fixed;
   display: flex;
@@ -148,25 +216,13 @@ export default {
   overflow: visible;
 }
 
-
-.center {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 300px;
-  height: 54px;
-  left: calc(50% - 150px);
-
-  @media (max-width: 640px) {
-    width: 150px;
-    left: calc(50% - 75px);
-  }
-}
-
 .calc-price {
   width: 300px;
+  position: relative;
+
+  @media (max-width: 640px) {
+    min-width: 40px;
+  }
 
   .title {
     padding: 16px 0;

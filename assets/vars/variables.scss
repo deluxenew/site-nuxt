@@ -2,6 +2,8 @@
 $rate: 8px;
 $max: 100vmax;
 $min: 100vmin;
+$vh: 100vh;
+$vw: 100vw;
 
 $verticalText: 100vh / 56;
 
@@ -13,7 +15,7 @@ $h1: $min / 16;
 $h2: $min / 24;
 $h3: $min / 32;
 
-$p: $min / 48;
+$p: 22px;
 
 $font: 'TTNorms';
 
