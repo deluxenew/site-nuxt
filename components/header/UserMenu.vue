@@ -43,6 +43,7 @@
     <div class="row bottom">
       <ui-button
         class="button"
+        iconName="logout"
         :style="`--item-count:${items.length + 1}`"
         text="выход"
         @click="logout"

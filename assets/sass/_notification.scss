@@ -1,0 +1,168 @@
+.vue-notification-group {
+  top: 60px!important;
+}
+.vue-notification-wrapper {
+  overflow: visible !important;
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+
+  //@include mobile {
+  //  padding-left: 0 !important;
+  //}
+
+  &:first-child {
+    margin-top: 10px;
+
+    .notify {
+      margin-top: 10px;
+    }
+  }
+}
+
+.custom-notify {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 15px;
+
+  //@include mobile {
+  //  margin: 0 20px;
+  //  padding-bottom: 5px;
+  //}
+
+  .inner {
+    padding: 0;
+
+    .row {
+      position: relative;
+      display: flex !important;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      min-height: 40px;
+      padding: 0 10px;
+      background-color: $white;
+      font-size: 12px;
+      color: $default;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      z-index: 1000;
+
+      //@include mobile {
+      //  padding: 0 10px;
+      //  border-radius: 10px;
+      //  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      //}
+
+      .icon {
+        padding: 5px 0;
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .warn {
+        .notification-title {
+          color: #FFC300;
+        }
+      }
+
+      .error {
+        .notification-title {
+          color: #FF3531;
+        }
+      }
+
+      .success {
+        .notification-title {
+          color: #3ACF88;
+        }
+      }
+
+      .data-wrap {
+        width: 100%;
+        margin-left: 16px;
+        padding: 16px 0;
+
+        //@include mobile {
+        //  margin-left: 12px;
+        //  margin-right: 10px;
+        //  padding: 5px 0;
+        //}
+
+        .notification-title {
+          font-family: $font;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 24px;
+
+          //@include mobile {
+          //  font-size: 16px;
+          //  line-height: 20px;
+          //}
+        }
+
+        .notification-content {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 20px;
+          color: $default;
+
+          //@include mobile {
+          //  font-size: 12px;
+          //  line-height: 17px;
+          //}
+        }
+      }
+
+      .icon-close {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+
+        //@include mobile {
+        //  position: absolute;
+        //  top: 5px;
+        //  right: 5px;
+        //  width: 12px;
+        //  height: 12px;
+        //  margin-top: 5px;
+        //  margin-right: 5px;
+        //}
+
+        path {
+          stroke: $default;
+        }
+      }
+    }
+  }
+}
+
+.notify {
+  padding-top: 60px!important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 50px;
+  padding-left: 100px;
+  font-size: 12px;
+  color: $default;
+  background: $white !important;
+  margin-top: 60px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+
+
+  //@include mobile {
+  //  padding-left: 0;
+  //}
+
+}

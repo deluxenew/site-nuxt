@@ -31,6 +31,7 @@ export default {
     { mode: 'all', src: '~/plugins/api-plugin' },
     { mode: 'all', src: '~/plugins/utils-plugin' },
     { mode: 'client', src: '~/plugins/vue-js-modal'},
+    { mode: 'client', src: '~/plugins/vue-notifications' },
   ],
   styleResources: {
     scss: [

@@ -110,18 +110,23 @@ export default {
   },
   methods: {
     async setRegister() {
-      const {name: {value: name},login: {value: login}, password: {value: password}} = this.registerForm
+      const {name: {value: name}, login: {value: login}, password: {value: password}} = this.registerForm
       await this.$store.dispatch('SIGN_UP_USER_ACTION', {name, login, password})
-      this.$emit('close')
+        .then(() => {
+          this.$emit('close')
+        })
     },
     async setLogin() {
       const {login: {value: login}, password: {value: password}} = this.authForm
       await this.$store.dispatch('SIGN_IN_USER_ACTION', {login, password})
-      this.$emit('close')
+        .then((data) => {
+          if (data) this.$emit('close')
+        })
+      .catch((err) => {
+        let msg = this.$utils.formatError(err)
+        this.$notify({...msg, title: 'Ошибка авторизации'})
+      })
     },
-    expand() {
-
-    }
   }
 }
 </script>

@@ -9,12 +9,12 @@
     </div>
     <div class="row field">
       <ui-button
+        iconName="login"
         :loading="loading"
         text="Войти"
         @click="$emit('setLogin')"
       />
       <ui-button
-        :loading="loading"
         text="Напомнить пароль"
       />
     </div>

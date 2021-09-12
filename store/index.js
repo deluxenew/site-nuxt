@@ -1,55 +1,66 @@
 import axios from "axios";
 
 export const state = () => ({
-
+  loading: false,
 })
 
 export const actions = {
-  SIGN_IN_USER_ACTION ({commit, dispatch, getters}, {login, password}) {
-    const vm = this
-    return this.$auth.loginWith('local', {
+
+  async SIGN_IN_USER_ACTION({commit, dispatch, getters}, {login, password}) {
+    commit('SET_LOADING', true)
+    await this.$auth.loginWith('local', {
       data: {
         login: login,
         password: password,
       }
     })
       .then(({data}) => {
-        const { token, refreshToken } = data
-        return vm.$auth.setUserToken(token, refreshToken)
+        if (data) {
+          const {token, refreshToken} = data
+          this.$auth.setUserToken(token, refreshToken)
+          return data
+        }
       })
+      .finally(() => commit('SET_LOADING', false))
   },
-  async SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
-    await this.$api.register({name, login, password, })
+  SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
+    commit('SET_LOADING', true)
+    this.$api.register({name, login, password,})
       .then(() => {
         return dispatch("SIGN_IN_USER_ACTION", {login, password})
+      })
+      .finally(() => {
+        commit('SET_LOADING', false)
       })
       .catch(function (error) {
         // commit('setError', error, {root: true})
         throw error
       });
   },
-  async logoutAll({ dispatch }) {
+  async logoutAll({commit, dispatch}) {
+    commit('SET_LOADING', true)
     if (this.$auth.user) {
       const data = await this.$api.logoutAll()
       if (data) {
         dispatch('logout')
       }
+      commit('SET_LOADING', false)
     }
   },
-  async signup({ commit, dispatch }, formData) {
-    await axios.post('/api/auth/admin/signup', formData)
-      .then(function (response) {
-
-      })
-      .catch(function (error) {
-        // commit('setError', error, {root: true})
-        throw error
-      });
-  },
-  logout() {
+  logout({commit}) {
+    commit('SET_LOADING', true)
     return this.$auth.logout('local')
+      .finally(() => {
+        commit('SET_LOADING', false)
+      })
   },
 }
 export const mutations = {
+  SET_LOADING(state, load) {
+    state.loading = load
+  }
+}
 
+export const getters = {
+  IS_LOGGING: (state) => state.loading
 }

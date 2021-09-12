@@ -9,6 +9,7 @@
     </div>
     <div class="row field">
       <ui-button
+        iconName="register"
         :loading="loading"
         text="Зарегистрироваться"
         @click="$emit('setRegister')"
