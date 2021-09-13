@@ -1,15 +1,15 @@
 .modal-bg-enter-active {
   animation-name: modal-bg-in, modal-bg-out;
-  animation-timing-function: linear;
+  animation-timing-function: ease, linear;
   animation-direction: normal, reverse;
   animation-duration: 1000s, 1s;
-  animation-iteration-count: infinite, 1;
+  animation-iteration-count: 1, 1;
 
   &:before {
     content: '';
     position: absolute;
     animation-name: modal-bg-in;
-    animation-timing-function: linear;
+    animation-timing-function: ease-in;
     animation-duration: 5s;
     animation-iteration-count: infinite;
     bottom: -600px;
@@ -31,40 +31,40 @@
 
 @keyframes modal-bg-in {
   0% {
-    bottom: -300px;
+    bottom: calc(15vh - 300px);
+    right: calc(15vh - 300px);
+  }
+  12.5% {
+    bottom: calc(50vh - 300px);
     right: -300px;
   }
-  10% {
+  25% {
     bottom: calc(85vh - 300px);
-    right: calc(12.5vw - 300px);
+    right: calc(15vw - 300px)
   }
-  20% {
-    bottom: calc(90vh - 300px);
-    right: calc(25vw - 300px);
-  }
-  30% {
-    bottom: calc(95vh - 300px);
-    right: calc(37.5vw - 300px)
-  }
-  40%{
+  37.5% {
     bottom: calc(100vh - 300px);
     right: calc(50vw - 300px)
   }
-  45% {
-    bottom: calc(95vh - 300px);
-    right: calc(62.5vw - 300px);
-  }
   50% {
-    bottom: calc(100vh - 300px);
+    bottom: calc(85vh - 300px);
+    right: calc(85vw - 300px);
+  }
+  65.5% {
+    bottom: calc(50vh - 300px);
     right: calc(100vw - 300px);
   }
   75% {
+    bottom: calc(15vw - 300px);
+    right: calc(85vw - 300px);
+  }
+  87.5% {
     bottom: -300px;
-    right: calc(100vw - 300px);
+    right: calc(50vw - 300px);
   }
   100% {
-    bottom: -300px;
-    right: -300px;
+    bottom: calc(15vh - 300px);
+    right: calc(15vh - 300px);
   }
 }
 

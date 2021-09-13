@@ -286,10 +286,6 @@ $bodyHeightMobile: calc(100vh - var(--modal-header-height) - var(--modal-footer-
 .vm--top-right-slot {
   width: 100%;
   height: 100%;
-  //width: 600px;
-  //height: 600px;
-  //position: relative;
-  //perspective: 780px;
   box-sizing: border-box;
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
