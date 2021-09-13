@@ -263,81 +263,53 @@ $bodyHeightMobile: calc(100vh - var(--modal-header-height) - var(--modal-footer-
   height: 100%;
 
   &:after {
+    opacity: 0.5;
     content: '';
     position: absolute;
     width: 600px;
     height: 600px;
-    //top: 0%;
-    //left: 0%;
     animation-name: modal-bg-in, cssload-rotate-three;
     animation-iteration-count: infinite;
-    animation-duration: 5s, 1.15s;
+    animation-duration: 20s, 1.15s;
     animation-timing-function: linear;
-
-    //-o-animation: cssload-rotate-three 1.15s linear infinite;
-    //-ms-animation: cssload-rotate-three 1.15s linear infinite;
-    //-webkit-animation: cssload-rotate-three 1.15s linear infinite;
-    //-moz-animation: cssload-rotate-three 1.15s linear infinite;
     border-top: 3px solid $white;
     border-radius: 50%;
   }
 }
 
 .vm--top-right-slot {
-  width: 100%;
+  width: 0;
   height: 100%;
   box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   border-radius: 50%;
-  -o-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
 
   &:before {
+    opacity: 0.5;
     content: '';
     position: absolute;
     width: 600px;
     height: 600px;
-    //right: 0%;
-    //top: 0%;
     animation-name: modal-bg-in, cssload-rotate-two;
     animation-iteration-count: infinite;
-    animation-duration: 5s, 1.15s;
+    animation-duration: 20s, 1.15s;
     animation-timing-function: linear;
-
-    //animation: cssload-rotate-two 1.15s linear infinite;
-    //-o-animation: cssload-rotate-two 1.15s linear infinite;
-    //-ms-animation: cssload-rotate-two 1.15s linear infinite;
-    //-webkit-animation: cssload-rotate-two 1.15s linear infinite;
-    //-moz-animation: cssload-rotate-two 1.15s linear infinite;
     border-right: 3px solid $default;
     border-radius: 50%;
   }
 
   &:after {
+    opacity: 0.5;
     content: '';
     position: absolute;
     width: 600px;
     height: 600px;
     background-color: transparent;
-    //left: 0%;
-    //top: 0%;
     animation-name: modal-bg-in, cssload-rotate-one;
     animation-iteration-count: infinite;
-    animation-duration: 5s, 1.15s;
+    animation-duration: 20s, 1.15s;
     animation-timing-function: linear;
-    //animation: cssload-rotate-one 1.15s linear infinite;
-    //-o-animation: cssload-rotate-one 1.15s linear infinite;
-    //-ms-animation: cssload-rotate-one 1.15s linear infinite;
-    //-webkit-animation: cssload-rotate-one 1.15s linear infinite;
-    //-moz-animation: cssload-rotate-one 1.15s linear infinite;
     border-bottom: 3px solid $green;
     border-radius: 50%;
-
   }
 }
 

@@ -8,7 +8,7 @@
       :class="customClasses"
       :placeholder="placeholder"
       :style="{ textIndent: indent + 'px' }"
-      @blur="blur"
+      @blur="init"
       @focus="focus"
     >
     <label ref="label" :for="id">
@@ -44,6 +44,14 @@ export default {
     type: {
       type: String,
       default: 'text',
+    },
+    required: {
+      type: Boolean,
+      default: false,
+    },
+    validateFn: {
+      type: Function,
+      default: () => {}
     }
   },
   data() {
@@ -58,6 +66,7 @@ export default {
       },
       set(v) {
         this.$emit('input', v)
+        this.$emit('setError', {fieldName: this.name, value: this.validateFn(v)})
       }
     },
     customClasses() {
@@ -65,7 +74,7 @@ export default {
     }
   },
   methods: {
-    blur() {
+    init() {
       this.indent = this.$refs.label.clientWidth
     },
     focus() {
@@ -73,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.blur()
+    this.init()
   }
 }
 </script>

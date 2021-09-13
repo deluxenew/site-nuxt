@@ -26,10 +26,11 @@
       </label>
       <div class="back"></div>
     </nav>
-
-    <section :key="tab + 'sec'" v-for="tab in Object.keys(tabs)">
-      <slot v-if="tab === checked" :name="checked"/>
-    </section>
+  <section :key="tab + 'sec'" v-for="tab in Object.keys(tabs)">
+    <transition name="fade" mode="out-in">
+      <slot v-if="tab === checked" :name="checked" />
+    </transition>
+  </section>
   </div>
 </template>
 
@@ -71,12 +72,14 @@ $labelWidth: calc(100% / #{$count});
 $left: calc(#{$labelWidth} * #{$index});
 
 .tabs-component {
+  position: relative;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   background: #BEE3D1;
   width: 100%;
   max-width: 100%;
   min-width: 390px;
+  height: 100%;
 
   *, *:after, *:before {
     box-sizing: border-box;
@@ -93,7 +96,7 @@ $left: calc(#{$labelWidth} * #{$index});
   }
 
   section {
-    position: relative;
+    position: absolute;
     padding: 1rem 2rem 0;
     overflow: auto;
     transition: .7s;

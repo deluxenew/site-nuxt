@@ -69,7 +69,7 @@ export default {
       authForm: {
         login: {
           value: '',
-          label: 'Логин'
+          label: 'Почта'
         },
         password: {
           value: '',
@@ -83,7 +83,7 @@ export default {
         },
         login: {
           value: '',
-          label: 'Логин'
+          label: 'Почта'
         },
         password: {
           value: '',
