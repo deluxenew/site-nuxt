@@ -1,13 +1,12 @@
 <template>
   <header class="header">
     <div ref="wrapper" class="header-wrapper">
-
         <transition name="bounce-fast" mode="out-in">
           <div v-if="!isAuth">
             <header-item-component
               title="Вход / Регистрация"
               alignTitle="center"
-              class="calc-price"
+              class="calc-price static"
               icon-name="login"
               item-name="login"
               :currentItem="currentItem"
@@ -19,7 +18,7 @@
             <header-item-component
               :title="userName || ''"
               alignTitle="center"
-              class="calc-price"
+              class="calc-price static"
               icon-name="profile"
               item-name="profile"
               :arrow-down="true"
@@ -30,38 +29,13 @@
           </template>
         </transition>
       <header-item-component
-        title="Контакты"
+        v-for="item in topMenu"
+        v-bind="item"
         class="calc-price"
         alignTitle="center"
-        icon-name="contacts"
-        item-name="contacts"
-        :arrow-down="true"
-        :title-show="currentItem !== 'contacts'"
+        :title-show="currentItem !== item.itemName"
         :currentItem="currentItem"
-        @click="toggleDropDown($event)"
-      />
-
-      <header-item-component
-        title="Калькулятор"
-        alignTitle="center"
-        class="calc-price"
-        icon-name="calculator"
-        item-name="calc"
-        :arrow-down="true"
-        :currentItem="currentItem"
-        :title-show="currentItem !== 'calc'"
-        @click="toggleDropDown($event)"
-      />
-
-      <header-item-component
-        title="Меню"
-        class="calc-price"
-        alignTitle="center"
-        icon-name="burger"
-        item-name="menu"
-        :arrow-down="true"
-        :currentItem="currentItem"
-        :title-show="currentItem !== 'menu'"
+        :key="item.itemName"
         @click="toggleDropDown($event)"
       />
     </div>
@@ -93,6 +67,12 @@ export default {
     CalcProjectForm: () => import('~/components/forms/CalcProjectForm'),
     DropDown: () => import('~/components/reuse/DropDown'),
     AuthRegisterModal
+  },
+  props: {
+    topMenu: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
@@ -207,9 +187,9 @@ export default {
   border-bottom: 3px solid $green;
   transition: $trs;
   color: $default;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 400;
   font-family: $font;
   background-color: $white;
   z-index: 9002;
@@ -221,6 +201,7 @@ export default {
   position: relative;
 
   @media (max-width: 640px) {
+    width: auto;
     min-width: 40px;
   }
 
@@ -238,6 +219,14 @@ export default {
           fill: $green;
         }
       }
+    }
+  }
+
+  &.static {
+    flex: 0 0 250px;
+
+    @media (max-width: 640px) {
+      flex: none;
     }
   }
 }

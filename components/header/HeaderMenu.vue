@@ -88,7 +88,7 @@ export default {
     padding-top: 32px;
     font-size: $h2;
     line-height: normal;
-    font-weight: 500;
+    font-weight: bold;
     font-family: $font;
     text-align: center;
     color: $default;

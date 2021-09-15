@@ -59,7 +59,7 @@
 a {
     text-decoration: none;
     font-family: $font;
-    font-weight: bold;
+    font-weight: 400;
     color: #fffff1;
     transition: $trs;
 
@@ -75,7 +75,6 @@ a {
 
 body {
     font-family: $font;
-    font-weight: 500;
     font-size: 14px;
     min-width: 320px;
     position: relative;
@@ -85,6 +84,14 @@ body {
 
 .main {
     flex: 1;
+}
+
+.content {
+  width: 100vw;
+  padding-top: 56px;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 0;
 }
 
 .ruble {

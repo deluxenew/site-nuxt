@@ -31,7 +31,7 @@ export default {
 }
 .title {
   color: $default;
-  font-weight: 500;
+  font-weight: bold;
   display: block;
   font-family: $font;
   font-size: $h2;

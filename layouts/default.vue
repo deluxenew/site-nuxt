@@ -1,6 +1,6 @@
 <template>
-  <div class="layout-wrapper">
-    <header-component/>
+  <div class="default-layout">
+    <header-component :topMenu="topMenu"/>
 
     <div class="content">
       <nuxt/>
@@ -20,21 +20,7 @@
             <div class="inner card" @click="props.close">
               <div class="row">
                 <div class="icon">
-<!--                  <img-->
-<!--                    v-if="props.item.type === 'success'"-->
-<!--                    class="success"-->
-<!--                    src="@/assets/img/notify-success.svg"-->
-<!--                  >-->
-<!--                  <img-->
-<!--                    v-if="props.item.type === 'warn'"-->
-<!--                    class="warn"-->
-<!--                    :src="require('@imgs/notify-warning.svg')"-->
-<!--                  >-->
-<!--                  <img-->
-<!--                    v-if="props.item.type === 'error'"-->
-<!--                    class="error"-->
-<!--                    :src="require('@imgs/notify-error.svg')"-->
-<!--                  >-->
+
                 </div>
                 <div class="data-wrap" :class="props.item.type">
                   <div class="notification-title">
@@ -61,19 +47,36 @@ import HeaderComponent from "../components/header/HeaderComponent";
 export default {
   name: "default",
   components: {FooterComponent, HeaderComponent},
+  data() {
+    return {
+      topMenu: [
+        {
+          itemName: 'contacts',
+          iconName: 'contacts',
+          title: 'Контакты',
+          arrowDown: true,
+        },
+        {
+          itemName: 'calc',
+          iconName: 'calculator',
+          title: 'Калькулятор',
+          arrowDown: true,
+        },
+        {
+          itemName: 'menu',
+          iconName: 'burger',
+          title: 'Меню',
+          arrowDown: true,
+        }
+      ]
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.layout-wrapper {
+.default-layout {
 
 }
 
-.content {
-  width: 100vw;
-  padding-top: 56px;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 0;
-}
 </style>

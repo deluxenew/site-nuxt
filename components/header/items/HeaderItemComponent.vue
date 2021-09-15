@@ -185,7 +185,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 21px;
-    font-size: calc(#{$p} - 4px);
+    font-size: calc(#{$p} - 6px);
   }
 
   &:hover {

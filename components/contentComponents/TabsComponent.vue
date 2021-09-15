@@ -80,6 +80,7 @@ $left: calc(#{$labelWidth} * #{$index});
   max-width: 100%;
   min-width: 390px;
   height: 100%;
+  border-radius: 8px;
 
   *, *:after, *:before {
     box-sizing: border-box;
@@ -134,6 +135,7 @@ $left: calc(#{$labelWidth} * #{$index});
     bottom: 0;
     top: 0;
     border-top: 0 none;
+    border-radius: 8px 8px 0 0;
   }
 
   input {

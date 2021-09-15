@@ -1,4 +1,5 @@
 import { emailValidateFn, passwordValidateFn, nameValidateFn } from './validateFunctions'
+
 export default (isDev) => ({
   formatError(err) {
     let {response: {data: {message: text}}} = err
@@ -28,22 +29,24 @@ export default (isDev) => ({
   formFieldByName(val) {
     const fieldsList = {
       login: {
+        value: '',
         name: 'login',
         type: 'text',
         componentName: 'SingleText',
         emptyErrorText: 'Необходимо ввести e-mail адрес (пример: example@gmail.com)',
         validateFunction: emailValidateFn,
         required: true,
-        labelText: 'Адрес почты (e-mail)',
+        label: 'Адрес почты (e-mail)',
       },
       password: {
+        value: '',
         name: 'password',
         type: 'text',
         componentName: 'SingleText',
         emptyErrorText: 'Необходимо указать пароль (не менее 8 символов)',
         validateFunction: passwordValidateFn,
         required: true,
-        labelText: 'Пароль',
+        label: 'Пароль',
       }
     }
     return fieldsList[val]

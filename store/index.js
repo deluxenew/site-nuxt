@@ -13,20 +13,20 @@ export const actions = {
         password: password,
       }
     })
+      .finally(() => commit('SET_LOADING', false))
       .then(({data}) => {
         if (data) {
           const {token, refreshToken} = data
-          this.$auth.setUserToken(token, refreshToken)
-          return data
+          return  this.$auth.setUserToken(token, refreshToken)
         }
       })
-      .finally(() => commit('SET_LOADING', false))
+
   },
   async SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
     commit('SET_LOADING', true)
-    await this.$api.register({name, login, password,})
+    await this.$api.register({ name, login, password })
       .then(() => {
-        dispatch("SIGN_IN_USER_ACTION", {login, password})
+        return  dispatch("SIGN_IN_USER_ACTION", {login, password})
       })
       .finally(() => {
         commit('SET_LOADING', false)
@@ -57,5 +57,5 @@ export const mutations = {
 }
 
 export const getters = {
-  IS_LOGGING: (state) => state.loading
+  IS_LOADING: (state) => state.loading
 }

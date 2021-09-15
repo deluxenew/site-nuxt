@@ -51,7 +51,7 @@ export default {
     font-size: $h2;
     line-height: normal;
     margin-bottom: 40px;
-    font-weight: 500;
+    font-weight: bold;
     font-family: $font;
     text-align: center;
     display: flex;
@@ -65,8 +65,8 @@ export default {
     display: flex;
     align-items: center;
     font-size: $h2;
-    font-weight: 500;
-    font-family: TTNormss;
+    font-weight: bold;
+    font-family: TTNorms;
 
     .text {
       padding-left: 24px;
