@@ -1,6 +1,6 @@
 <template>
-  <page-view :sections="sections">
-    <div class="view-block" v-for="section in sections" :slot="section.slotName" :key="section.slotName">
+  <component :is="template" :sections="sections">
+    <div class="homepage" v-for="section in sections" :slot="section.slotName" :key="section.slotName">
       <component
         v-for="component in Object.keys(blockComponents[section.slotName][0].componentsProps || {})"
         :key="JSON.stringify(component)"
@@ -8,64 +8,65 @@
         v-bind="section.componentsProps[component]"
       />
     </div>
-  </page-view>
+  </component>
 </template>
 
 <script>
 import { views } from "~/constants/views";
-const { content: { components }} = views
+const { content: { components: content }, pageTemplates: { components: templates }} = views
+const components = { ...content, ...templates }
 
 export default {
   name: "IndexPage",
   components,
   data() {
     return {
-      ret: components,
+      // ret: components,
+      template: 'PageView',
       sections: [
         {
-          navTitle: 'Приветствие',
+          navTitle: 'Главная',
           slotName: 'one',
           componentsProps: {
             WelcomeBlock: {},
           }
         },
         {
-          navTitle: 'Второй экран',
+          navTitle: 'Проекты',
           slotName: 'two',
         },
         {
-          navTitle: 'Третий экран',
+          navTitle: 'Услуги',
           slotName: 'tree',
           componentsProps: {
           }
         },
         {
-          navTitle: 'Четвертый экран',
+          navTitle: 'Компании',
           slotName: 'four',
           componentsProps: {
-            test: {
-              title: 'sadasd'
-            },
+            test: {},
+          }
+        },
+        {
+          navTitle: 'Инфо',
+          slotName: 'five',
+          componentsProps: {
+            test: {},
           }
         }]
     }
   },
   computed: {
     blockComponents() {
-      const groupBy = (list, key) => {
-        return list.reduce(function (rv, x) {
-          (rv[x[key]] = rv[x[key]] || []).push(x)
-          return rv
-        }, {})
-      }
-      return groupBy(this.sections, 'slotName')
+      return this.$utils.groupBy(this.sections, 'slotName')
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.view-block {
+.homepage {
   width: 100%;
   height: 100%;
   display: block;

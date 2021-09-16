@@ -99,6 +99,7 @@ $left: calc(#{$labelWidth} * #{$index});
   section {
     position: absolute;
     padding: 1rem 2rem 0;
+    width: 100%;
     overflow: auto;
     transition: .7s;
     transform-origin: center;
@@ -166,7 +167,7 @@ $left: calc(#{$labelWidth} * #{$index});
 
   .checked {
     color: #000;
-    font-weight: 600;
+    font-weight: 400;
   }
 }
 </style>

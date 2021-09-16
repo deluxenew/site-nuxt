@@ -50,26 +50,30 @@ export default {
     return {
       topMenu: [
         {
-          itemName: 'contacts',
-          iconName: 'contacts',
+          itemName: 'company',
+          iconName: 'company',
           title: 'Компания',
+          link: '/user/company',
           arrowDown: false,
         },
         {
           itemName: 'contacts',
           iconName: 'contacts',
+          link: "/user/services",
           title: 'Услуги',
           arrowDown: false,
         },
         {
-          itemName: 'calc',
-          iconName: 'calculator',
+          itemName: 'articles',
+          iconName: 'articles',
+          link: "/user/articles",
           title: 'Статьи',
           arrowDown: false,
         },
         {
-          itemName: 'calc',
-          iconName: 'calculator',
+          itemName: 'subscribe',
+          iconName: 'subscribe',
+          link: "/user/subscribe",
           title: 'Подписка',
           arrowDown: false,
         },

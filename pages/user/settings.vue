@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: "settings"
+  name: "settings",
+  layout: (ctx) => {
+    if (!ctx.$auth.user) return 'noAccess'
+    else return 'personal'
+  },
+  transition: 'bounce-fast'
 }
 </script>
 

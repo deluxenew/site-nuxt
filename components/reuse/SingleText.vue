@@ -83,7 +83,7 @@ export default {
   methods: {
     blur() {
       this.init()
-      this.$emit('setError', {fieldName: this.name, value: this.validateFunction(this.value)})
+      this.$emit('setError', {fieldName: this.name, value: this.validateFunction(this.value, this.required)})
     },
     init() {
       this.indent = this.$refs.label.clientWidth

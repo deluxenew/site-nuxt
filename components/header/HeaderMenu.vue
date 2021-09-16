@@ -212,21 +212,6 @@ export default {
     opacity: 1;
   }
 
-  @keyframes on-load {
-    0% {
-      opacity: 0;
-      transform: scale(.3);
-    }
-    70% {
-      opacity: .7;
-      transform: scale(1.1);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
   @keyframes text {
     0% {
       opacity: 0;

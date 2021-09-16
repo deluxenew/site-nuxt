@@ -5,8 +5,14 @@
 </template>
 
 <script>
+
 export default {
-  name: "company"
+  name: "company",
+  layout: (ctx) => {
+    if (!ctx.$auth.user) return 'noAccess'
+    else return 'personal'
+  },
+  transition: 'bounce-fast'
 }
 </script>
 

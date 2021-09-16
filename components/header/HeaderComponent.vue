@@ -36,7 +36,7 @@
         :title-show="currentItem !== item.itemName"
         :currentItem="currentItem"
         :key="item.itemName"
-        @click="toggleDropDown($event)"
+        @click="item.arrowDown ? toggleDropDown($event) : gotoLink(item.link)"
       />
     </div>
 
@@ -129,6 +129,9 @@ export default {
     }
   },
   methods: {
+    gotoLink(link) {
+      this.$router.push(link)
+    },
     showAuthModal() {
       const vm = this
       if (!this.openModal) {
@@ -199,8 +202,9 @@ export default {
 .calc-price {
   width: 300px;
   position: relative;
+  animation: on-load .3s ease-in-out forwards;
 
-  @media (max-width: 640px) {
+  @media (max-width: 800px) {
     width: auto;
     min-width: 40px;
   }
@@ -225,7 +229,7 @@ export default {
   &.static {
     flex: 0 0 250px;
 
-    @media (max-width: 640px) {
+    @media (max-width: 800px) {
       flex: none;
     }
   }

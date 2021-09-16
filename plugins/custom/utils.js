@@ -1,4 +1,4 @@
-import { emailValidateFn, passwordValidateFn, nameValidateFn } from './validateFunctions'
+import {fieldsList} from './formFields'
 
 export default (isDev) => ({
   formatError(err) {
@@ -27,28 +27,41 @@ export default (isDev) => ({
   },
 
   formFieldByName(val) {
-    const fieldsList = {
-      login: {
-        value: '',
-        name: 'login',
-        type: 'text',
-        componentName: 'SingleText',
-        emptyErrorText: 'Необходимо ввести e-mail адрес (пример: example@gmail.com)',
-        validateFunction: emailValidateFn,
-        required: true,
-        label: 'Адрес почты (e-mail)',
-      },
-      password: {
-        value: '',
-        name: 'password',
-        type: 'text',
-        componentName: 'SingleText',
-        emptyErrorText: 'Необходимо указать пароль (не менее 8 символов)',
-        validateFunction: passwordValidateFn,
-        required: true,
-        label: 'Пароль',
-      }
-    }
     return fieldsList[val]
+  },
+  getFormValues(form) {
+    return form.steps.reduce((obj, {rows}) => {
+      rows
+        .flat()
+        .forEach(({id, value}) => {
+          obj[id] = value
+        })
+      return obj
+    }, {})
+  },
+  getRequiredFields(form) {
+    return form.steps.reduce((arr, {rows}) => {
+      rows
+        .flat()
+        .forEach(({id, required}) => {
+         if (required) arr.push(id)
+        })
+      return arr
+    }, [])
+  },
+  isInvalidForm(form) {
+    return !!form.steps
+      .find(({ rows }) => rows
+        .flat()
+        .find(({ validateFunction, value, required }) => {
+          return !validateFunction(value, required).result
+        }))
+  },
+  groupBy: (list, key) => {
+    return list.reduce(function (rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x)
+      return rv
+    }, {})
   }
+
 });

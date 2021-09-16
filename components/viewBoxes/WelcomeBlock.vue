@@ -1,16 +1,23 @@
 <template>
   <div class="welcome-block">
       <h1 class="title">
-        Строительство домов
+        {{title}}
       </h1>
-    <tabs-component/>
+    <tabs-component />
   </div>
 </template>
 
 <script>
 import TabsComponent from "../contentComponents/TabsComponent";
+
 export default {
   name: "WelcomeBlock",
+  props: {
+    title: {
+      type: String,
+      default: 'Строительство домов'
+    }
+  },
   components: {
     TabsComponent
   }
@@ -21,15 +28,11 @@ export default {
 .welcome-block {
   width: 100%;
   height: 100%;
-  padding: $largePadding 0;
-  //background-image: url('/images/bg2.png');
-  //background-size: auto auto;
-  //background-position: center top;
-  //background-repeat: repeat-y;
+  padding: $smallPadding 0;
 
   .title {
     color: $default;
-    font-size: $h2;
+    font-size: $h3;
     text-align: center;
   }
 }

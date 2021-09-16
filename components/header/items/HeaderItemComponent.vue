@@ -75,9 +75,9 @@ export default {
   text-align: center;
   transition: $trs;
   user-select: none;
-  padding-left: 16px;
+  padding-left: 8px;
 
-  @media (max-width: 640px) {
+  @media (max-width: 800px) {
     display: none;
   }
 }
@@ -134,7 +134,7 @@ export default {
   bottom: 0;
   left: calc(50% - 45px);
 
-  @media (min-width: 641px) {
+  @media (min-width: 800px) {
     left: calc(50% - 24px);
   }
 
@@ -176,7 +176,7 @@ export default {
   cursor: pointer;
   color: $default;
 
-  @media (max-width: 640px) {
+  @media (max-width:  800px) {
 
   }
 
