@@ -22,7 +22,8 @@
         class="label"
         :class="{ checked: checked === tab }"
       >
-        {{ tabs[tab].title }}
+        <fa-icon class="icon" :icon="['fac', tabs[tab].icon]"/>
+        <span class="text">{{ tabs[tab].title }}</span>
       </label>
       <div class="back"></div>
     </nav>
@@ -78,7 +79,6 @@ $left: calc(#{$labelWidth} * #{$index});
   background: #BEE3D1;
   width: 100%;
   max-width: 100%;
-  min-width: 390px;
   height: 100%;
   border-radius: 8px;
 
@@ -154,6 +154,21 @@ $left: calc(#{$labelWidth} * #{$index});
     line-height: $p;
     z-index: 2;
     padding: 16px $smallPadding;
+
+    .icon {
+      display: none;
+      width: $p;
+      height: $p;
+    }
+
+    @media (max-width: 800px) {
+      .text {
+        display: none;
+      }
+      .icon {
+        display: inline-flex;
+      }
+    }
   }
 
   .label:hover {

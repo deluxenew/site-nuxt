@@ -2,7 +2,7 @@
   <header class="header">
     <div ref="wrapper" class="header-wrapper">
         <transition name="bounce-fast" mode="out-in">
-          <div v-if="!isAuth">
+          <div v-if="!isAuth && topMenu.length">
             <header-item-component
               title="Вход / Регистрация"
               alignTitle="center"
@@ -202,12 +202,13 @@ export default {
 .calc-price {
   width: 300px;
   position: relative;
-  animation: on-load .3s ease-in-out forwards;
+  animation: on-load .5s ease-in-out;
 
   @media (max-width: 800px) {
     width: auto;
     min-width: 40px;
   }
+
 
   .title {
     padding: 16px 0;

@@ -68,11 +68,7 @@ export default {
   }
 }
 </script>
-<style>
-:root {
-  --base-grid: calc(8px - (1080px - 100vmin) / 50);
-}
-</style>
+
 <style lang="scss" scoped>
 .top-menu {
   padding: 32px;
@@ -80,13 +76,13 @@ export default {
   width: 100%;
   transition: $trs;
   height: 100%;
-  @media (max-width: 640px) {
+  @media (max-width: 800px) {
     width: 100vw;
   }
 
   .title {
     padding-top: 32px;
-    font-size: $h2;
+    font-size: $h3;
     line-height: normal;
     font-weight: bold;
     font-family: $font;

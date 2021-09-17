@@ -77,11 +77,6 @@ export default {
   }
 }
 </script>
-<style>
-:root {
-  --base-grid: calc(8px - (1080px - 100vmin) / 50);
-}
-</style>
 
 <style lang="scss" scoped>
 .button {
@@ -98,13 +93,13 @@ export default {
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 640px) {
+  @media (max-width: 800px) {
     width: 100vw;
   }
 
   .title {
     padding-top: 32px;
-    font-size: $h2;
+    font-size: $h3;
     line-height: normal;
     font-weight: 400;
     font-family: $font;

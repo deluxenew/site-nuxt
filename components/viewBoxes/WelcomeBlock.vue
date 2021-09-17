@@ -28,7 +28,11 @@ export default {
 .welcome-block {
   width: 100%;
   height: 100%;
-  padding: $smallPadding 0;
+  padding: $mediumPadding 0;
+
+  @media (max-width: 800px) {
+    padding: 32px 0;
+  }
 
   .title {
     color: $default;

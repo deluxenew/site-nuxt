@@ -11,7 +11,7 @@
         <slot :name="item.slotName"/>
       </div>
     </section>
-    <aside class="navigator">
+    <aside class="navigator" :class="{move: showNavigate}">
       <div class="nav-item"
            v-for="(item, index) in sections"
            :key="index + 1"
@@ -28,6 +28,7 @@
 
 const MOVE_COUNT = 3
 
+let interval = ''
 export default {
   name: 'PageView',
   props: {
@@ -38,6 +39,8 @@ export default {
   },
   data() {
     return {
+      timer: 0,
+      showNavigate: false,
       wrapHeight: 0,
       currentPosition: 0,
       currentId: 0,
@@ -49,6 +52,13 @@ export default {
     }
   },
   watch: {
+    timer(v) {
+     if (v === 2) {
+       this.showNavigate = false
+       clearInterval(interval)
+       interval = ''
+     }
+    },
     wrapHeight(newV) {
       this.currentPosition = newV * this.currentId
       this.$nextTick(() => {
@@ -109,6 +119,12 @@ export default {
       setTimeout(() => {
         this.isScrolling = false
       }, 100)
+      this.timer = 0
+      clearInterval(interval)
+      this.showNavigate = true
+      interval = setInterval(function() {
+        this.timer++
+      }.bind(this), 1000)
     },
     setResize() {
       this.wrapHeight = window.innerHeight - 56
@@ -193,6 +209,17 @@ export default {
     &.active {
       background-color: $green;
       color: $white;
+    }
+  }
+
+  &.move {
+    .nav-item {
+      padding: 16px 24px;
+      transition: $trs;
+
+      span {
+        opacity: 1;
+      }
     }
   }
 

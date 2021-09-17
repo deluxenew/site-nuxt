@@ -89,6 +89,7 @@ export default {
       buttonRemember:  { id: 'remember', text: 'Напомнить пароль' },
       authForm: {
         title: 'Авторизация',
+        formIcon: 'login',
         steps: [{
           id: 'required',
           showStepNumber: false,
@@ -103,6 +104,7 @@ export default {
       },
       registerForm: {
         title: 'Регистрация',
+        formIcon: 'register',
         steps: [{
           id: 'required',
           showStepNumber: false,
@@ -127,7 +129,10 @@ export default {
       return dataFields
         .filter(el => this.$data[el].steps)
         .reduce((obj, el) => {
-          obj[el] = { title: this.$data[el].title }
+          obj[el] = {
+            title: this.$data[el].title,
+            icon: this.$data[el].formIcon
+          }
           return obj
         }, {})
     },
