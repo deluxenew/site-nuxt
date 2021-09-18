@@ -12,9 +12,10 @@
 </template>
 
 <script>
-import { views } from "~/constants/views";
-const { content: { components: content }, pageTemplates: { components: templates }} = views
-const components = { ...content, ...templates }
+import {views} from "~/constants/views";
+
+const {content: {components: content}, pageTemplates: {components: templates}} = views
+const components = {...content, ...templates}
 
 export default {
   name: 'UserIndexPage',
@@ -32,7 +33,28 @@ export default {
           slotName: 'one',
           componentsProps: {
             WelcomeBlock: {
-              title: 'Кабинет пользователя'
+              title: 'Кабинет пользователя',
+              blocks: [
+                {
+                  id: 'info',
+                  verticalGrow: 3 / 2,
+                  horizontalGrow: 3,
+                  title: "Информация",
+                  description: "Персональная информация пользователя с возможностью редактирования",
+                  component: 'UserInfo'
+                },
+                {
+                  id: 'stat',
+                  verticalGrow: 3 / 2,
+                  horizontalGrow: 3 / 2,
+                  title: "Статистика",
+                },
+                {
+                  id: 'common',
+                  verticalGrow: 3,
+                  horizontalGrow: 1,
+                  title: "Общее",
+                }]
             },
           }
         },
@@ -43,8 +65,7 @@ export default {
         {
           navTitle: 'Услуги',
           slotName: 'tree',
-          componentsProps: {
-          }
+          componentsProps: {}
         },
         {
           navTitle: 'Компании',

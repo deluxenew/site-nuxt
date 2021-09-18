@@ -111,6 +111,20 @@ body {
   justify-content: flex-start;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 .bottom {
   margin-top: auto;
+}
+
+.w-100 {
+  //flex-grow: 1;
+  width: 100%;
+  //flex: 0 0 100%;
 }

@@ -3,7 +3,7 @@ export const views = {
     components: {
       test: () => import('~/components/reuse/test'),
       WelcomeBlock: () => import ('~/components/viewBoxes/WelcomeBlock'),
-
+      UserInfo: () => import ('~/components/UserComponents/UserInfo'),
     },
     props: {
 
@@ -17,9 +17,9 @@ export const views = {
 
     }
   },
-  Ui: {
+  ui: {
     components: {
-
+      UiBlock: () => import('~/components/reuse/UiBlock'),
     },
     props: {
 

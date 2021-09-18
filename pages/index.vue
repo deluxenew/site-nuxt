@@ -19,6 +19,7 @@ const components = { ...content, ...templates }
 export default {
   name: "IndexPage",
   components,
+  transition: 'bounce-fast',
   data() {
     return {
       // ret: components,
@@ -28,7 +29,24 @@ export default {
           navTitle: 'Главная',
           slotName: 'one',
           componentsProps: {
-            WelcomeBlock: {},
+            WelcomeBlock: {
+              title: 'Пользователь',
+              blocks: [
+                {
+                  id: 'info',
+                  verticalGrow: 1,
+                  horizontalGrow: 3,
+                  title: "Информация",
+                  description: "Персональная информация пользователя с возможностью редактирования",
+                  component: 'UserInfo'
+                },
+                {
+                  id: 'stat',
+                  verticalGrow: 1,
+                  horizontalGrow: 3 / 2,
+                  title: "Статистика",
+                }]
+            },
           }
         },
         {

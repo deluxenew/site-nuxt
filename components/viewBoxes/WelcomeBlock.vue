@@ -5,46 +5,55 @@
     </h1>
     <div class="flex">
       <ui-block
-        :verticalGrow="3 / 2"
-        :horizontalGrow="3"
-        title="Персональная информация"
-
-      >
-
-      </ui-block>
-      <ui-block
-        :verticalGrow="3 / 2"
-        :horizontalGrow="3 / 2"
-        title="Статистика"
-      >
-        asdadasd
-      </ui-block>
-      <ui-block
-        :verticalGrow="3"
-        :horizontalGrow="1"
-        title="Достижения"
-      >
-        asdadasd
+        v-for="block in blocks"
+        v-bind="block"
+        :total="blocks.length"
+        :expandedId="expandedId"
+        @toggleExpand="toggleExpand"
+       >
+        <component
+          :is="block.component"
+          :slot="block.id"
+        />
       </ui-block>
     </div>
   </div>
 </template>
 
 <script>
-import TabsComponent from "../contentComponents/TabsComponent";
-import UiBlock from "../reuse/UiBlock";
+import {views} from "~/constants/views";
+
+const {
+  content: {components: content},
+  pageTemplates: {components: templates},
+  ui: {components: ui},
+
+} = views
+const components = {...content, ...templates, ...ui}
+
 
 export default {
   name: "WelcomeBlock",
+  components,
   props: {
     title: {
       type: String,
       default: 'Строительство домов'
+    },
+    blocks: {
+      type: Array,
+      default: () => []
     }
   },
-  components: {
-    UiBlock,
-    TabsComponent
+  data() {
+    return {
+      expandedId: '',
+    }
+  },
+  methods: {
+    toggleExpand(v) {
+      this.expandedId = v
+    }
   }
 }
 </script>
@@ -66,6 +75,10 @@ export default {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+
+    @media (max-width: 800px) {
+     flex-direction: column;
+    }
   }
 
   .title {
