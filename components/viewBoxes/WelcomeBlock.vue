@@ -1,14 +1,38 @@
 <template>
   <div class="welcome-block">
-      <h1 class="title">
-        {{title}}
-      </h1>
-    <tabs-component />
+    <h1 class="title">
+      {{ title }}
+    </h1>
+    <div class="flex">
+      <ui-block
+        :verticalGrow="3 / 2"
+        :horizontalGrow="3"
+        title="Персональная информация"
+
+      >
+
+      </ui-block>
+      <ui-block
+        :verticalGrow="3 / 2"
+        :horizontalGrow="3 / 2"
+        title="Статистика"
+      >
+        asdadasd
+      </ui-block>
+      <ui-block
+        :verticalGrow="3"
+        :horizontalGrow="1"
+        title="Достижения"
+      >
+        asdadasd
+      </ui-block>
+    </div>
   </div>
 </template>
 
 <script>
 import TabsComponent from "../contentComponents/TabsComponent";
+import UiBlock from "../reuse/UiBlock";
 
 export default {
   name: "WelcomeBlock",
@@ -19,6 +43,7 @@ export default {
     }
   },
   components: {
+    UiBlock,
     TabsComponent
   }
 }
@@ -32,6 +57,15 @@ export default {
 
   @media (max-width: 800px) {
     padding: 32px 0;
+  }
+
+  .flex {
+    padding-top: 16px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .title {

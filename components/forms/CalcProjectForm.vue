@@ -2,7 +2,7 @@
   <div class="calc-form">
     <h3 class="title">Рассчет стоимости проекта</h3>
 
-    <single-text
+    <ui-input
       v-model="text"
       label="двавай"
       placeholder="вводим"
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import SingleText from "../reuse/SingleText";
+import UiInput from "../reuse/UiInput";
 
 export default {
   name: "CalcProjectForm",
-  components: {SingleText},
+  components: {UiInput},
   data() {
     return {
       text: '',

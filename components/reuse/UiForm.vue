@@ -32,7 +32,7 @@
 export default {
   name: "UiForm",
   components: {
-    SingleText: () => import('~/components/reuse/SingleText.vue'),
+    UiInput: () => import('~/components/reuse/UiInput.vue'),
     UiButton: () => import('~/components/reuse/UiButton.vue')
   },
   props: {

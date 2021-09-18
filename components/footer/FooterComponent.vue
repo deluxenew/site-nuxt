@@ -32,6 +32,7 @@ export default {
   transition: $trs;
   height: 0;
   border-top: 3px solid $white;
+  z-index: 1000;
 
   &.active {
     height: 300px;
