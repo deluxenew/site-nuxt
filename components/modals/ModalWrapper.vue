@@ -1,7 +1,7 @@
 <template>
   <div class="modal-wrapper">
     <div class="modal-controls">
-      <fa-icon class="icon" :icon="['fac', isFullscreen ? 'collapse' :'expand']" @click="isFullscreen = !isFullscreen"/>
+      <fa-icon v-if="expanded" class="icon" :icon="['fac', isFullscreen ? 'collapse' :'expand']" @click="isFullscreen = !isFullscreen"/>
       <fa-icon class="icon" :icon="['fac', 'close']" @click="$emit('close')"/>
     </div>
     <div v-if="!hideHeader" ref="header" class="modal-header">

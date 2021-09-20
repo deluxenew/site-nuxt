@@ -15,16 +15,22 @@
         </div>
       </div>
 
-      <div class="edit">
+      <div class="edit" @click="editField(item)">
         <fa-icon :icon="['fac', 'edit']"/>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
+import editField from '~/components/modals/edit/EditField'
+
 export default {
   name: "UserInfo",
+  components: {
+    editField
+  },
   data() {
     return {
       user: {
@@ -57,7 +63,40 @@ export default {
         backgroundImage: `url(${this.user.avatar.value})`
       }
     }
-  }
+  },
+  methods: {
+    editField(item) {
+      const vm = this
+      if (!this.openModal) {
+        this.$modal.show(
+          editField,
+          {
+            fieldName: item,
+            title: `Редактирование поля \"${this.user[item].title}\"`,
+            value: this.user[item].value,
+            expanded: false,
+            changeFn: this.setNewValue.bind(this)
+          },
+          {
+            classes: 'modal-custom',
+            overlayTransition: 'modal-bg',
+            adaptive: true,
+            height: `${window.innerHeight - 120}px`,
+            width: `${window.innerWidth}px`,
+            shiftY: 1,
+            styles: "overflow: visible; border-radius: 8px; box-shadow: none"
+          },
+          {
+            'before-open': () => vm.openModal = true,
+            'before-close': () => vm.openModal = false,
+          }
+        )
+      }
+    },
+    setNewValue(field, value) {
+      console.log(field, value)
+    }
+  },
 }
 </script>
 

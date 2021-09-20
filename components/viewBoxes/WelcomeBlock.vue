@@ -25,11 +25,9 @@ import {views} from "~/constants/views";
 
 const {
   content: {components: content},
-  pageTemplates: {components: templates},
   ui: {components: ui},
-
 } = views
-const components = {...content, ...templates, ...ui}
+const components = {...content, ...ui}
 
 
 export default {
@@ -43,7 +41,7 @@ export default {
     blocks: {
       type: Array,
       default: () => []
-    }
+    },
   },
   data() {
     return {

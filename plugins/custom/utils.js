@@ -27,6 +27,7 @@ export default (isDev) => ({
   },
 
   formFieldByName(val) {
+    if (!fieldsList[val]) return {}
     return fieldsList[val]
   },
   getFormValues(form) {
