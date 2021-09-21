@@ -76,7 +76,8 @@ export default {
     // middleware: ['auth']
   },
   axios: {
-    baseURL: process.env.HOST_URL,
+    // baseURL: process.env.HOST_URL,
+    baseURL: 'http://217.107.219.109:3000',
     withCredentials: true,
     debug,
   },
