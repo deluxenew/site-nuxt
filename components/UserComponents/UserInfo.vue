@@ -11,7 +11,7 @@
         </div>
 
         <div class="value">
-          {{user[item].value}}
+          {{profile && profile[item] ? profile[item] : ''}}
         </div>
       </div>
 
@@ -40,11 +40,9 @@ export default {
         },
         name: {
           title: 'Имя',
-          value: 'Человек Богемский nhf nf nf nf f nf fn f nf f nf n',
         },
         login: {
           title: 'Почта',
-          value: 'Почта@почта.почт',
         },
         password:  {
           title: 'Пароль',
@@ -52,12 +50,14 @@ export default {
         },
         about: {
           title: 'О себе',
-          value: 'Ну вот я такой-то такой-то, может вовсе и не такой, но скорее такой, чем не такой, хотя и сам не знаю.',
         }
       },
     }
   },
   computed: {
+    profile() {
+        return this.$store.getters['profile/USER_DATA']
+    },
     style() {
       return {
         backgroundImage: `url(${this.user.avatar.value})`

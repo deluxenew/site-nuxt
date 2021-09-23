@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     isAuth() {
-      return this.$auth && this.$auth.loggedIn
+      return this.$auth && this.$auth.user
     },
     userName() {
       return this.$auth && this.$auth.user && this.$auth.user.login

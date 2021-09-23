@@ -12,19 +12,21 @@
 </template>
 
 <script>
-import {views} from "~/constants/views";
+    import {views} from "~/constants/views";
 
-const {content: {components: content}, pageTemplates: {components: templates}} = views
-const components = {...content, ...templates}
+    const {content: {components: content}, pageTemplates: {components: templates}} = views
+    const components = {...content, ...templates}
 
 export default {
   name: 'UserIndexPage',
   components,
   transition: 'bounce-fast',
-  layout: (ctx) => {
-    if (!ctx.$auth.user) return 'noAccess'
-    else return 'personal'
-  },
+    middleware: 'isAuth',
+    layout: 'personal',
+  // layout: (ctx) => {
+  //   if (!ctx.$auth.user) return 'noAccess'
+  //   else return 'personal'
+  // },
   data() {
     return {
       sections: [
@@ -92,9 +94,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-page {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+  .user-page {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 </style>

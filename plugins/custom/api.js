@@ -11,4 +11,9 @@ export default (axios) => ({
   logoutAll() {
     return axios.post('/api/auth/user/logout-all').then(({ data }) => data)
   },
+  // profile
+  profile({ userId }) {
+    return axios.get(`/api/profile/my/${userId}`).then(({ data }) => data)
+  },
+
 })

@@ -45,6 +45,7 @@ import HeaderComponent from "../components/header/HeaderComponent";
 
 export default {
   name: "personal",
+    transition: 'bounce-fast',
   components: {FooterComponent, HeaderComponent},
   data() {
     return {

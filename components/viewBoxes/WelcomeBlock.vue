@@ -7,6 +7,7 @@
       <ui-block
         v-for="block in blocks"
         v-bind="block"
+        :key="block.id"
         :total="blocks.length"
         :expandedId="expandedId"
         @toggleExpand="toggleExpand"

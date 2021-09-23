@@ -11,8 +11,12 @@ export const mutations = {
 }
 
 export const actions = {
-  FETCH_USER_DATA({commit, dispatch}) {
-
+  async FETCH_USER_DATA({commit, dispatch, getters}) {
+    const { id: userId } = this.$auth.user
+    const data = await this.$api.profile({userId})
+    if (data){
+      commit('SET_USER_DATA_MUTATION', data)
+    }
   }
 }
 

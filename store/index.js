@@ -1,10 +1,16 @@
-import axios from "axios";
-
 export const state = () => ({
   loading: false,
 })
 
 export const actions = {
+ // async nuxtServerInit({commit}, {req}) {
+ //    if (req.headers.cookie) {
+ //      await this.$api.me()
+ //        .then(({data}) => {
+ //          this.$auth.setUser(data)
+ //        })
+ //    }
+ //  },
   async SIGN_IN_USER_ACTION({commit, dispatch, getters}, {login, password}) {
     commit('SET_LOADING', true)
     await this.$auth.loginWith('local', {

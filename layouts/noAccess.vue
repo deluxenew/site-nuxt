@@ -79,9 +79,10 @@ export default {
       this.menuVisible = !this.menuVisible;
     }
   },
-  mounted() {
+    async mounted() {
+      await this.$nextTick()
     this.$auth.$storage.watchState('loggedIn', isLogin => {
-      if (isLogin) this.$router.push('/')
+      if (isLogin) this.$router.push('/user')
     });
   },
 }
