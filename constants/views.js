@@ -12,6 +12,7 @@ export const views = {
   pageTemplates: {
     components: {
       PageView: () => import ('~/components/views/PageView'),
+      SingleScreen: () => import ('~/components/views/SingleScreen'),
     },
     props: {
 

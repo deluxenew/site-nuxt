@@ -74,7 +74,6 @@ export default {
     }]
   ],
   router: {
-    // middleware: ['auth']
   },
   axios: {
      baseURL: 'http://217.107.219.109:3000',
@@ -83,33 +82,8 @@ export default {
     debug,
   },
   auth: {
-    // // watchLoggedIn: true,
-    // localStorage: {
-    //   prefix: 'auth.'
-    // },
-    // cookie: {
-    //   prefix: 'auth.', // Default token prefix used in building a key for token storage in the browser's localStorage.
-    //   options: {
-    //     path: '/', // Path where the cookie is visible. Default is '/'.
-    //     expires: 5 // Can be used to specify cookie lifetime in Number of days or specific Date. Default is session only.
-    //     // domain: '', // Domain (and by extension subdomain/s) where the cookie is visible. Default is domain and all subdomains.
-    //     // secure - false, // Sets whether the cookie requires a secure protocol (https). Default is false, should be set to true if possible.
-    //   }
-    // },
     redirect: false,
     strategies: {
-      // cookie: {
-      //   cookie: {
-      //     // (optional) If set, we check this cookie existence for loggedIn check
-      //     name: 'XSRF-TOKEN',
-      //   },
-      //   endpoints: {
-      //     // (optional) If set, we send a get request to this endpoint before login
-      //     csrf: {
-      //       url: ''
-      //     }
-      //   }
-      // },
       local: {
         scheme: 'refresh',
         token: {

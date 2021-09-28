@@ -15,6 +15,7 @@
         <UiInput
           v-model="model"
           v-bind="$utils.formFieldByName(fieldName)"
+          :label="fieldLabel"
         />
       </div>
 
@@ -37,52 +38,57 @@
 
 <script>
 
-export default {
-  name: "EditField",
-  props: {
-    fieldName: {
-      type: String,
-      default: '',
+  export default {
+    name: "EditField",
+    props: {
+      fieldName: {
+        type: String,
+        default: '',
+      },
+      title: {
+        type: String,
+        default: '',
+      },
+      fieldLabel: {
+        type: String,
+        default: '',
+      },
+      value: {
+        type: String, Number,
+        default: '',
+      },
+      expanded: {
+        type: Boolean,
+        default: false,
+      },
+      changeFn: {
+        type: Function,
+        default: () => {
+        }
+      }
     },
-    title: {
-      type: String,
-      default: '',
+    components: {
+      ModalWrapper: () => import('~/components/modals/ModalWrapper'),
+      UiButton: () => import('~/components/reuse/UiButton'),
+      UiInput: () => import('~/components/reuse/UiInput'),
     },
-    value: {
-      type: String, Number,
-      default: '',
+    data() {
+      return {
+        model: this.value
+      }
     },
-    expanded: {
-      type: Boolean,
-      default: false,
+    computed: {
+      isLoading() {
+        return this.$store.getters["IS_LOADING"]
+      },
     },
-    changeFn: {
-      type: Function,
-      default: () => {}
-    }
-  },
-  components: {
-    ModalWrapper: () => import('~/components/modals/ModalWrapper'),
-    UiButton: () => import('~/components/reuse/UiButton'),
-    UiInput: () => import('~/components/reuse/UiInput'),
-  },
-  data() {
-    return {
-      model: this.value
-    }
-  },
-  computed: {
-    isLoading() {
-      return this.$store.getters["IS_LOADING"]
-    },
-  },
-  methods: {
+    methods: {
 
-    // changeFn(field, value) {
-    //   console.log(field, value)
-    // }
+      // changeFn(field, value) {
+      //   console.log(field, value)
+      // }
+    }
   }
-}
 </script>
 
 <style scoped>

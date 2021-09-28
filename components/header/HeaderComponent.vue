@@ -1,37 +1,38 @@
 <template>
   <header class="header">
     <div ref="wrapper" class="header-wrapper">
-        <transition name="bounce-fast" mode="out-in">
-          <div v-if="!isAuth && topMenu.length">
-            <header-item-component
-              title="Вход / Регистрация"
-              alignTitle="center"
-              class="calc-price static"
-              icon-name="login"
-              item-name="login"
-              :currentItem="currentItem"
-              :title-show="currentItem !== 'login'"
-              @click="showAuthModal"
-            />
-          </div>
-          <template v-else>
-            <header-item-component
-              :title="userName || ''"
-              alignTitle="center"
-              class="calc-price static"
-              icon-name="profile"
-              item-name="profile"
-              :arrow-down="true"
-              :currentItem="currentItem"
-              :title-show="currentItem !== 'profile'"
-              @click="toggleDropDown($event)"
-            />
-          </template>
-        </transition>
+      <transition name="bounce-fast" mode="out-in">
+        <div v-if="!isAuth && topMenu.length">
+          <header-item-component
+            title="Вход / Регистрация"
+            alignTitle="center"
+            class="calc-price static"
+            icon-name="login"
+            item-name="login"
+            :currentItem="currentItem"
+            :title-show="currentItem !== 'login'"
+            @click="showAuthModal"
+          />
+        </div>
+        <template v-else>
+          <header-item-component
+            :title="userName || ''"
+            alignTitle="center"
+            class="calc-price static"
+            icon-name="profile"
+            item-name="profile"
+            :arrow-down="true"
+            :currentItem="currentItem"
+            :title-show="currentItem !== 'profile'"
+            @click="toggleDropDown($event)"
+          />
+        </template>
+      </transition>
       <header-item-component
         v-for="item in topMenu"
         v-bind="item"
         class="calc-price"
+        :class="{active: item.link === $route.path}"
         alignTitle="center"
         :title-show="currentItem !== item.itemName"
         :currentItem="currentItem"
@@ -55,185 +56,188 @@
 </template>
 
 <script>
-import AuthRegisterModal from "~/components/modals/AuthRegisterModal";
+  import AuthRegisterModal from "~/components/modals/AuthRegisterModal";
 
-export default {
-  name: "HeaderWrapper",
-  components: {
-    HeaderMenu: () => import('./HeaderMenu'),
-    UserMenu: () => import('./UserMenu'),
-    ContactsComponent: () => import('./ContactsComponent'),
-    HeaderItemComponent: () => import('./items/HeaderItemComponent'),
-    CalcProjectForm: () => import('~/components/forms/CalcProjectForm'),
-    DropDown: () => import('~/components/reuse/DropDown'),
-    AuthRegisterModal
-  },
-  props: {
-    topMenu: {
-      type: Array,
-      default: () => []
-    }
-  },
-  data() {
-    return {
-      currentItem: '',
-      dropdownHeight: 0,
-      showDropDown: false,
-      openModal: false
-    }
-  },
-  watch: {
-    currentItem(v) {
-      if (v) {
-        this.dropdownHeight = window.innerHeight - this.$refs.wrapper.clientHeight
-        this.showDropDown = false
-        const vm = this
-        setTimeout(() => {
-          vm.showDropDown = true
-        }, 100)
-        this.subscribeClick()
-      } else {
-        this.unsubscribeClick()
-        this.showDropDown = false
-      }
-    }
-  },
-  computed: {
-    isAuth() {
-      return this.$auth && this.$auth.user
+  export default {
+    name: "HeaderWrapper",
+    components: {
+      HeaderMenu: () => import('./HeaderMenu'),
+      UserMenu: () => import('./UserMenu'),
+      ContactsComponent: () => import('./ContactsComponent'),
+      HeaderItemComponent: () => import('./items/HeaderItemComponent'),
+      CalcProjectForm: () => import('~/components/forms/CalcProjectForm'),
+      DropDown: () => import('~/components/reuse/DropDown'),
+      AuthRegisterModal
     },
-    userName() {
-      return this.$auth && this.$auth.user && this.$auth.user.login
-    },
-    currentDropDown() {
-      switch (this.currentItem) {
-        case "contacts":
-          return "ContactsComponent"
-        case "login":
-          return "CalcProjectForm"
-        case "calc":
-          return "CalcProjectForm"
-        case "menu":
-          return "HeaderMenu"
-        case "profile":
-          return "UserMenu"
+    props: {
+      topMenu: {
+        type: Array,
+        default: () => []
       }
     },
-    customStyleDropDown() {
+    data() {
       return {
-        top: this.$refs.wrapper && this.$refs.wrapper.clientHeight || 0,
-        height: this.dropdownHeight || 0,
-        right: this.currentItem !== "menu" ? "auto" : 0,
-        left: this.currentItem !== "menu" ? 0 : "auto"
-      }
-    }
-  },
-  methods: {
-    gotoLink(link) {
-      this.$router.push(link)
-    },
-    showAuthModal() {
-      const vm = this
-      if (!this.openModal) {
-        this.$modal.show(
-          AuthRegisterModal,
-          {},
-          {
-            classes: 'modal-custom',
-            // transition: 'modal',
-            overlayTransition: 'modal-bg',
-            adaptive: true,
-            height: `${window.innerHeight - 120}px`,
-            width: `${window.innerWidth}px`,
-            shiftY: 1,
-            styles: "overflow: visible; border-radius: 8px; box-shadow: none"
-          },
-          {
-            'before-open': () => vm.openModal = true,
-            'before-close': () => vm.openModal = false,
-          }
-        )
+        currentItem: '',
+        dropdownHeight: 0,
+        showDropDown: false,
+        openModal: false
       }
     },
+    watch: {
+      currentItem(v) {
+        if (v) {
+          this.dropdownHeight = window.innerHeight - this.$refs.wrapper.clientHeight
+          this.showDropDown = false
+          const vm = this
+          setTimeout(() => {
+            vm.showDropDown = true
+          }, 100)
+          this.subscribeClick()
+        } else {
+          this.unsubscribeClick()
+          this.showDropDown = false
+        }
+      }
+    },
+    computed: {
+      route() {
+        return this.$route
+      },
+      isAuth() {
+        return this.$auth && this.$auth.user
+      },
+      userName() {
+        return this.$auth && this.$auth.user && this.$auth.user.login
+      },
+      currentDropDown() {
+        switch (this.currentItem) {
+          case "contacts":
+            return "ContactsComponent"
+          case "login":
+            return "CalcProjectForm"
+          case "calc":
+            return "CalcProjectForm"
+          case "menu":
+            return "HeaderMenu"
+          case "profile":
+            return "UserMenu"
+        }
+      },
+      customStyleDropDown() {
+        return {
+          top: this.$refs.wrapper && this.$refs.wrapper.clientHeight || 0,
+          height: this.dropdownHeight || 0,
+          right: this.currentItem !== "menu" ? "auto" : 0,
+          left: this.currentItem !== "menu" ? 0 : "auto"
+        }
+      }
+    },
+    methods: {
+      gotoLink(link) {
+        this.$router.push(link)
+      },
+      showAuthModal() {
+        const vm = this
+        if (!this.openModal) {
+          this.$modal.show(
+              AuthRegisterModal,
+              {},
+              {
+                classes: 'modal-custom',
+                // transition: 'modal',
+                overlayTransition: 'modal-bg',
+                adaptive: true,
+                height: `${window.innerHeight - 120}px`,
+                width: `${window.innerWidth}px`,
+                shiftY: 1,
+                styles: "overflow: visible; border-radius: 8px; box-shadow: none"
+              },
+              {
+                'before-open': () => vm.openModal = true,
+                'before-close': () => vm.openModal = false,
+              }
+          )
+        }
+      },
 
-    toggleDropDown(v) {
-      this.currentItem !== v ? this.currentItem = v : this.currentItem = ""
+      toggleDropDown(v) {
+        this.currentItem !== v ? this.currentItem = v : this.currentItem = ""
+      },
+      onClick(v) {
+        if (!this.$refs.dropdown.$el.contains(v.target) && this.showDropDown === true) this.currentItem = ""
+      },
+      subscribeClick() {
+        window.addEventListener('click', this.onClick)
+      },
+      unsubscribeClick() {
+        window.removeEventListener('click', this.onClick)
+      }
     },
-    onClick(v) {
-      if (!this.$refs.dropdown.$el.contains(v.target) && this.showDropDown === true) this.currentItem = ""
-    },
-    subscribeClick() {
-      window.addEventListener('click', this.onClick)
-    },
-    unsubscribeClick() {
-      window.removeEventListener('click', this.onClick)
+    beforeDestroy() {
+      this.unsubscribeClick()
     }
-  },
-  beforeDestroy() {
-    this.unsubscribeClick()
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.header {
-  overflow: visible;
-  z-index: 9001;
-}
-
-.header-wrapper {
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 24px;
-  border-bottom: 3px solid $green;
-  transition: $trs;
-  color: $default;
-  font-size: 18px;
-  line-height: 1;
-  font-weight: 400;
-  font-family: $font;
-  background-color: $white;
-  z-index: 9002;
-  overflow: visible;
-}
-
-.calc-price {
-  width: 300px;
-  position: relative;
-  animation: on-load .5s ease-in-out;
-
-  @media (max-width: 800px) {
-    width: auto;
-    min-width: 40px;
+  .header {
+    overflow: visible;
+    z-index: 9001;
   }
 
-
-  .title {
-    padding: 16px 0;
+  .header-wrapper {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 24px;
+    border-bottom: 3px solid $green;
+    transition: $trs;
+    color: $default;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 400;
+    font-family: $font;
+    background-color: $white;
+    z-index: 9002;
+    overflow: visible;
   }
 
-  &:hover {
-    color: $green;
-    text-shadow: 1px 1px 5px rgba($default, .1);
+  .calc-price {
+    width: 300px;
+    position: relative;
+    animation: on-load .5s ease-in-out;
 
-    .arrow-button {
-      .icon, .icon-close {
-        path {
-          fill: $green;
+    @media (max-width: 800px) {
+      width: auto;
+      min-width: 40px;
+    }
+
+
+    .title {
+      padding: 16px 0;
+    }
+
+    &:hover, &.active {
+      color: $green;
+      text-shadow: 1px 1px 5px rgba($default, .1);
+
+      .arrow-button {
+        .icon, .icon-close {
+          path {
+            fill: $green;
+          }
         }
       }
     }
-  }
 
-  &.static {
-    flex: 0 0 250px;
+    &.static {
+      flex: 0 0 250px;
 
-    @media (max-width: 800px) {
-      flex: none;
+      @media (max-width: 800px) {
+        flex: none;
+      }
     }
   }
-}
 
 </style>

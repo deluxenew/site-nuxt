@@ -8,10 +8,8 @@
 
 export default {
   name: "company",
-  layout: (ctx) => {
-    if (!ctx.$auth.user) return 'noAccess'
-    else return 'personal'
-  },
+  middleware: 'isAuth',
+  layout: 'personal',
   transition: 'bounce-fast'
 }
 </script>
