@@ -1,5 +1,5 @@
 <template>
-  <div class="personal-layout">
+  <div class="personal-layout" :style="{'--page-height': pageHeight + 'px'}">
     <header-component :topMenu="topMenu"/>
     <div class="content">
       <nuxt/>
@@ -40,67 +40,77 @@
 </template>
 
 <script>
-import FooterComponent from "../components/footer/FooterComponent";
-import HeaderComponent from "../components/header/HeaderComponent";
+  import FooterComponent from "../components/footer/FooterComponent";
+  import HeaderComponent from "../components/header/HeaderComponent";
 
-export default {
-  name: "personal",
+  export default {
+    name: "personal",
     transition: 'bounce-fast',
-  components: {FooterComponent, HeaderComponent},
-  data() {
-    return {
-      topMenu: [
-        {
-          itemName: 'company',
-          iconName: 'company',
-          title: 'Компания',
-          link: '/user/company',
-          arrowDown: false,
-        },
-        {
-          itemName: 'contacts',
-          iconName: 'contacts',
-          link: "/user/services",
-          title: 'Услуги',
-          arrowDown: false,
-        },
-        {
-          itemName: 'articles',
-          iconName: 'articles',
-          link: "/user/articles",
-          title: 'Статьи',
-          arrowDown: false,
-        },
-        {
-          itemName: 'subscribe',
-          iconName: 'subscribe',
-          link: "/user/subscribe",
-          title: 'Подписка',
-          arrowDown: false,
-        },
-        {
-          itemName: 'menu',
-          iconName: 'burger',
-          title: 'Меню',
-          arrowDown: true,
-        }
-      ]
-    }
-  },
-  mounted() {
-    this.$auth.$storage.watchState('loggedIn', isLogin => {
-      if (isLogin) {
-        this.$router.push('/user')
-      } else {
-        this.$router.push('/')
+    components: {FooterComponent, HeaderComponent},
+    data() {
+      return {
+        pageHeight: 0,
+        topMenu: [
+          {
+            itemName: 'company',
+            iconName: 'company',
+            title: 'Компания',
+            link: '/user/company',
+            arrowDown: false,
+          },
+          {
+            itemName: 'contacts',
+            iconName: 'contacts',
+            link: "/user/services",
+            title: 'Услуги',
+            arrowDown: false,
+          },
+          {
+            itemName: 'articles',
+            iconName: 'articles',
+            link: "/user/articles",
+            title: 'Статьи',
+            arrowDown: false,
+          },
+          {
+            itemName: 'subscribe',
+            iconName: 'subscribe',
+            link: "/user/subscribe",
+            title: 'Подписка',
+            arrowDown: false,
+          },
+          {
+            itemName: 'menu',
+            iconName: 'burger',
+            title: 'Меню',
+            arrowDown: true,
+          }
+        ]
       }
-    });
-  },
-}
+    },
+    mounted() {
+      const vm = this
+      this.$auth.$storage.watchState('loggedIn', isLogin => {
+        if (isLogin) {
+          this.$router.push('/user')
+        } else {
+          this.$router.push('/')
+        }
+      });
+      vm.pageHeight = window.innerHeight
+      window.addEventListener('resize', () => {
+        vm.pageHeight = window.innerHeight
+      })
+    },
+    beforeDestroy() {
+      const vm = this
+      window.removeEventListener('resize', () => vm.pageHeight = window.innerHeight)
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
-.personal-layout {
-
-}
+  .personal-layout {
+    height: var(--page-height);
+  }
 </style>

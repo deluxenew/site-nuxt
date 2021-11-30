@@ -5,7 +5,7 @@ const routes = require('./routes')
 const app = express()
 
 const cors = require('cors')
-const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://217.107.219.109:3000']
+const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://217.107.219.66:3000']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

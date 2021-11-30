@@ -170,7 +170,6 @@ $horizontal: var(--horizontal-grow);
     background-color: $white;
     box-shadow: 0 0 3px rgba($gray, .9), inset 0 0 3px rgba($gray, .9);
     z-index: 3;
-    transition: $trs;
   }
   &:hover {
     .deep-wrapper {

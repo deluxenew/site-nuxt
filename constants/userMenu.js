@@ -40,4 +40,11 @@ export const userMenu = [
     children: [],
     iconName: "services",
   },
+  {
+    id: 7,
+    title: "Сообщения",
+    link: "/user/messages",
+    children: [],
+    iconName: "services",
+  },
 ]

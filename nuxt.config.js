@@ -76,7 +76,7 @@ export default {
   router: {
   },
   axios: {
-     baseURL: 'http://217.107.219.109:3000',
+     baseURL: 'http://217.107.219.66:3000',
     // baseURL: 'http://localhost:3000',
     withCredentials: true,
     debug,

@@ -3,24 +3,15 @@
     <section
       class="main"
       :style="`--main-height: ${wrapHeight + 'px'}`"
-      v-for="(item, index) in sections"
-      :key="JSON.stringify(item)"
-      :id="index + 1"
+      :id="currentSectionId"
     >
       <div class="container">
-        <slot :name="item.slotName"/>
+
+        <slot :name="sections[currentSectionId].slotName"/>
       </div>
     </section>
-<!--    <aside class="navigator" :class="{move: showNavigate}">-->
-<!--      <div class="nav-item"-->
-<!--           v-for="(item, index) in sections"-->
-<!--           :key="index + 1"-->
-<!--           :class="{ active: currentId === index}"-->
-<!--           @click="onScrollTOBlock(index)"-->
-<!--      >-->
-<!--        <span>{{ item.navTitle }}</span>-->
-<!--      </div>-->
-<!--    </aside>-->
+
+    <slot name="nav"/>
   </div>
 </template>
 
@@ -31,21 +22,40 @@
       sections: {
         type: Array,
         default: () => []
+      },
+      value: {
+        type: Number,
+        default: 0,
       }
     },
     data() {
       return {
-        currentSectionId: 0,
         wrapHeight: 0,
       }
+    },
+    computed: {
+      currentSectionId: {
+        get() {
+          return this.value
+        },
+        set(v) {
+          this.$emit('input', v)
+        },
+      },
     },
     methods: {
       setResize() {
         this.wrapHeight = window.innerHeight - 56
-      }
+      },
+      changeSection(number) {
+        this.currentSectionId = number
+      },
     },
     mounted() {
-      this.setResize()
+      window.addEventListener('resize', this.setResize)
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.setResize)
     }
   }
 </script>
@@ -60,7 +70,7 @@
    width: 100vw;
    min-height: calc(100vh - 56px);
    height: var(--main-height);
-   padding-right: $rate;
+   padding-right: 0;
 
    .container {
      padding: 0;

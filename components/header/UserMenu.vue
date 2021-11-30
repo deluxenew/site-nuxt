@@ -116,8 +116,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: calc(100% - 64px);
-    top: 50vh;
-    padding-top: 32px;
+    top: calc(50vh - 56px);
   }
 
   .links__list {

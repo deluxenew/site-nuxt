@@ -1,6 +1,10 @@
 <template>
-  <single-screen :sections="sections">
-    Сообщения
+  <single-screen :sections="sections" v-model="currentSectionId">
+    <page-sections-navigate
+      v-model="currentSectionId"
+      slot="nav"
+      :items="sections"
+    />
     <div class="user-page" v-for="section in sections" :slot="section.slotName" :key="section.slotName">
       <component
         v-for="component in Object.keys(blockComponents[section.slotName][0].componentsProps || {})"
@@ -15,8 +19,8 @@
 <script>
   import {views} from "~/constants/views";
 
-  const {content: {components: content}, pageTemplates: {components: templates}} = views
-  const components = {...content, ...templates}
+  const {content: {components: content}, pageTemplates: {components: templates}, ui: {components: ui}} = views
+  const components = {...content, ...templates, ...ui}
 
   export default {
     name: "messages",
@@ -26,9 +30,10 @@
     transition: 'bounce-fast',
     data() {
       return {
+        currentSectionId: 0,
         sections: [
           {
-            navTitle: 'Общее',
+            navTitle: 'Сообщения',
             slotName: 'one',
             componentsProps: {
               WelcomeBlock: {
@@ -46,6 +51,7 @@
                     id: 'stat',
                     verticalGrow: 3 / 2,
                     horizontalGrow: 3 / 2,
+                    description: "Статистические данные по сообщениям",
                     title: "Статистика",
                   },
                   {
@@ -58,27 +64,13 @@
             }
           },
           {
-            navTitle: 'Уведомления',
+            navTitle: 'Настройки',
             slotName: 'two',
           },
           {
-            navTitle: 'Услуги',
+            navTitle: 'Друзья',
             slotName: 'tree',
             componentsProps: {}
-          },
-          {
-            navTitle: 'Компании',
-            slotName: 'four',
-            componentsProps: {
-              // test: {},
-            }
-          },
-          {
-            navTitle: 'Инфо',
-            slotName: 'five',
-            componentsProps: {
-              // test: {},
-            }
           }]
       }
     },

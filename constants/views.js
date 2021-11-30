@@ -21,6 +21,7 @@ export const views = {
   ui: {
     components: {
       UiBlock: () => import('~/components/reuse/UiBlock'),
+      PageSectionsNavigate: () => import('~/components/reuse/PageSectionsNavigate'),
     },
     props: {
 
