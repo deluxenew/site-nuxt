@@ -76,7 +76,7 @@ export default {
   router: {
   },
   axios: {
-     baseURL: 'http://217.107.219.66:3000',
+     baseURL: `http://${process.env.SERVER_URL}:${process.env.PORT}`,
     // baseURL: 'http://localhost:3000',
     withCredentials: true,
     debug,

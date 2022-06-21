@@ -5,7 +5,7 @@ module.exports = {
   ssr: true,
   server: {
     port: 3000, // default: 3000
-    host: '217.107.219.66',
+    host: 'localhost',
     // timing: false
   },
   head: {
@@ -77,7 +77,7 @@ module.exports = {
 
   },
   axios: {
-    baseURL: 'http://217.107.219.66:3000',
+    baseURL: `http://${process.env.SERVER_URL}:${process.env.PORT}`,
     withCredentials: true,
     debug,
   },

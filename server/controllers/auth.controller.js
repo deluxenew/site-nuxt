@@ -70,7 +70,7 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.logoutAll = async (req, res) => {
-  console.log(req)
+  // console.log(req)
   const {user: {login}} = req
 
   const findUser = await User.findOne({login})
