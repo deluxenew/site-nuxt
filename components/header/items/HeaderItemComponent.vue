@@ -137,7 +137,7 @@ export default {
   left: calc(50% - 45px);
 
   @media (min-width: 800px) {
-    left: calc(50% - 24px);
+    left: calc(50% - 40px);
   }
 
   .icon {

@@ -144,11 +144,8 @@
               {},
               {
                 classes: 'modal-custom',
-                // transition: 'modal',
                 overlayTransition: 'modal-bg',
                 adaptive: true,
-                height: `${window.innerHeight - 120}px`,
-                width: `${window.innerWidth}px`,
                 shiftY: 1,
                 styles: "overflow: visible; border-radius: 8px; box-shadow: none"
               },
@@ -159,7 +156,6 @@
           )
         }
       },
-
       toggleDropDown(v) {
         this.currentItem !== v ? this.currentItem = v : this.currentItem = ""
       },

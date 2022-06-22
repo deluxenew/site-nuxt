@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       // ret: components,
-      template: 'PageView',
+      template: 'SingleScreen',
       sections: [
         {
           navTitle: 'Главная',

@@ -66,7 +66,7 @@ export default {
     align-items: center;
     font-size: $h2;
     font-weight: bold;
-    font-family: TTNorms;
+    font-family: Sans;
 
     .text {
       padding-left: 24px;

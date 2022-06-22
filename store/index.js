@@ -11,13 +11,13 @@ export const actions = {
         password: password,
       }
     })
-      .finally(() => commit('SET_LOADING', false))
       .then(({data}) => {
         if (data) {
           const {token, refreshToken} = data
           return this.$auth.setUserToken(token, refreshToken)
         }
       })
+      .finally(() => commit('SET_LOADING', false))
 
   },
   async SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {

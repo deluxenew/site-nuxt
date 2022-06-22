@@ -53,7 +53,7 @@ export default {
 }
 
 .ui-button {
-  font-family: 'TTNorms';
+  font-family: $font;
   display: flex;
   align-items: center;
   justify-content: center;

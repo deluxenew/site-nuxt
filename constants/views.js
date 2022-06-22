@@ -1,7 +1,7 @@
 export const views = {
   content: {
     components: {
-      test: () => import('~/components/reuse/test'),
+      // test: () => import('~/components/reuse/test'),
       WelcomeBlock: () => import ('~/components/viewBoxes/WelcomeBlock'),
       UserInfo: () => import ('~/components/UserComponents/UserInfo'),
     },

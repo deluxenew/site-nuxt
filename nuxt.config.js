@@ -1,5 +1,7 @@
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
+
+
 export default {
   ssr: true,
   telemetry: false,
@@ -51,21 +53,35 @@ export default {
       prefetchCount: 0,
       fonts: [
         {
-          fileExtensions: ['woff'],
-          fontFamily: 'TTNorms',
+          fileExtensions: ['ttf'],
+          fontFamily: 'Sans',
           fontFaces: [
             {
               preload: true,
-              src: '@/assets/fonts/WaffleSoft',
-              fontWeight: 500,
+              src: '@/assets/fonts/SansRegular',
+              fontWeight: 400,
               fontStyle: 'normal',
               fontDisplay: 'swap'
             },
             {
               preload: true,
-              src: '@/assets/fonts/WaffleSlab',
-              fontWeight: 400,
+              src: '@/assets/fonts/SansBold',
+              fontWeight: 700,
               fontStyle: 'normal',
+              fontDisplay: 'swap'
+            },
+            {
+              preload: true,
+              src: '@/assets/fonts/SansItalic',
+              fontWeight: 400,
+              fontStyle: 'italic',
+              fontDisplay: 'swap'
+            },
+            {
+              preload: true,
+              src: '@/assets/fonts/SansBoldItalic',
+              fontWeight: 700,
+              fontStyle: 'italic',
               fontDisplay: 'swap'
             },
           ]

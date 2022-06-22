@@ -107,10 +107,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
-
 <style lang="scss">
 $padding: 24px;
 $paddingMobile: 16px;
