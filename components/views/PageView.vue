@@ -7,7 +7,7 @@
       :key="JSON.stringify(item)"
       :id="index + 1"
     >
-      <div class="container">
+      <div class="container-wrapper">
         <slot :name="item.slotName"/>
       </div>
     </section>
@@ -241,7 +241,7 @@ export default {
   height: var(--main-height);
   padding-right: $rate;
 
-  .container {
+  .container-wrapper {
     padding: 0;
     display: flex;
     align-items: center;

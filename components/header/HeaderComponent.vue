@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="overflow-visible z-50">
     <div ref="wrapper" class="header-wrapper">
       <transition name="bounce-fast" mode="out-in">
         <div v-if="!isAuth && topMenu.length">
@@ -57,15 +57,20 @@
 
 <script>
   import AuthRegisterModal from "~/components/modals/AuthRegisterModal";
+  import HeaderItemComponent from "./items/HeaderItemComponent";
+  import HeaderMenu from "./HeaderMenu";
+  import UserMenu from "./UserMenu";
+  import ContactsComponent from "./ContactsComponent";
+  import CalcProjectForm from "~/components/forms/CalcProjectForm";
 
   export default {
     name: "HeaderWrapper",
     components: {
-      HeaderMenu: () => import('./HeaderMenu'),
-      UserMenu: () => import('./UserMenu'),
-      ContactsComponent: () => import('./ContactsComponent'),
-      HeaderItemComponent: () => import('./items/HeaderItemComponent'),
-      CalcProjectForm: () => import('~/components/forms/CalcProjectForm'),
+      HeaderMenu,
+      UserMenu,
+      ContactsComponent,
+      HeaderItemComponent,
+      CalcProjectForm,
       DropDown: () => import('~/components/reuse/DropDown'),
       AuthRegisterModal
     },
@@ -175,12 +180,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .header {
-    overflow: visible;
-    z-index: 9001;
-  }
-
+<style lang="scss">
   .header-wrapper {
     position: fixed;
     display: flex;

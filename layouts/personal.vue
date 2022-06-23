@@ -1,7 +1,7 @@
 <template>
   <div class="personal-layout" :style="{'--page-height': pageHeight + 'px'}">
     <header-component :topMenu="topMenu"/>
-    <div class="content">
+    <div class="content-wrapper">
       <nuxt/>
     </div>
 
@@ -109,7 +109,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .personal-layout {
     height: var(--page-height);
   }

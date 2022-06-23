@@ -1,28 +1,5 @@
 // ----- AWESOME VARIABLES -----
-:root {
-  --base-grid: calc(8px - (1080px - 100vmin) / 50);
-  @media (max-width: 800px) {
-    --base-grid: calc(8px - (800px - 100vmin) / 100);
-  }
 
-  --h1-title: calc(100vmin / 24);
-
-  @media (max-width: 800px) {
-    --h1-title: 28px;
-  }
-
-  --h2-title: calc(100vmin / 32);
-
-  @media (max-width: 800px) {
-    --h2-title: 24px;
-  }
-
-  --h3-title: calc(100vmin / 40);
-
-  @media (max-width: 800px) {
-    --h3-title: 20px;
-  }
-}
 
 $rate: 8px;
 $max: 100vmax;
@@ -42,7 +19,7 @@ $h3: var(--h3-title);
 
 $p: 22px;
 
-$font: 'Sans';
+$font: 'ui-sans-serif';
 
 $default: #1b1b1b;
 $green: #4dce00;

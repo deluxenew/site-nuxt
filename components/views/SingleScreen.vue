@@ -5,7 +5,7 @@
       :style="`--main-height: ${wrapHeight + 'px'}`"
       :id="currentSectionId"
     >
-      <div class="container">
+      <div class="container-wrapper">
 
         <slot :name="sections[currentSectionId].slotName"/>
       </div>
@@ -60,7 +60,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
  .single-screen {
    width: 100vw;
    height: 100%;
@@ -72,7 +72,7 @@
    height: var(--main-height);
    padding-right: 0;
 
-   .container {
+   .container-wrapper {
      padding: 0;
      display: flex;
      align-items: center;

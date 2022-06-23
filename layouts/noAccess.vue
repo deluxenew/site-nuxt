@@ -2,7 +2,7 @@
   <div class="no-access-layout">
     <header-component :topMenu="topMenu"/>
 
-    <div class="content">
+    <div class="content-wrapper">
       <h2>Доступ ограничен</h2>
     </div>
 
@@ -88,9 +88,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.no-access-layout {
-
-}
-</style>
 

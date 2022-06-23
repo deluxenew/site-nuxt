@@ -1,3 +1,27 @@
+:root {
+  --base-grid: calc(8px - (1080px - 100vmin) / 50);
+  @media (max-width: 800px) {
+    --base-grid: calc(8px - (800px - 100vmin) / 100);
+  }
+
+  --h1-title: calc(100vmin / 24);
+
+  @media (max-width: 800px) {
+    --h1-title: 28px;
+  }
+
+  --h2-title: calc(100vmin / 32);
+
+  @media (max-width: 800px) {
+    --h2-title: 24px;
+  }
+
+  --h3-title: calc(100vmin / 40);
+
+  @media (max-width: 800px) {
+    --h3-title: 20px;
+  }
+}
 * {
     box-sizing: border-box;
     outline: none;
@@ -86,7 +110,7 @@ body {
     flex: 1;
 }
 
-.content {
+.content-wrapper {
   width: 100vw;
   padding-top: 56px;
   height: 100vh;

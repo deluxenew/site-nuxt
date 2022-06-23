@@ -2,7 +2,7 @@
   <div class="default-layout">
     <header-component :topMenu="topMenu"/>
 
-    <div class="content">
+    <div class="content-wrapper">
       <nuxt/>
     </div>
 
@@ -46,7 +46,7 @@ import HeaderComponent from "../components/header/HeaderComponent";
 
 export default {
   name: "default",
-    transition: 'bounce-fast',
+  transition: 'bounce-fast',
   components: {FooterComponent, HeaderComponent},
   data() {
     return {
@@ -75,9 +75,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.default-layout {
-
-}
-
-</style>

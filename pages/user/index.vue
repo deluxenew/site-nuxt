@@ -1,6 +1,6 @@
 <template>
   <page-view :sections="sections">
-    <div class="user-page" v-for="section in sections" :slot="section.slotName" :key="section.slotName">
+    <div class="w-full h-full" v-for="section in sections" :slot="section.slotName" :key="section.slotName">
       <component
         v-for="component in Object.keys(blockComponents[section.slotName][0].componentsProps || {})"
         :key="JSON.stringify(component)"
@@ -69,14 +69,14 @@
             navTitle: 'Компании',
             slotName: 'four',
             componentsProps: {
-              test: {},
+
             }
           },
           {
             navTitle: 'Инфо',
             slotName: 'five',
             componentsProps: {
-              test: {},
+
             }
           }]
       }
@@ -89,10 +89,3 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .user-page {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-</style>

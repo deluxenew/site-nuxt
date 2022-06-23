@@ -1,3 +1,4 @@
+const shrinkRay = require('shrink-ray-current')
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -5,7 +6,7 @@ module.exports = {
   ssr: true,
   server: {
     port: 3000, // default: 3000
-    host: 'localhost',
+    host: debug ? 'localhost' : '81.177.136.241',
     // timing: false
   },
   head: {
@@ -52,7 +53,7 @@ module.exports = {
       fonts: [
         {
           fileExtensions: ['ttf'],
-          fontFamily: 'Sans',
+          fontFamily: 'ui-sans-serif',
           fontFaces: [
             {
               preload: true,
@@ -62,21 +63,21 @@ module.exports = {
               fontDisplay: 'swap'
             },
             {
-              preload: true,
+              // preload: true,
               src: '@/assets/fonts/SansBold',
               fontWeight: 700,
               fontStyle: 'normal',
               fontDisplay: 'swap'
             },
             {
-              preload: true,
+              // preload: true,
               src: '@/assets/fonts/SansItalic',
               fontWeight: 400,
               fontStyle: 'italic',
               fontDisplay: 'swap'
             },
             {
-              preload: true,
+              // preload: true,
               src: '@/assets/fonts/SansBoldItalic',
               fontWeight: 700,
               fontStyle: 'italic',
@@ -129,7 +130,54 @@ module.exports = {
       }
     },
   },
+  buildModules: [
+    '@nuxt/postcss8',
+  ],
   build: {
+    babel: {
+      presets(env, [preset, options]) {
+        return [
+          ['@nuxt/babel-preset-app', {corejs: {version: 3, proposals: true}}]
+        ]
+      }
+    },
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
+    optimizeCSS: !debug,
+    optimization: {
+      minimize: !debug,
+      splitChunks: {
+        maxSize: 249856 * 2,
+      },
+    },
+    splitChunks: {
+      name: debug,
+      layouts: true,
+      pages: true,
+      commons: true,
+    },
+    // extractCSS: {
+    //   ignoreOrder: true,
+    // },
+    ...(!debug && {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+        },
+      },
+    }),
   },
   pwa: {
     manifest: {
@@ -154,8 +202,10 @@ module.exports = {
     http2: {
       push: true,
       pushAssets: (req, res, publicPath, preloadFiles) => preloadFiles
-        .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`),
+        .filter(f => f.asType === 'script' && f.file === 'runtime.js')
+        .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}; crossorigin=anonymous`),
     },
-    compressor: false,
+    crossorigin: 'anonymous',
+    compressor: shrinkRay()
   },
 }
