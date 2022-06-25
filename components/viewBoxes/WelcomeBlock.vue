@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-block">
-    <h1 class="title">
+    <h1 class="text-center">
       {{ title }}
     </h1>
     <div class="flex">
@@ -56,34 +56,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.welcome-block {
-  width: 100%;
-  height: 100%;
-  padding: $mediumPadding 0;
-
-  @media (max-width: 800px) {
-    padding: 32px 0;
-  }
-
-  .flex {
-    padding-top: 16px;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-
-    @media (max-width: 800px) {
-     flex-direction: column;
-    }
-  }
-
-  .title {
-    color: $default;
-    font-size: $h3;
-    text-align: center;
-  }
-}
-</style>

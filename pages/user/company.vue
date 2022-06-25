@@ -13,7 +13,3 @@ export default {
   transition: 'bounce-fast'
 }
 </script>
-
-<style scoped>
-
-</style>

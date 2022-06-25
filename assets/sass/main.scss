@@ -1,9 +1,35 @@
-@import "_mixins";
-@import "_base";
-@import "_inputs";
-@import "_transitions";
-@import "_notification";
+@import "base/mixins";
+@import "base/transitions";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @import "base/base";
+  @import "base/inputs";
+  @import "base/notification";
+}
+
+@layer components {
+  @import "components/contentComponents/TabsComponent";
+  @import "components/footer/FooterComponent";
+  @import "components/forms/CalcProjectForm";
+  @import "components/header/items/HeaderItemComponent";
+  @import "components/header/ContactsComponent";
+  @import "components/header/HeaderComponent";
+  @import "components/header/HeaderMenu";
+  @import "components/header/UserMenu";
+  @import "components/modals/ModalWrapper";
+  @import "components/reuse/DropDown";
+  @import "components/reuse/PageSectionsNavigate";
+
+  @import "components/reuse/UiBlock";
+  @import "components/reuse/UiButton";
+  @import "components/reuse/UiInput";
+  @import "components/reuse/UiTooltip";
+  @import "components/userComponents/UserInfo";
+  @import "components/viewBoxes/WelcomeBlock";
+  @import "components/views/PageView";
+
+}

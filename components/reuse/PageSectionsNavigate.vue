@@ -71,43 +71,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .page-sections-navigate {
-    position: fixed;
-    top: 86px;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
 
-
-    .toggle-nav {
-      margin-right: 16px;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-    }
-
-    .nav-item + .nav-item {
-      margin-top: 16px;
-    }
-
-    .item-list {
-      transition: $trs;
-      transform: translateX(100%);
-      z-index: 10000;
-
-      .nav-item {
-        width: 112px;
-        height: 112px;
-        background-color: $gray;
-        border-radius: $rate;
-        cursor: pointer;
-      }
-
-      &.opened {
-        transform: translateX(0);
-      }
-    }
-
-  }
 </style>

@@ -6,7 +6,7 @@
     @close="$emit('close')"
   >
     <template slot="modal-header">
-      <div class="title">{{ title }}</div>
+      <div class="text-lg">{{ title }}</div>
     </template>
 
     <template slot="modal-body">
@@ -21,7 +21,7 @@
             :loading="isLoading"
           />
 
-          <div class="buttons form-row">
+          <div class="buttons flex align-center justify-start pt-4 ">
             <ui-button
               class="form-button"
               :disabled="$utils.isInvalidForm(authForm)"
@@ -45,7 +45,7 @@
             :loading="isLoading"
           />
 
-          <div class="buttons form-row">
+          <div class="buttons flex align-center justify-start pt-4">
             <ui-button
               class="form-button"
               :disabled="$utils.isInvalidForm(registerForm)"
@@ -169,17 +169,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.title {
-  font-size: 20px;
-  line-height: 1;
-  font-weight: 500;
-}
-.form-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 16px;
-}
-</style>

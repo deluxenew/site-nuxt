@@ -6,7 +6,7 @@
         :class="item"
         :style="item === 'avatar' ? style : {}"
       >
-        <div class="title">
+        <div class="text-sm">
           {{user[item].title}}:
         </div>
 
@@ -98,81 +98,3 @@
     },
   }
 </script>
-
-<style lang="scss" scoped>
-  .user-info {
-    display: flex;
-    flex-direction: column;
-
-    .row + .row {
-      padding-top: 8px;
-    }
-
-    .user-row {
-      width: calc(100% - 40px);
-
-      &.avatar {
-        padding: 8px;
-        align-items: flex-start;
-        height: 200px;
-        width: 200px;
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border-radius: 8px;
-        box-shadow: inset 0 0 20px $gray;
-
-        .title, .value {
-          display: none;
-        }
-
-        @media (max-width: 800px) {
-          width: 100px;
-          height: 100px;
-        }
-      }
-    }
-
-    .title {
-      flex: 0 0 80px;
-    }
-
-    .value {
-      font-weight: bold;
-      white-space: nowrap;
-      overflow: hidden;
-      padding: 5px;
-      text-overflow: ellipsis;
-    }
-
-    .edit {
-      margin-left: 8px;
-      flex: 0 0 32px;
-      height: 32px;
-      cursor: pointer;
-
-      .fa-edit {
-        path {
-          transition: $trs;
-          fill: $default;
-
-          &:last-child {
-            fill: $gray;
-          }
-        }
-      }
-
-      &:hover:not(&.disabled) {
-        .fa-edit {
-          path {
-            fill: $green;
-
-            &:last-child {
-              fill: $gray;
-            }
-          }
-        }
-      }
-    }
-  }
-</style>

@@ -1,12 +1,11 @@
 <template>
-  <div class="single-screen">
+  <div class="w-screen h-full overflow-hidden">
     <section
-      class="main"
-      :style="`--main-height: ${wrapHeight + 'px'}`"
+      class="main w-screen"
+      :style="`--main-height: ${wrapHeight + 'px'};height:  ${wrapHeight + 'px'}`"
       :id="currentSectionId"
     >
       <div class="container-wrapper">
-
         <slot :name="sections[currentSectionId].slotName"/>
       </div>
     </section>
@@ -60,27 +59,3 @@
   }
 </script>
 
-<style lang="scss">
- .single-screen {
-   width: 100vw;
-   height: 100%;
-   overflow: hidden;
- }
- .main {
-   width: 100vw;
-   min-height: calc(100vh - 56px);
-   height: var(--main-height);
-   padding-right: 0;
-
-   .container-wrapper {
-     padding: 0;
-     display: flex;
-     align-items: center;
-     justify-content: flex-start;
-     flex-direction: column;
-     height: 100%;
-     width: 100%;
-   }
- }
-
-</style>

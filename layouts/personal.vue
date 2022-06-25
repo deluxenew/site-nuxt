@@ -109,8 +109,3 @@
   }
 </script>
 
-<style lang="scss">
-  .personal-layout {
-    height: var(--page-height);
-  }
-</style>

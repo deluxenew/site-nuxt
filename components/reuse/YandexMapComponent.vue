@@ -1,6 +1,6 @@
 <template>
   <yandex-map
-    class="map"
+    class="pt-5"
     :coords="[55.747019,37.620546]"
     zoom="17"
     style="width: 100%; height: 300px;"
@@ -40,8 +40,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.map {
-  padding-top: 24px;
-}
-</style>

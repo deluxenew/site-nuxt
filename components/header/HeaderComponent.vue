@@ -64,7 +64,7 @@
   import CalcProjectForm from "~/components/forms/CalcProjectForm";
 
   export default {
-    name: "HeaderWrapper",
+    name: "HeaderComponent",
     components: {
       HeaderMenu,
       UserMenu,
@@ -179,61 +179,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .header-wrapper {
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 24px;
-    border-bottom: 3px solid $green;
-    transition: $trs;
-    color: $default;
-    font-size: 18px;
-    line-height: 1;
-    font-weight: 400;
-    font-family: $font;
-    background-color: $white;
-    z-index: 9002;
-    overflow: visible;
-  }
-
-  .calc-price {
-    width: 300px;
-    position: relative;
-    animation: on-load .5s ease-in-out;
-
-    @media (max-width: 800px) {
-      width: auto;
-      min-width: 40px;
-    }
-
-
-    .title {
-      padding: 16px 0;
-    }
-
-    &:hover, &.active {
-      color: $green;
-      text-shadow: 1px 1px 5px rgba($default, .1);
-
-      .arrow-button {
-        .icon, .icon-close {
-          path {
-            fill: $green;
-          }
-        }
-      }
-    }
-
-    &.static {
-      flex: 0 0 250px;
-
-      @media (max-width: 800px) {
-        flex: none;
-      }
-    }
-  }
-
-</style>

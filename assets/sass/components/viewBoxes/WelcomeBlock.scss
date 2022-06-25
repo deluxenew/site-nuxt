@@ -1,0 +1,23 @@
+.welcome-block {
+  width: 100%;
+  height: 100%;
+  padding: $mediumPadding 0;
+
+  @media (max-width: 800px) {
+    padding: 32px 0;
+  }
+
+  .flex {
+    padding-top: 16px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+    }
+  }
+
+}

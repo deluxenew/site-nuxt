@@ -83,14 +83,6 @@
       },
     },
     methods: {
-
-      // changeFn(field, value) {
-      //   console.log(field, value)
-      // }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

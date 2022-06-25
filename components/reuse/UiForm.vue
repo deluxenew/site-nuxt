@@ -11,7 +11,7 @@
         >
           <div class="number" v-if="step.showStepNumber">{{step.stepNumber}}</div>
           <div class="title" v-if="step.showTitle">{{step.title}}</div>
-          <div class="form-row" v-for="(row, index) in step.rows" :key="index">
+          <div class="flex align-center justify-start pt-4" v-for="(row, index) in step.rows" :key="index">
             <component
               v-for="component in row"
               v-model="component.value"
@@ -81,14 +81,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.form-wrapper {
-
-  .form-row {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 16px;
-  }
-}
-</style>

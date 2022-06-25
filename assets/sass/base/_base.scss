@@ -152,3 +152,20 @@ body {
   width: 100%;
   //flex: 0 0 100%;
 }
+
+.container-wrapper {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  width: 100vw;
+  min-height: calc(100vh - 56px);
+  height: var(--main-height);
+  padding-right: $rate;
+}

@@ -1,0 +1,183 @@
+
+$padding: 24px;
+$paddingMobile: 16px;
+$bodyHeight: calc(var(--modal-height) - var(--modal-header-height) - var(--modal-footer-height) - (#{$padding} * 2)) !important;
+$bodyHeightMobile: calc(100vh - var(--modal-header-height) - var(--modal-footer-height) - (#{$paddingMobile} * 2) - 130px) !important;
+.vm--overlay, .vm--container {
+  transition: $trs;
+}
+
+.modal-custom {
+  width: var(--modal-width) !important;
+  height: var(--modal-height) !important;
+  left: var(--modal-left) !important;
+  top: var(--modal-top) !important;
+  transition: $trs;
+  animation: bounce-fast-in .3s ease-in-out forwards;
+
+  @media (max-width: 640px) {
+    width: calc(100vw - 16px) !important;
+    height: calc(100vh - 128px) !important;
+    left: 8px !important;
+    top: 120px !important;
+  }
+}
+
+.modal-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  transition: $trs;
+
+  .modal-controls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    top: -56px;
+    background-color: $white;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .icon + .icon {
+      border-left: 1px solid $green;
+    }
+
+    .icon {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      padding: 16px;
+      cursor: pointer;
+      box-sizing: content-box;
+      transition: $trs;
+
+      path {
+        transition: $trs;
+
+        &:nth-child(2) {
+          fill: $gray;
+        }
+      }
+
+      &:hover {
+        background-color: $green;
+
+        path {
+          fill: $white;
+        }
+      }
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    padding: $padding;
+    border-bottom: 1px solid rgba($gray, 0.3);
+    box-sizing: border-box;
+
+    @media (max-width: 640px) {
+      padding: $paddingMobile;
+    }
+  }
+
+  .modal-body-wrapper {
+    padding: $padding;
+
+    @media (max-width: 640px) {
+      padding: $paddingMobile;
+    }
+
+    .modal-body {
+      width: 100%;
+      overflow-y: auto;
+      transition: $trs;
+      box-sizing: border-box;
+      height: $bodyHeight;
+
+      @media (max-width: 640px) {
+        height: $bodyHeightMobile;
+      }
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: 0 0 16px rgba($gray, 0.3)!important;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $green!important;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    padding: $padding;
+    border-top: 1px solid rgba($gray, 0.3);
+    box-sizing: border-box;
+
+    @media (max-width: 640px) {
+      padding: $paddingMobile;
+    }
+  }
+}
+
+.vm--overlay {
+  width: 100%;
+  height: 100%;
+
+  &:after {
+    opacity: 0.5;
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    animation-name: modal-bg-in, cssload-rotate-three;
+    animation-iteration-count: infinite;
+    animation-duration: 20s, 1.15s;
+    animation-timing-function: linear;
+    border-top: 3px solid $white;
+    border-radius: 50%;
+  }
+}
+
+.vm--top-right-slot {
+  width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 50%;
+
+  &:before {
+    opacity: 0.5;
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    animation-name: modal-bg-in, cssload-rotate-two;
+    animation-iteration-count: infinite;
+    animation-duration: 20s, 1.15s;
+    animation-timing-function: linear;
+    border-right: 3px solid $default;
+    border-radius: 50%;
+  }
+
+  &:after {
+    opacity: 0.5;
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background-color: transparent;
+    animation-name: modal-bg-in, cssload-rotate-one;
+    animation-iteration-count: infinite;
+    animation-duration: 20s, 1.15s;
+    animation-timing-function: linear;
+    border-bottom: 3px solid $green;
+    border-radius: 50%;
+  }
+}
