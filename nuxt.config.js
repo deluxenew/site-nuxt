@@ -1,11 +1,18 @@
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-const baseURL = `http://${process.env.SERVER_URL}:${process.env.PORT}`
+const baseURL = `https://${process.env.SERVER_URL}:${process.env.PORT}`
+import path from 'path'
+import fs from 'fs'
+
 import shrinkRay from 'shrink-ray-current'
 export default {
   ssr: true,
   telemetry: false,
   server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+    },
     port: 3000, // default: 3000
     host: 'localhost', // default: localhost,
     timing: false
@@ -64,21 +71,21 @@ export default {
               fontDisplay: 'swap'
             },
             {
-              // preload: true,
+              preload: true,
               src: '@/assets/fonts/SansBold',
               fontWeight: 700,
               fontStyle: 'normal',
               fontDisplay: 'swap'
             },
             {
-              // preload: true,
+              preload: true,
               src: '@/assets/fonts/SansItalic',
               fontWeight: 400,
               fontStyle: 'italic',
               fontDisplay: 'swap'
             },
             {
-              // preload: true,
+              preload: true,
               src: '@/assets/fonts/SansBoldItalic',
               fontWeight: 700,
               fontStyle: 'italic',

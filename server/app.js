@@ -7,7 +7,7 @@ require('dotenv').config();
 const debug = process.env.NODE_ENV === 'development'
 
 const cors = require('cors')
-const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', `http://${process.env.SERVER_URL}:${process.env.PORT}`]
+const whitelist = ['http://127.0.0.1:3000', 'http://localhost:3000', `https://${process.env.SERVER_URL}`]
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

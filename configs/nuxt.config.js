@@ -1,3 +1,6 @@
+const fs =  require("fs");
+const path =  require("path");
+
 const shrinkRay = require('shrink-ray-current')
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
@@ -5,8 +8,13 @@ module.exports = {
   telemetry: false,
   ssr: true,
   server: {
-    port: 3000, // default: 3000
-    host: debug ? 'localhost' : '81.177.136.241',
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+    },
+    port: 443, // default: 3000
+
+    host: debug ? 'localhost' : 'struger.online',
     // timing: false
   },
   head: {
@@ -63,21 +71,21 @@ module.exports = {
               fontDisplay: 'swap'
             },
             {
-              // preload: true,
+              preload: true,
               src: '@/assets/fonts/SansBold',
               fontWeight: 700,
               fontStyle: 'normal',
               fontDisplay: 'swap'
             },
             {
-              // preload: true,
+              preload: true,
               src: '@/assets/fonts/SansItalic',
               fontWeight: 400,
               fontStyle: 'italic',
               fontDisplay: 'swap'
             },
             {
-              // preload: true,
+              preload: true,
               src: '@/assets/fonts/SansBoldItalic',
               fontWeight: 700,
               fontStyle: 'italic',
@@ -86,13 +94,24 @@ module.exports = {
           ]
         },
       ]
-    }]
+    }],
+    [
+      'nuxt-netlify-http2-server-push',
+      {
+        resources: [
+          { path: '**/*.js', as: 'script' },
+          // { path: 'images/hero.jpg', as: 'image' },
+          // { path: 'fonts/*.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' },
+          // { path: 'images/bg-image-narrow.png', as: 'image', media: '(max-width: 600px)', },
+        ]
+      }
+    ]
   ],
   router: {
 
   },
   axios: {
-    baseURL: `http://${process.env.SERVER_URL}:${process.env.PORT}`,
+    baseURL: `https://${process.env.SERVER_URL}:${process.env.PORT}`,
     withCredentials: true,
     debug,
   },
@@ -202,7 +221,6 @@ module.exports = {
     http2: {
       push: true,
       pushAssets: (req, res, publicPath, preloadFiles) => preloadFiles
-        .filter(f => f.asType === 'script' && f.file === 'runtime.js')
         .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}; crossorigin=anonymous`),
     },
     crossorigin: 'anonymous',
