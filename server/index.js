@@ -17,17 +17,17 @@ async function start () {
   }
 
   app.use(nuxt.render)
-  https.createServer(nuxt.options.server.https, app).listen(port, host, ()=>{
-    consola.ready({
-      message: `Server listening on http://${host}:${port} ${nuxt.options.server.https}`,
-      badge: true
-    })
-  });
-  // app.listen(port, host, ()=>{
+  // https.createServer(nuxt.options.server.https, app).listen(port, host, ()=>{
   //   consola.ready({
-  //     message: `Server listening on http://${host}:${port}`,
+  //     message: `Server listening on http://${host}:${port} ${nuxt.options.server.https}`,
   //     badge: true
   //   })
-  // })
+  // });
+  app.listen(port, host, ()=>{
+    consola.ready({
+      message: `Server listening on http://${host}:${port}`,
+      badge: true
+    })
+  })
 }
 start()

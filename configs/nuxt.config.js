@@ -1,20 +1,11 @@
-const fs =  require("fs");
-const path =  require("path");
-
-const shrinkRay = require('shrink-ray-current')
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 module.exports = {
   telemetry: false,
   ssr: true,
   server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
-    },
-    port: 443, // default: 3000
-
-    host: debug ? 'localhost' : 'struger.online',
+    port: 3000, // default: 3000
+    host: 'localhost',
     // timing: false
   },
   head: {
@@ -95,17 +86,6 @@ module.exports = {
         },
       ]
     }],
-    [
-      'nuxt-netlify-http2-server-push',
-      {
-        resources: [
-          { path: '**/*.js', as: 'script' },
-          // { path: 'images/hero.jpg', as: 'image' },
-          // { path: 'fonts/*.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' },
-          // { path: 'images/bg-image-narrow.png', as: 'image', media: '(max-width: 600px)', },
-        ]
-      }
-    ]
   ],
   router: {
 
@@ -179,9 +159,9 @@ module.exports = {
       pages: true,
       commons: true,
     },
-    // extractCSS: {
-    //   ignoreOrder: true,
-    // },
+    extractCSS: {
+      ignoreOrder: true,
+    },
     ...(!debug && {
       html: {
         minify: {
@@ -224,6 +204,6 @@ module.exports = {
         .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}; crossorigin=anonymous`),
     },
     crossorigin: 'anonymous',
-    compressor: shrinkRay()
+    // compressor: shrinkRay()
   },
 }
