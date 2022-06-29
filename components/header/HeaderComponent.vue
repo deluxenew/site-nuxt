@@ -6,7 +6,7 @@
           <header-item-component
             title="Вход / Регистрация"
             alignTitle="center"
-            class="calc-price static"
+            class="calc-price"
             icon-name="login"
             item-name="login"
             :currentItem="currentItem"
@@ -18,7 +18,7 @@
           <header-item-component
             :title="userName || ''"
             alignTitle="center"
-            class="calc-price static"
+            class="calc-price"
             icon-name="profile"
             item-name="profile"
             :arrow-down="true"

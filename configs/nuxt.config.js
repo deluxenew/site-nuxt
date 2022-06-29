@@ -159,9 +159,9 @@ module.exports = {
       pages: true,
       commons: true,
     },
-    extractCSS: {
-      ignoreOrder: true,
-    },
+    // extractCSS: {
+    //   ignoreOrder: true,
+    // },
     ...(!debug && {
       html: {
         minify: {
@@ -201,6 +201,7 @@ module.exports = {
     http2: {
       push: true,
       pushAssets: (req, res, publicPath, preloadFiles) => preloadFiles
+        .filter(f => f.asType === 'script' && f.file === 'runtime.js')
         .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}; crossorigin=anonymous`),
     },
     crossorigin: 'anonymous',

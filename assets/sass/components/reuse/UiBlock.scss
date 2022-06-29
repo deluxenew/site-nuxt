@@ -55,7 +55,7 @@ $horizontal: var(--horizontal-grow);
     position: absolute;
     font-weight: bold;
     left: calc(50% - #{$titleWidth / 2});
-    padding: 1px 16px 8px;
+    padding: 4px 16px 4px;
     top: -12px;
     width: max-content;
     height: 24px;

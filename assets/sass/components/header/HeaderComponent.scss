@@ -43,12 +43,4 @@
       }
     }
   }
-
-  &.static {
-    flex: 0 0 250px;
-
-    @media (max-width: 800px) {
-      flex: none;
-    }
-  }
 }

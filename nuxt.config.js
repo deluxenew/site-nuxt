@@ -1,18 +1,10 @@
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 const baseURL = `https://${process.env.SERVER_URL}:${process.env.PORT}`
-import path from 'path'
-import fs from 'fs'
-
-import shrinkRay from 'shrink-ray-current'
 export default {
   ssr: true,
   telemetry: false,
   server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
-    },
     port: 3000, // default: 3000
     host: 'localhost', // default: localhost,
     timing: false
@@ -214,6 +206,6 @@ export default {
         .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}; crossorigin=anonymous`),
     },
     crossorigin: 'anonymous',
-    compressor: shrinkRay()
+    // compressor: shrinkRay()
   },
 }
