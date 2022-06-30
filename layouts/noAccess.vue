@@ -71,7 +71,8 @@ export default {
   }),
   computed: {
     isAuth() {
-      return this.$auth.loggedIn;
+      // return this.$auth.loggedIn;
+      return false
     }
   },
   methods: {

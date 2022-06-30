@@ -19,7 +19,8 @@ export default {
   },
   computed: {
     isAuth() {
-      return this.$auth && this.$auth.loggedIn
+      // return this.$auth && this.$auth.loggedIn
+      return false
     },
   },
   methods: {

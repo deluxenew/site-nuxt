@@ -86,7 +86,17 @@ export default {
           ]
         },
       ]
-    }]
+    }],
+    ['nuxt-compress',
+      {
+        gzip: {
+          threshold: 8192,
+        },
+        brotli: {
+          threshold: 8192,
+        },
+      },
+    ],
   ],
   router: {
   },
@@ -132,12 +142,18 @@ export default {
   },
   buildModules: [
     '@nuxt/postcss8',
+    'nuxt-compress'
   ],
   build: {
     babel: {
-      presets(env, [preset, options]) {
+      presets({ envName }) {
         return [
-          ['@nuxt/babel-preset-app', {corejs: {version: 3, proposals: true}}]
+          [
+            '@nuxt/babel-preset-app',
+            {
+              corejs: { version: 3 }
+            }
+          ]
         ]
       }
     },
