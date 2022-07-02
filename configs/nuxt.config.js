@@ -51,7 +51,7 @@ module.exports = {
       prefetchCount: 0,
       fonts: [
         {
-          fileExtensions: ['ttf'],
+          fileExtensions: ['woff2'],
           fontFamily: 'ui-sans-serif',
           fontFaces: [
             {
