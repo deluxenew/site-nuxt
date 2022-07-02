@@ -19,8 +19,7 @@ export default {
   },
   computed: {
     isAuth() {
-      // return this.$auth && this.$auth.loggedIn
-      return false
+      return this.$store.getters["IS_AUTH"]
     },
   },
   methods: {

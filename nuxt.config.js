@@ -145,41 +145,41 @@ export default {
     'nuxt-compress'
   ],
   build: {
-    babel: {
-      presets({ envName }) {
-        return [
-          [
-            '@nuxt/babel-preset-app',
-            {
-              corejs: { version: 3 }
-            }
-          ]
-        ]
-      }
-    },
     postcss: {
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
       },
     },
-    optimizeCSS: !debug,
-    optimization: {
-      minimize: !debug,
-      splitChunks: {
-        maxSize: 249856 * 2,
-      },
-    },
-    splitChunks: {
-      name: debug,
-      layouts: true,
-      pages: true,
-      commons: true,
-    },
-    // extractCSS: {
-    //   ignoreOrder: true,
-    // },
     ...(!debug && {
+      // extractCSS: {
+      //   ignoreOrder: true,
+      // },
+      babel: {
+        presets({ envName }) {
+          return [
+            [
+              '@nuxt/babel-preset-app',
+              {
+                corejs: { version: 3 }
+              }
+            ]
+          ]
+        }
+      },
+      optimizeCSS: true,
+      optimization: {
+        minimize: true,
+        splitChunks: {
+          maxSize: 249856 * 2,
+        },
+      },
+      splitChunks: {
+        name: debug,
+        layouts: true,
+        pages: true,
+        commons: true,
+      },
       html: {
         minify: {
           collapseBooleanAttributes: true,

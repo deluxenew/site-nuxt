@@ -36,7 +36,7 @@
         user: {
           avatar: {
             title: 'Фото',
-            // value: 'https://sun1-20.userapi.com/s/v1/ig2/P4HfSYWT4NfaHQRWGoMI3wHlkmUTV2zh5xE32UK5Rh3wnYsC3G7xEPIy4gBJpuk_pC10swprIhLVw_KByBSb7ENf.jpg?size=200x299&quality=96&crop=0,74,576,863&ava=1',
+            value: 'https://sun1-20.userapi.com/s/v1/ig2/P4HfSYWT4NfaHQRWGoMI3wHlkmUTV2zh5xE32UK5Rh3wnYsC3G7xEPIy4gBJpuk_pC10swprIhLVw_KByBSb7ENf.jpg?size=200x299&quality=96&crop=0,74,576,863&ava=1',
           },
           name: {
             title: 'Имя',
@@ -56,12 +56,11 @@
     },
     computed: {
       profile() {
-        // return this.$auth.user
-        return false
+        return this.$store.getters["USER"]
       },
       style() {
         return {
-          // backgroundImage: `url(${this.user.avatar.value})`
+          backgroundImage: `url(${this.user.avatar.value})`
         }
       }
     },

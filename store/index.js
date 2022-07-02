@@ -18,7 +18,6 @@ export const actions = {
         }
       })
       .finally(() => commit('SET_LOADING', false))
-
   },
   async SIGN_UP_USER_ACTION({commit, dispatch, getters}, {name, login, password}) {
     commit('SET_LOADING', true)
@@ -55,5 +54,7 @@ export const mutations = {
 }
 
 export const getters = {
+  IS_AUTH: (state) => state.auth.loggedIn,
+  USER: (state) => state.auth.user,
   IS_LOADING: (state) => state.loading
 }

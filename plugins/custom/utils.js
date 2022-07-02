@@ -2,27 +2,29 @@ import {fieldsList} from './formFields'
 
 export default (isDev) => ({
   formatError(err) {
-    let {response: {data: {message: text}}} = err
+    // const {response} = err
+    // const {data } = response
+    // const {message: text} = data
     console.log('format error', err.message ? err.message : '', '\nERR >> ', err)
 
     let title = 'Упс... что то пошло не так!!!'
-
+    let message = err?.response?.data?.message ? err.response.data.message : 'Попробуйте еще раз'
     if (err.response) {
       switch (err.response.status) {
         case 400:
           title = 'Ошибка ввода'
+
           break
         case 500:
           title = 'Ошибка сервера'
           break
       }
-      text = err.response.data.message ? err.response.data.message : 'Попробуйте еще раз'
     }
 
     return {
       type: 'error',
       title,
-      text,
+      text: message,
     }
   },
 

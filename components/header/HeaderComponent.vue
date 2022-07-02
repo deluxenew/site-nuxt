@@ -109,12 +109,11 @@
         return this.$route
       },
       isAuth() {
-        // return this.$auth && this.$auth.user
-        return false
+        return this.$store.getters["IS_AUTH"]
       },
       userName() {
-        // return this.$auth && this.$auth.user && this.$auth.user.login
-        return false
+        if (!this.isAuth) return null
+        return this.$store.getters["USER"].login
       },
       currentDropDown() {
         switch (this.currentItem) {

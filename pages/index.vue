@@ -78,7 +78,7 @@ export default {
   computed: {
     blockComponents() {
       return this.$utils.groupBy(this.sections, 'slotName')
-    }
+    },
   },
 }
 </script>
