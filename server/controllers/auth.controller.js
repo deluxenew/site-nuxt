@@ -8,7 +8,8 @@ const excludedFields = ['tokens', 'password', '__v', '_id']
 module.exports.me = async (req, res) => {
   const rawToken = req.header("Authorization")
   const token = rawToken.replace("Bearer ", "");
-  const {userId} = jwt.verify(token, "str123scan");
+  const {userId} = jwt.verify(token, process.env.TOKEN_KEY);
+  console.log({userId})
   const candidate = await User.findOne({'_id': userId})
 
   if (candidate) {

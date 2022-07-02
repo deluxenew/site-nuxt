@@ -25,7 +25,7 @@ const dbPassword = process.env.DB_PASSWORD
 const serverUrl = process.env.SERVER_URL
 const port = process.env.PORT
 const dbName = process.env.DB_NAME
-console.log(dbUser, dbPassword)
+
 
 const mongoConnectStringDev = `mongodb://${dbUser}:${dbPassword}@${serverUrl}/${dbName}`
 const mongoConnectStringProd = `mongodb://127.0.0.1/${dbName}`
