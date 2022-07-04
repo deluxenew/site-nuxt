@@ -4,7 +4,7 @@ export default ({store}) => {
   let stateCopy = {...store.state}
   createPersistedState({
      rehydrated:(defStore)=>{ defStore.replaceState(stateCopy) },
-    paths: ['auth', 'profile'],
+    paths: ['auth', 'profile', 'admin'],
 
   })(store)
 }
