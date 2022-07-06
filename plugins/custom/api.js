@@ -34,6 +34,27 @@ export default (axios) => ({
   },
   getCategoryById(id) {
     return axios.get(`/api/admin/categories/?id=${id}`).then(({ data }) => data)
-  }
+  },
+
+  // admin
+  getCategoryFull({route}) {
+    return axios.get(`/api/admin/category/${route}/all`).then(({ data }) => data)
+  },
+  addCategoryItem({item, route}) {
+    return axios.post(`/api/admin/category/${route}/add`, item).then(({ data }) => data)
+  },
+
+  // admin pages
+  getPages() {
+    return axios.get(`/api/admin/pages/all`).then(({ data }) => data)
+  },
+  addPage({ title, slug }) {
+    return axios.post('/api/admin/pages/add', { title, slug }).then(({ data }) => data)
+  },
+
+  //admin users
+  getUsers() {
+    return axios.get(`/api/admin/users/all`).then(({ data }) => data)
+  },
 
 })
