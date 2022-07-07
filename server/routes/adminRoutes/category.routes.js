@@ -7,8 +7,4 @@ const { all, add } = require('../../controllers/adminControllers/categories.cont
 router.get('/all', all)
 router.post('/add', add)
 
-const dynamicCategory = (route) => {
-  router.get('/all', all)
-  router.post('/add', add)
-}
 module.exports = router

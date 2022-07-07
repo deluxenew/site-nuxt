@@ -30,3 +30,16 @@ module.exports.add = async (req, res) => {
     resInterceptors(res, category)
   }
 }
+
+module.exports.edit = async (req, res) => {
+  const { body: { title, slug } } = req
+  logger(res.statusCode)
+  const Model = getModelByReqSlug(req)
+  const candidate = await Model.findOne({slug})
+
+  if (!candidate) {
+    const category = new Model({ title, slug })
+    category.save()
+    resInterceptors(res, category)
+  }
+}

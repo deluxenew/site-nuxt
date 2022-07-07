@@ -10,6 +10,9 @@ const categorySchema = new Schema({
     type: String,
     unique: true,
     required: true
+  },
+  categoryModelFields: {
+    type: Object,
   }
 })
 

@@ -18,16 +18,66 @@
       </nuxt-link>
     </div>
     <div>
-      <input
-        class="outline"
-        v-model="title"
-        type="text"
-      >
-      <input
-        class="outline"
-        v-model="slug"
-        type="text"
-      >
+      <div class="form">
+
+        <input
+          class="outline"
+          v-model="title"
+          type="text"
+        >
+        <input
+          class="outline"
+          v-model="slug"
+          type="text"
+        >
+      </div>
+      <div class="title">
+        Поля
+      </div>
+      <div class="form">
+        <div class="list">
+          <div
+            class="list-item"
+            v-for="field in categoryModelFields"
+            :key="field.name"
+          >
+            <input
+              class="outline"
+              v-model="field.name"
+              type="text"
+            >
+            <input
+              class="outline"
+              v-model="field.value"
+              type="text"
+            >
+            <div class="wrapper">
+              <div class="title">Свойства</div>
+
+              <div class="list">
+                <div
+                  class="list-item"
+                  v-for="prop in field.props"
+                  :key="prop.key"
+                >
+                  <input
+                    class="outline"
+                    v-model="prop.key"
+                    type="text"
+                  >
+                  <input
+                    class="outline"
+                    v-model="prop.value"
+                    type="text"
+                  >
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       <button @click="addCategory">
         Добавить
       </button>
@@ -46,8 +96,20 @@
     fetchDelay: 0,
     data() {
       return {
-        title: "",
-        slug: "",
+        title: "Название категории",
+        slug: "slug",
+        categoryModelFields: [
+          {
+            name: "Название поля",
+            value: "Значение",
+            props: [
+              {
+                key: "Ключ",
+                value: "Значение"
+              }
+            ]
+          },
+        ]
       }
     },
     async fetch() {

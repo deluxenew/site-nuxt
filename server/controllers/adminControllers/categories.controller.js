@@ -10,7 +10,7 @@ module.exports.all = async (req, res) => {
 }
 
 module.exports.add = async (req, res) => {
-  const { body: { title, slug } } = req
+  const { body: { title, slug, categoryModelFields } } = req
   const candidate = await CategoryModel.findOne({slug})
 
   if (candidate) {
@@ -18,7 +18,7 @@ module.exports.add = async (req, res) => {
   } else if (!title || !slug) {
     res.status(400).json({message: 'Заполните все обязадельные поля'})
   } else {
-    const category = new CategoryModel({ title, slug })
+    const category = new CategoryModel({ title, slug, categoryModelFields })
     category.save()
     res.status(201).json(category)
   }
