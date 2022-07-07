@@ -1,5 +1,6 @@
 const jwtDecode = require("jwt-decode");
 
+
 const omit = (obj, props) => {
   const inProps = (key, props) => {
     return props.some((omitKey) => {
@@ -25,7 +26,13 @@ const isTokenValid = (token) => {
   return (new Date().getTime() / 1000) < expires
 }
 
+const resInterceptors = (res, body) => {
+  const { statusCode } = res
+  return res.status(statusCode).json(body)
+}
+
 module.exports = {
   omit,
-  isTokenValid
+  isTokenValid,
+  resInterceptors
 }

@@ -1,32 +1,32 @@
+const {  resInterceptors } = require('../../common/helper')
 const dynamicCategory = require('../../models/adminModules/dynamicCategory.model')
-const consola = require('consola')
-module.exports.all = async (req, res)  => {
+const logger = require('../../common/logger')
+
+const getModelByReqSlug = (req) => {
   const baseUrl = req.baseUrl.split('/')
   const route = baseUrl[baseUrl.length - 1];
-  consola.ready({route});
-  const Model = dynamicCategory(route)
-  const collections = await Model.find()
+  return dynamicCategory[route]
+}
 
-  if (collections) {
-    console.log({collections});
-    res.status(200).json(collections)
+module.exports.all = async (req, res)  => {
+  const Model = getModelByReqSlug(req)
+  logger(res.statusCode)
+  const collection = await Model.find()
+
+  if (collection) {
+    resInterceptors(res, collection)
   }
 }
 
 module.exports.add = async (req, res) => {
-  const baseUrl = req.baseUrl.split('/')
-  const route = baseUrl[baseUrl.length - 1];
-  const Model = dynamicCategory(route)
   const { body: { title, slug } } = req
+  logger(res.statusCode)
+  const Model = getModelByReqSlug(req)
   const candidate = await Model.findOne({slug})
 
-  if (candidate) {
-    res.status(409).json({message: 'Такая категория уже существует'})
-  } else if (!title || !slug) {
-    res.status(400).json({message: 'Заполните все обязадельные поля'})
-  } else {
+  if (!candidate) {
     const category = new Model({ title, slug })
     category.save()
-    res.status(201).json(category)
+    resInterceptors(res, category)
   }
 }

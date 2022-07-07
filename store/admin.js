@@ -45,7 +45,8 @@ export const mutations = {
   SET_CATEGORY_ITEM: (state, {item, route}) => {
     const categoryIdx = state.categories.findIndex((cat) => cat.slug === route)
     if (categoryIdx > -1) {
-      state.categories.add(item)
+      // if (!state.categories[categoryIdx].items) state.categories[categoryIdx].items = []
+      state.categories[categoryIdx].items.push(item)
     }
   }
 }
