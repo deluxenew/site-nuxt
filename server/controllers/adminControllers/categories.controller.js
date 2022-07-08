@@ -4,7 +4,6 @@ module.exports.all = async (req, res) => {
   const collections = await CategoryModel.find()
 
   if (collections) {
-    console.log({collections});
     res.status(200).json(collections)
   }
 }
