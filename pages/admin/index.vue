@@ -19,17 +19,8 @@
     </div>
     <div>
       <div class="form">
-
-        <input
-          class="outline"
-          v-model="title"
-          type="text"
-        >
-        <input
-          class="outline"
-          v-model="slug"
-          type="text"
-        >
+        <input class="outline" v-model="title" type="text">
+        <input class="outline" v-model="slug" type="text">
       </div>
       <div class="title">
         Поля
@@ -38,7 +29,7 @@
         <div class="list">
           <div
             class="list-item"
-            v-for="field in categoryModelFields"
+            v-for="field in fields"
             :key="field.name"
           >
             <input
@@ -89,6 +80,16 @@
 </template>
 
 <script>
+  const fieldExample = {
+    name: "Название поля",
+    value: "Значение",
+    props: [
+      {
+        key: "Ключ",
+        value: "Значение"
+      }
+    ]
+  }
   export default {
     layout: "admin",
     name: "index",
@@ -98,34 +99,28 @@
       return {
         title: "Название категории",
         slug: "slug",
-        categoryModelFields: [
+        fields: [
           {
-            name: "Название поля",
-            value: "Значение",
-            props: [
-              {
-                key: "Ключ",
-                value: "Значение"
-              }
-            ]
+            ...fieldExample,
+            props: [...fieldExample.props]
           },
         ]
       }
     },
     async fetch() {
-     await this.fetchAllCategories()
+      await this.fetchAllCategories()
     },
     computed: {
       items() {
         return this.$store.getters["admin/ADMIN_CATEGORIES_ALL"]
-      }
+      },
     },
     methods: {
       async fetchAllCategories() {
         await this.$store.dispatch("admin/GET_ADMIN_CATEGORIES_ALL")
       },
       async addCategory() {
-        await this.$api.addCategory({title: this.title, slug: this.slug})
+        await this.$api.addCategory({title: this.title, slug: this.slug, categoryModelFields: this.fields})
       }
     }
   }
