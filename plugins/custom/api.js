@@ -20,8 +20,8 @@ export default (axios) => ({
   getCategories() {
     return axios.get(`/api/admin/categories/all`).then(({ data }) => data)
   },
-  addCategory({ title, slug }) {
-    return axios.post('/api/admin/categories/add', { title, slug }).then(({ data }) => data)
+  addCategory(category) {
+    return axios.post('/api/admin/categories/add', category).then(({ data }) => data)
   },
   editCategory({ title, slug }) {
     axios.put('/api/admin/categories/edit', { title, slug }).then(({ data }) => data)
