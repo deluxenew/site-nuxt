@@ -1,5 +1,5 @@
 <template lang="pug">
-div.p-2
+div.grid.gap-2.p-3
   div.title Палень урапвления
   div.p-2.w-100.flex.flex-wrap
     div.item(
@@ -16,29 +16,28 @@ div.p-2
       div(@click="openEditCategory(item)")
         | Редактировать
 
-  div.grid.gap-2.p-3(class='w-1/2')
-    div.text-xl.pt-4 Параметры
+  div.grid.gap-2.p-2.bg-green-100(class='w-1/2')
+    div.text-xl Параметры
     div
       ui-input.mt-2(v-model='title' label="Название категории" type='text')
       ui-input.mt-2(v-model='slug' label="Код категории" type='text')
       ui-input.mt-2(v-model='collectionName' label="Код модели" type='text')
     div.text-xl.pt-3 Поля
-    div.grid.gap-4
-      div(:class="j !== 0 ? 'pt-2' : ''" v-for='(field, j) in fields' :key='j')
+    div.grid.gap-4.p-2.bg-green-200
+      div(v-for='(field, j) in fields' :key='j')
         ui-input(v-model='field.value' type='text' label='Код поля')
-        div.grid.gap-2
-          div.text-base.pt-3 Свойства
-            div.grid.gap-2.grid-cols-2.pt-2(v-for='(prop, i) in field.props' :key='i')
+        div.grid.gap-2.p-2.bg-green-400
+          div.text-base Свойства
+          div.grid.gap-2
+            div.grid.gap-2.grid-cols-2(v-for='(prop, i) in field.props' :key='i')
               ui-input(v-model='prop.key' type='text' label='Код свойства')
               ui-input(v-model='prop.value' type='text' label='Значение свойства')
-          ui-button(@click='addProp(field)' text="Добавить свойство")
+            ui-button(@click='addProp(field)' text="Добавить свойство")
       ui-button(@click='addField(fields)' text="Добавить Поле")
-    ui-button(@click='addCategory' text="Добавить категорию")
-
-  hr.pb-4
-  ui-button(@click='fetchAllCategories' text="Получить всех")
-  | Готовый объект полей
-  pre {{fieldsObject}}
+  ui-button.mt-3(@click='addCategory' text="Добавить категорию")
+  div.p-4
+    div.text-base Готовый объект полей
+    pre.pt-2 {{fieldsObject}}
 </template>
 
 <script>
