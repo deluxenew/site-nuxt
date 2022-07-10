@@ -1,5 +1,5 @@
 <template lang="pug">
-div.p-1
+div.p-2
   div.title Палень урапвления
   div.p-2.w-100.flex.flex-wrap
     div.item(
@@ -15,79 +15,58 @@ div.p-1
           | {{item.title}}
       div(@click="openEditCategory(item)")
         | Редактировать
-  div.form
-    div.fields
-      input.outline(v-model='title' type='text')
-      input.outline(v-model='slug' type='text')
-      input.outline(v-model='collectionName' type='text')
-    div.title Поля
-    div.form
-      div.list
-        div.list-item(v-for='(field, j) in fields' :key='j')
-          div {{field.key}}
-          input.outline(v-model='field.value' type='text')
-          div.wrapper
-            div.title Свойства
-            div.list
-              div.list-item(v-for='(prop, i) in field.props' :key='i')
-                input.outline(v-model='prop.key' type='text')
-                input.outline(v-model='prop.value' type='text')
-            button(@click='addProp(field)') Добавить свойство
-      button(@click='addField(fields)') Добавить Поле
-    button(@click='addCategory') Добавить
-  div.title Редактироваие
-  div.form(v-if="editCategory")
-    div.fields
-      input.outline(v-model='editCategory.title' type='text')
-      input.outline(v-model='editCategory.slug' type='text')
-      input.outline(v-model='editCategory.collectionName' type='text')
-    div.title Поля
-    div.form
-      div.list
-        div.list-item(v-for='(field, j) in editCategory.fields' :key='j')
-          div {{field.key}}
-          input.outline(v-model='field.value' type='text')
-          div.wrapper
-            div.title Свойства
-            div.list
-              div.list-item(v-for='(prop, i) in field.props' :key='i')
-                input.outline(v-model='prop.key' type='text')
-                input.outline(v-model='prop.value' type='text')
-            button(@click='addProp(field)') Добавить свойство
-      button(@click='addField(editCategory.fields)') Добавить Поле
-    button(@click='addCategory') Добавить
-    button(@click='updateCategory') Сохранить
 
-  hr
-  button(@click='fetchAllCategories') Получить всех
+  div.grid.gap-2.p-3(class='w-1/2')
+    div.text-xl.pt-4 Параметры
+    div
+      ui-input.mt-2(v-model='title' label="Название категории" type='text')
+      ui-input.mt-2(v-model='slug' label="Код категории" type='text')
+      ui-input.mt-2(v-model='collectionName' label="Код модели" type='text')
+    div.text-xl.pt-3 Поля
+    div.grid.gap-4
+      div(:class="j !== 0 ? 'pt-2' : ''" v-for='(field, j) in fields' :key='j')
+        ui-input(v-model='field.value' type='text' label='Код поля')
+        div.grid.gap-2
+          div.text-base.pt-3 Свойства
+            div.grid.gap-2.grid-cols-2.pt-2(v-for='(prop, i) in field.props' :key='i')
+              ui-input(v-model='prop.key' type='text' label='Код свойства')
+              ui-input(v-model='prop.value' type='text' label='Значение свойства')
+          ui-button(@click='addProp(field)' text="Добавить свойство")
+      ui-button(@click='addField(fields)' text="Добавить Поле")
+    ui-button(@click='addCategory' text="Добавить категорию")
+
+  hr.pb-4
+  ui-button(@click='fetchAllCategories' text="Получить всех")
   | Готовый объект полей
   pre {{fieldsObject}}
-
 </template>
 
 <script>
+  import UiInput from "../../components/reuse/UiInput";
+  import UiButton from "../../components/reuse/UiButton";
   const propExample = {
-    key: "Ключ",
-    value: "Значение"
+    key: "",
+    value: ""
   }
   const fieldExample = {
-    key: "Ключ",
-    value: "Название ключа",
+    key: "",
+    value: "",
     props: []
   }
 
   export default {
+    components: {UiButton, UiInput},
     layout: "admin",
     name: "index",
     fetchOnServer: false,
     fetchDelay: 0,
     data() {
       return {
-        title: "Название категории",
-        slug: "slugs",
-        collectionName: "Slug",
+        title: "",
+        slug: "",
+        collectionName: "",
         fields: [],
-        editCategory: null
+        editCategory: false
       }
     },
     async fetch() {
@@ -125,21 +104,23 @@ div.p-1
       },
       async addCategory() {
         if (this.fields && !this.fields.length) return
-        await this.$api.addCategory({
+        const sendData = {
           title: this.title,
           slug: this.slug,
           collectionName: this.collectionName,
           fields: this.fieldsObject
-        })
+        }
+        if (this.editCategory) await this.$api.updateCategory(sendData)
+        else await this.$api.addCategory(sendData)
       },
       openEditCategory(category) {
         if (!category) return
-        const { slug, title, collectionName, fields } = category
-        this.editCategory = {}
-        this.editCategory.slug = slug
-        this.editCategory.title = title
-        this.editCategory.collectionName = collectionName
-        this.editCategory.fields = Object.keys(fields)
+        this.editCategory = true
+        const {slug, title, collectionName, fields} = category
+        this.slug = slug
+        this.title = title
+        this.collectionName = collectionName
+        this.fields = Object.keys(fields)
             .map((fieldName) => {
               return {
                 value: fieldName,
@@ -156,10 +137,10 @@ div.p-1
       async updateCategory() {
         if (!this.editCategory) return
         await this.$api.editCategory({
-          title: this.editCategory.title,
-          slug: this.editCategory.slug,
-          collectionName: this.editCategory.collectionName,
-          fields: this.getFieldObject(this.editCategory.fields)
+          title: this.title,
+          slug: this.slug,
+          collectionName: this.collectionName,
+          fields: this.getFieldObject(this.fields)
         })
       }
     }

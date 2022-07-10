@@ -97,3 +97,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</styles>
