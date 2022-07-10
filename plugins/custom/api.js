@@ -23,8 +23,8 @@ export default (axios) => ({
   addCategory(category) {
     return axios.post('/api/admin/categories/add', category).then(({ data }) => data)
   },
-  editCategory({ title, slug }) {
-    axios.put('/api/admin/categories/edit', { title, slug }).then(({ data }) => data)
+  editCategory(category) {
+    axios.put('/api/admin/categories/edit', category).then(({ data }) => data)
   },
   removeCategory({id}) {
     axios.delete('/api/admin/categories/remove', { id }).then(({ data }) => data)

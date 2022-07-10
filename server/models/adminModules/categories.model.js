@@ -11,7 +11,15 @@ const categorySchema = new Schema({
     unique: true,
     required: true
   },
-  categoryModelFields: {
+  parent: {
+    type: String,
+  },
+  collectionName: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  fields: {
     type: Object,
   }
 })
