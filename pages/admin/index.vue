@@ -33,7 +33,7 @@ div.grid.gap-2.p-3
           div.grid.gap-2
             div.grid.gap-2.grid-cols-2(v-for='(prop, i) in field.props' :key='i')
               ui-input(v-model='prop.key' type='text' label='Код свойства')
-              ui-input(v-model='prop.value' type='text' label='Значение свойства')
+              ui-select(v-model='prop.value' :items="propTypes" type='text' label='Значение свойства')
             ui-button(@click='addProp(field)' text="Добавить свойство")
       ui-button(@click='addField(fields)' text="Добавить Поле")
   ui-button.mt-3(@click='addCategory' text="Добавить категорию")
@@ -46,6 +46,7 @@ div.grid.gap-2.p-3
 <script>
   import UiInput from "../../components/reuse/UiInput";
   import UiButton from "../../components/reuse/UiButton";
+  import UiSelect from "../../components/reuse/UiSelect";
   const propExample = {
     key: "",
     value: ""
@@ -57,7 +58,7 @@ div.grid.gap-2.p-3
   }
 
   export default {
-    components: {UiButton, UiInput},
+    components: {UiSelect, UiButton, UiInput},
     layout: "admin",
     name: "index",
     fetchOnServer: false,
@@ -78,6 +79,15 @@ div.grid.gap-2.p-3
       items() {
         return this.$store.getters["admin/ADMIN_CATEGORIES_ALL"]
       },
+      propTypes() {
+        return [
+          { title: "Надпись", value: "string", type: String },
+          { title: "Число", value: "number", type: Number },
+          { title: "Массив", value: "array", type: Array },
+          { title: "Объект", value: "object", type: Object },
+          { title: "Да/Нет", value: "boolean", type: Boolean },
+        ]
+      },
       fieldsObject() {
         return this.getFieldObject(this.fields)
       }
@@ -88,7 +98,7 @@ div.grid.gap-2.p-3
           const {value, props} = el
           const propsObj = props.reduce((propsList, prop) => {
             const {key: propsKey, value: propsValue} = prop
-            if (!propsList[propsKey]) propsList[propsKey] = propsValue
+            if (!propsList[propsKey]) propsList[propsKey] = this.propTypes.find(({value}) => value === propsValue)?.type
             return propsList
           }, {})
           if (!acc[value]) acc[value] = {...propsObj}

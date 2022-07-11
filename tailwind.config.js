@@ -29,8 +29,17 @@ module.exports = {
       xl: ['24px', '32px'],
     },
     extend: {
+      spacing: {
+        "0": "0px",
+      },
       width: {
-        "48": "48px"
+        "0": "0px",
+        "48": "48px",
+        "16": "16px"
+      },
+      height: {
+        "48": "48px",
+        "50": "50px",
       }
     },
   },
