@@ -32,3 +32,12 @@ module.exports.edit = async (req, res) => {
   }
 }
 
+module.exports.remove = async (req, res) => {
+  const {params: { id: _id } } = req
+  // logger(res.statusCode)
+  const complete = await CategoryModel.deleteOne({_id: _id})
+  if (complete) {
+    res.status(201).json(complete)
+  }
+}
+

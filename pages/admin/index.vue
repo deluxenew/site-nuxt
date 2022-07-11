@@ -1,21 +1,23 @@
 <template lang="pug">
 div.grid.gap-2.p-3
   div.title Палень урапвления
-  div.p-2.w-100.flex.flex-wrap
+  div.w-100.flex.flex-wrap.gap-4
     div.item(
       v-for='item in items'
       :key='item.slug'
     )
-      nuxt-link.p-2.item(
+      nuxt-link(
         tag='div'
-        class='w-1/4'
         :to="'admin/' + item.slug"
       )
-        div.m-2.p-4.text-4.transition-all(class='bg-[#50d71e] hover:bg-[#50df1e] cursor-[url(https://cdn.custom-cursor.com/db/5388/32/tree-felling-cursor-b.png),_pointer]')
+        div.p-4.text-4.transition-all(class='bg-[#50d71e] hover:bg-[#50df1e] cursor-[url(https://cdn.custom-cursor.com/db/5388/32/tree-felling-cursor-b.png),_pointer]')
           | {{item.title}}
-      div(@click="openEditCategory(item)")
-        | Редактировать
+      div.flex.justify-center.w-100
 
+        div.flex.align-center.justify-center.w-48.cursor-pointer(@click="openEditCategory(item)")
+          fa-icon(:icon="['fac', 'edit']")
+        div.flex.align-center.justify-center.w-48.cursor-pointer(@click="showDialog(item)")
+          fa-icon(:icon="['fac', 'remove']")
   div.grid.gap-2.p-2.bg-green-100(class='w-1/2')
     div.text-xl Параметры
     div
@@ -38,6 +40,7 @@ div.grid.gap-2.p-3
   div.p-4
     div.text-base Готовый объект полей
     pre.pt-2 {{fieldsObject}}
+  v-dialog
 </template>
 
 <script>
@@ -112,6 +115,28 @@ div.grid.gap-2.p-3
         if (this.editCategory) await this.$api.updateCategory(sendData)
         else await this.$api.addCategory(sendData)
       },
+      showDialog(category) {
+        const vm = this
+        this.$modal.show('dialog', {
+          title: 'Удаление!',
+          text: `Вы действительно хотите удалить "${category.title}"?`,
+          buttons: [
+            {
+              title: 'Удалить',
+              default: true,
+              handler: () => { vm.removeCategory(category) }
+            },
+            {
+              title: 'Отмена',
+              handler: () => {vm.$modal.hide('dialog')}
+            }
+          ]
+        })
+      },
+      async removeCategory({_id}) {
+        await this.$api.removeCategory(_id)
+        this.$modal.hide('dialog')
+      },
       openEditCategory(category) {
         if (!category) return
         this.editCategory = true
@@ -119,7 +144,8 @@ div.grid.gap-2.p-3
         this.slug = slug
         this.title = title
         this.collectionName = collectionName
-        this.fields = Object.keys(fields)
+        if (!fields) this.fields = []
+        else this.fields = Object.keys(fields)
             .map((fieldName) => {
               return {
                 value: fieldName,

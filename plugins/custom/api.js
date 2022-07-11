@@ -26,8 +26,8 @@ export default (axios) => ({
   editCategory(category) {
     axios.put('/api/admin/categories/edit', category).then(({ data }) => data)
   },
-  removeCategory({id}) {
-    axios.delete('/api/admin/categories/remove', { id }).then(({ data }) => data)
+  removeCategory(id) {
+    axios.delete(`/api/admin/categories/remove/${id}`).then(({ data }) => data)
   },
   getCategoryBySlug(slug) {
     return axios.get(`/api/admin/categories/?slug=${slug}`).then(({ data }) => data)
