@@ -18,7 +18,12 @@ export default (axios) => ({
 
   // admin
   getCategories() {
-    return axios.get(`/api/admin/categories/all`).then(({ data }) => data)
+    return axios.get(`/api/admin/categories/all`, {
+      headers: {
+        'pragma': 'no-cache',
+        'cache-control': 'no-cache'
+      }
+    }).then(({ data }) => data)
   },
   addCategory(category) {
     return axios.post('/api/admin/categories/add', category).then(({ data }) => data)

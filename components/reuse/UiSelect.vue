@@ -14,18 +14,23 @@
      {{ label }}
     </label>
     <fa-icon
-      class="w-48 absolute top-0 right-0 h-50 flex align-center justify-center p-3"
+      class="w-48 absolute top-0 right-0 h-50 flex align-center justify-center p-3 cursor-pointer"
       :icon="['fac', 'chevronDown']"
       @click="showDropDown = true"
     />
     <drop-down
+      class="absolute"
       ref="dropdown"
       animationName="slide-top"
       :show="showDropDown"
       :customStyle="customStyleDropDown"
     >
-      <div class="flex flex-column">
-        <div v-for="item in items" @click="clickItem(item)">
+      <div class="flex flex-col">
+        <div
+          class="p-4 cursor-pointer hover:bg-[#50df1e]"
+          v-for="item in items"
+          @click="clickItem(item)"
+        >
           {{item.title}}
         </div>
       </div>
@@ -91,7 +96,9 @@ export default {
       return this.classes
     },
     customStyleDropDown() {
-      return {}
+      return {
+        right: 50
+      }
     }
   },
   methods: {

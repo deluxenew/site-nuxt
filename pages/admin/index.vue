@@ -47,6 +47,8 @@ div.grid.gap-2.p-3
   import UiInput from "../../components/reuse/UiInput";
   import UiButton from "../../components/reuse/UiButton";
   import UiSelect from "../../components/reuse/UiSelect";
+
+  import {propTypes} from "../../constants/adminItems"
   const propExample = {
     key: "",
     value: ""
@@ -80,13 +82,7 @@ div.grid.gap-2.p-3
         return this.$store.getters["admin/ADMIN_CATEGORIES_ALL"]
       },
       propTypes() {
-        return [
-          { title: "Надпись", value: "string", type: String },
-          { title: "Число", value: "number", type: Number },
-          { title: "Массив", value: "array", type: Array },
-          { title: "Объект", value: "object", type: Object },
-          { title: "Да/Нет", value: "boolean", type: Boolean },
-        ]
+        return [...propTypes]
       },
       fieldsObject() {
         return this.getFieldObject(this.fields)
@@ -98,7 +94,7 @@ div.grid.gap-2.p-3
           const {value, props} = el
           const propsObj = props.reduce((propsList, prop) => {
             const {key: propsKey, value: propsValue} = prop
-            if (!propsList[propsKey]) propsList[propsKey] = this.propTypes.find(({value}) => value === propsValue)?.type
+            if (!propsList[propsKey]) propsList[propsKey] = propsValue
             return propsList
           }, {})
           if (!acc[value]) acc[value] = {...propsObj}
@@ -169,15 +165,6 @@ div.grid.gap-2.p-3
               }
             })
       },
-      async updateCategory() {
-        if (!this.editCategory) return
-        await this.$api.editCategory({
-          title: this.title,
-          slug: this.slug,
-          collectionName: this.collectionName,
-          fields: this.getFieldObject(this.fields)
-        })
-      }
     }
   }
 </script>
