@@ -122,7 +122,7 @@ div.grid.gap-2.p-3
           collectionName: this.collectionName,
           fields: this.fieldsObject
         }
-        if (this.editCategory) await this.$api.updateCategory(sendData)
+        if (this.editCategory) await this.$api.editCategory(sendData)
         else await this.$api.addCategory(sendData)
       },
       showDialog(category) {

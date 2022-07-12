@@ -2,7 +2,6 @@
   <div class="relative flex align-center input-text">
     <input
       v-model="value"
-      :type="type"
       :id="id"
       class="balloon"
       :class="customClasses"
@@ -14,7 +13,11 @@
     <label ref="label" :for="id">
      {{ label }}
     </label>
-    <fa-icon class="w-48 absolute top-0 right-0 h-50 flex align-center justify-center p-3" :icon="['fac', 'chevronDown']" />
+    <fa-icon
+      class="w-48 absolute top-0 right-0 h-50 flex align-center justify-center p-3"
+      :icon="['fac', 'chevronDown']"
+      @click="showDropDown = true"
+    />
     <drop-down
       ref="dropdown"
       animationName="slide-top"
@@ -79,12 +82,16 @@ export default {
   },
   data() {
     return {
-      indent: 0
+      indent: 0,
+      showDropDown:false
     }
   },
   computed: {
     customClasses() {
       return this.classes
+    },
+    customStyleDropDown() {
+      return {}
     }
   },
   methods: {
@@ -100,6 +107,7 @@ export default {
     },
     clickItem({value}) {
       this.$emit("input", value)
+      this.showDropDown = false
     },
   },
   mounted() {
