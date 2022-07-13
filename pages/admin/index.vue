@@ -1,7 +1,7 @@
 <template lang="pug">
 div.grid.gap-2.p-3
   div.title Палень урапвления
-  div.w-100.flex.flex-wrap.gap-4
+  div.w-100.flex.flex-wrap.gap-4.mt-4
     div.item(
       v-for='item in items'
       :key='item.slug'
@@ -18,7 +18,7 @@ div.grid.gap-2.p-3
           fa-icon(:icon="['fac', 'edit']")
         div.flex.align-center.justify-center.w-48.cursor-pointer(@click="showDialog(item)")
           fa-icon(:icon="['fac', 'remove']")
-  div.grid.gap-2.p-2.bg-green-100(class='w-1/2')
+  div.grid.gap-2.p-2.bg-green-100.mt-4(class='w-1/2')
     div.text-xl Параметры
     div
       ui-input.mt-2(v-model='title' label="Название категории" type='text')
@@ -27,16 +27,27 @@ div.grid.gap-2.p-3
     div.text-xl.pt-3 Поля
     div.grid.gap-4.p-2.bg-green-200
       div(v-for='(field, j) in fields' :key='j')
-        ui-input(v-model='field.value' type='text' label='Код поля')
-        div.grid.gap-2.p-2.bg-green-400
+        div.flex
+          ui-input(v-model='field.value' type='text' label='Код поля')
+          div.flex.align-center.justify-center.w-48.cursor-pointer.p-2(
+            @click="removeField({fieldValue: field.value})"
+          )
+            fa-icon(:icon="['fac', 'remove']")
+        div.grid.gap-2.p-2.bg-green-400.mt-2
           div.text-base Свойства
           div.grid.gap-2
             div.grid.gap-2.grid-cols-2(v-for='(prop, i) in field.props' :key='i')
-              ui-select(v-model='prop.key' :items="props" type='text' label='Код свойства')
-              ui-select(v-model='prop.value' :items="getPropVariants(prop.key)" type='text' label='Значение свойства')
+              div
+                ui-select(v-model='prop.key' :items="props" type='text' label='Код')
+              div.flex
+                ui-select(v-model='prop.value' :items="getPropVariants(prop.key)" type='text' label='Значение')
+                div.flex.align-center.justify-center.w-48.cursor-pointer.p-2(
+                  @click="removeProp({fieldValue: field.value, propKey: prop.key})"
+                )
+                  fa-icon(:icon="['fac', 'remove']")
             ui-button(@click='addProp(field)' text="Добавить свойство")
       ui-button(@click='addField(fields)' text="Добавить Поле")
-  ui-button.mt-3(@click='addCategory' text="Добавить категорию")
+  ui-button.mt-3(@click='addCategory' :text="(editCategory ? 'Обновить' : 'Добавить') + ' категорию'")
   div.p-4
     div.text-base Готовый объект полей
     pre.pt-2 {{fieldsObject}}
@@ -85,15 +96,7 @@ div.grid.gap-2.p-3
         return [...props]
       },
       fieldsObject() {
-        return this.getFieldObject(this.fields)
-      }
-    },
-    methods: {
-      getPropVariants(v) {
-        return getPropVariants(v)
-      },
-      getFieldObject(arr) {
-        return arr.reduce((acc, el) => {
+        return this.fields.reduce((acc, el) => {
           const {value, props} = el
           const propsObj = props.reduce((propsList, prop) => {
             const {key: propsKey, value: propsValue} = prop
@@ -103,26 +106,28 @@ div.grid.gap-2.p-3
           if (!acc[value]) acc[value] = {...propsObj}
           return acc
         }, {})
-      },
-      async fetchAllCategories() {
-        await this.$store.dispatch("admin/GET_ADMIN_CATEGORIES_ALL")
+      }
+    },
+    methods: {
+      getPropVariants(v) {
+        return getPropVariants(v)
       },
       addField(arr) {
         arr.push({...fieldExample, props: []})
       },
+      removeField({fieldValue}) {
+        const fieldIdx = this.fields.findIndex(({value}) => value === fieldValue)
+        if (fieldIdx > -1) this.fields.splice(fieldIdx, 1)
+      },
       addProp(field) {
         if (field) field.props.push({...propExample})
       },
-      async addCategory() {
-        if (this.fields && !this.fields.length) return
-        const sendData = {
-          title: this.title,
-          slug: this.slug,
-          collectionName: this.collectionName,
-          fields: this.fieldsObject
+      removeProp({fieldValue, propKey}) {
+        const field = this.fields.find(({value}) => value === fieldValue)
+        if (field && field.props) {
+          const propIdx = field.props.findIndex(({key}) => key === propKey)
+          if (propIdx > -1) field.props.splice(propIdx, 1)
         }
-        if (this.editCategory) await this.$api.editCategory(sendData)
-        else await this.$api.addCategory(sendData)
       },
       showDialog(category) {
         const vm = this
@@ -141,10 +146,6 @@ div.grid.gap-2.p-3
             }
           ]
         })
-      },
-      async removeCategory({_id}) {
-        await this.$api.removeCategory(_id)
-        this.$modal.hide('dialog')
       },
       openEditCategory(category) {
         if (!category) return
@@ -167,6 +168,24 @@ div.grid.gap-2.p-3
                     })
               }
             })
+      },
+      async fetchAllCategories() {
+        await this.$store.dispatch("admin/GET_ADMIN_CATEGORIES_ALL")
+      },
+      async removeCategory({_id}) {
+        await this.$api.removeCategory(_id)
+        this.$modal.hide('dialog')
+      },
+      async addCategory() {
+        if (this.fields && !this.fields.length) return
+        const sendData = {
+          title: this.title,
+          slug: this.slug,
+          collectionName: this.collectionName,
+          fields: this.fieldsObject
+        }
+        if (this.editCategory) await this.$api.editCategory(sendData)
+        else await this.$api.addCategory(sendData)
       },
     }
   }
