@@ -1,4 +1,5 @@
 const CategoryModel = require('../../models/adminModules/categories.model')
+const consola = require('consola')
 
 module.exports.all = async (req, res) => {
   const collections = await CategoryModel.find()
@@ -28,6 +29,7 @@ module.exports.edit = async (req, res) => {
   // logger(res.statusCode)
   const candidate = await CategoryModel.findOneAndReplace({slug: body.slug}, body, {new: true})
   if (candidate) {
+    consola.ready({candidate})
     res.status(201).json(candidate)
   }
 }

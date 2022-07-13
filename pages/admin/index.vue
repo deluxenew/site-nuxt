@@ -32,8 +32,8 @@ div.grid.gap-2.p-3
           div.text-base Свойства
           div.grid.gap-2
             div.grid.gap-2.grid-cols-2(v-for='(prop, i) in field.props' :key='i')
-              ui-input(v-model='prop.key' type='text' label='Код свойства')
-              ui-select(v-model='prop.value' :items="propTypes" type='text' label='Значение свойства')
+              ui-select(v-model='prop.key' :items="props" type='text' label='Код свойства')
+              ui-select(v-model='prop.value' :items="getPropVariants(prop.key)" type='text' label='Значение свойства')
             ui-button(@click='addProp(field)' text="Добавить свойство")
       ui-button(@click='addField(fields)' text="Добавить Поле")
   ui-button.mt-3(@click='addCategory' text="Добавить категорию")
@@ -48,7 +48,7 @@ div.grid.gap-2.p-3
   import UiButton from "../../components/reuse/UiButton";
   import UiSelect from "../../components/reuse/UiSelect";
 
-  import {propTypes} from "../../constants/adminItems"
+  import { props, getPropVariants } from "../../constants/adminItems"
   const propExample = {
     key: "",
     value: ""
@@ -81,14 +81,17 @@ div.grid.gap-2.p-3
       items() {
         return this.$store.getters["admin/ADMIN_CATEGORIES_ALL"]
       },
-      propTypes() {
-        return [...propTypes]
+      props() {
+        return [...props]
       },
       fieldsObject() {
         return this.getFieldObject(this.fields)
       }
     },
     methods: {
+      getPropVariants(v) {
+        return getPropVariants(v)
+      },
       getFieldObject(arr) {
         return arr.reduce((acc, el) => {
           const {value, props} = el

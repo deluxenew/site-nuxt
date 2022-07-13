@@ -1,6 +1,6 @@
 const { Schema, model, models } = require('mongoose')
 const consola = require('consola')
-const { getPropType } =  require('../../../constants/adminItems')
+const { getPropValue, getPropName } =  require('../../../constants/adminItems')
 
 const dynamicCategory = async function(route) {
   const shortCategory = await models.Category.findOne({slug: route})
@@ -9,9 +9,9 @@ const dynamicCategory = async function(route) {
     // consola.ready({fields})
     if (!collectionName) return null
     if (fields) {
-      for (let i in fields) {
-        for (let p in fields[i]) {
-          fields[i][p] = getPropType(fields[i][p])
+      for (let field in fields) {
+        for (let p in fields[field]) {
+          fields[field][p] = getPropValue(p, fields[field][p])
         }
       }
       consola.ready({fields})
