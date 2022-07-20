@@ -4,6 +4,9 @@
     {{category}}
     <div>
       <div>
+        <category-item-fields
+          :fields="category && category.fields"
+        />
         <input
           class="outline"
           v-model="title"
@@ -21,13 +24,18 @@
 <!--          Получить всех-->
 <!--        </button>-->
       </div>
+      <CategoryItemFields
+        :fields="category && category.fields"
+      />
     </div>
   </div>
 </template>
 
 <script>
+  import CategoryItemFields from "../../components/forms/CategoryItemFields";
   export default {
     name: "AdminPageView",
+    components: {CategoryItemFields},
     layout: "admin",
     fetchOnServer: false,
     fetchDelay: 0,

@@ -1,24 +1,16 @@
 const propTypes = [
-  { title: "Надпись", value: "string", type: String },
-  { title: "Число", value: "number", type: Number },
-  { title: "Массив", value: "array", type: Array },
-  { title: "Объект", value: "object", type: Object },
-  { title: "Да/Нет", value: "boolean", type: Boolean },
-  { title: "Дата", value: "date", type: Date },
+  { title: "Надпись", value: "string", type: String, defaultValue: "" },
+  { title: "Число", value: "number", type: Number, defaultValue: 0 },
+  { title: "Массив", value: "array", type: Array, defaultValue: [] },
+  { title: "Объект", value: "object", type: Object, defaultValue: {} },
+  { title: "Да/Нет", value: "boolean", type: Boolean, defaultValue: false},
+  { title: "Дата", value: "date", type: Date, defaultValue: Date.now },
+  { title: "Функция", value: "function", type: Function, defaultValue: () => {} },
 ]
 
 const booleanVariants = [
   { title: "Да", value: "true", type: true },
   { title: "Нет", value: "false", type: false }
-]
-
-const defaultVariants = [
-  { title: "Текущая дата", value: "dateNow", type: Date.now },
-  { title: "Функция", value: "function", type: () => {} },
-  { title: "Пустой объект", value: "object", type: () => {} },
-  { title: "Пустой массив", value: "array", type: () => [] },
-  { title: "Пустая строка", value: "string", type: "" },
-  { title: "Число 0", value: "number", type: 0 },
 ]
 
 const props = [
@@ -39,10 +31,26 @@ const props = [
   },
   {
     title: "По умолчанию", value: "default", variants: [
-      ...defaultVariants
+      ...propTypes.map((el) => {
+        return {
+          ...el,
+          type: el.defaultValue
+        }
+      })
     ]
   }
 ]
+
+const componentNamesByType = {
+  string: "UiInput",
+  array: 'UiItems'
+}
+
+const getPropVariants = (v) => {
+  const findProp = props.find(({value}) => value === v)
+  if (findProp) return findProp.variants
+  return null
+}
 
 module.exports.props = [
   ...props
@@ -61,8 +69,16 @@ module.exports.getPropValue = (key, v) => {
   return null
 }
 
-module.exports.getPropVariants = (v) => {
-  const findProp = props.find(({value}) => value === v)
-  if (findProp) return findProp.variants
-  return null
+module.exports.getPropVariants = (v) => getPropVariants(v)
+
+
+module.exports.getComponentNameByFieldType = (type) => {
+  return componentNamesByType[type]
+}
+
+module.exports.getDefaultFieldValue = (key, v) => {
+  const findProp = props.find(({value}) => value === key)
+  if (findProp && findProp.variants) {
+    return findProp.variants.find(({value}) => value === v)
+  }
 }
