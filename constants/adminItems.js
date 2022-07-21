@@ -38,7 +38,29 @@ const props = [
         }
       })
     ]
-  }
+  },
+  {
+    title: "Индекс", value: "index", variants: [
+      ...booleanVariants,
+    ]
+  },
+  {
+    title: "Ссылка на поле модели", value: "ref", variants: [
+      { title: "Функция", value: "function", type: Function, defaultValue: () => {} },
+      { title: "Надпись", value: "string", type: String, defaultValue: "" },
+    ]
+  },
+  {
+    title: "Иммутабельность", value: "immutable", variants: [
+      ...booleanVariants
+    ]
+  },
+  {
+    title: "Выдавать в запросах поиска", value: "select", variants: [
+      ...booleanVariants
+    ]
+  },
+
 ]
 
 const componentNamesByType = {

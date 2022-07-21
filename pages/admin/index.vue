@@ -1,6 +1,12 @@
 <template lang="pug">
 div.grid.gap-2.p-3
   div.title Палень урапвления
+  div.p-2 Показываем категории со статическими данными
+    div.flex
+      div.p-4.cursor-pointer(:class="{'bg-[#00ff00]': showStaticCategories}" @click="showStaticCategories = true")
+        | Да
+      div.p-4.cursor-pointer(:class="{'bg-[#ff0000]': !showStaticCategories}" @click="showStaticCategories = false")
+        | Нет
   div.w-100.flex.flex-wrap.gap-4.mt-4
     div.item(
       v-for='item in items'
@@ -24,6 +30,13 @@ div.grid.gap-2.p-3
       ui-input.mt-2(v-model='title' label="Название категории" type='text')
       ui-input.mt-2(v-model='slug' label="Код категории" type='text')
       ui-input.mt-2(v-model='collectionName' label="Код модели" type='text')
+      ui-select.mt-2(v-model='parent' :items="staticCategoriesList" label="Родительсткая категория")
+      div.p-2 Статические данные?
+      div.flex
+        div.p-4.cursor-pointer(:class="{'bg-[#00ff00]': isStaticValues}" @click="isStaticValues = true")
+          | Да
+        div.p-4.cursor-pointer(:class="{'bg-[#ff0000]': !isStaticValues}" @click="isStaticValues = false")
+          | Нет
     div.text-xl.pt-3 Поля
     div.grid.gap-4.p-2.bg-green-200
       div(v-for='(field, j) in fields' :key='j')
@@ -80,9 +93,12 @@ div.grid.gap-2.p-3
       return {
         title: "",
         slug: "",
+        parent: '',
+        isStaticValues: false,
         collectionName: "",
         fields: [],
-        editCategory: false
+        editCategory: false,
+        showStaticCategories: false
       }
     },
     async fetch() {
@@ -91,6 +107,18 @@ div.grid.gap-2.p-3
     computed: {
       items() {
         return this.$store.getters["admin/ADMIN_CATEGORIES_ALL"]
+            .filter(({isStaticValues}) => (!isStaticValues && !this.showStaticCategories) || this.showStaticCategories) || []
+      },
+      staticCategoriesList() {
+        return this.items
+            .filter(({isStaticValues}) => isStaticValues)
+            .map((el) => {
+          return {
+            id: el._id,
+            title: el.title,
+            value: el.slug,
+          }
+        })
       },
       props() {
         return [...props]
@@ -150,10 +178,12 @@ div.grid.gap-2.p-3
       openEditCategory(category) {
         if (!category) return
         this.editCategory = true
-        const {slug, title, collectionName, fields} = category
+        const {slug, title, collectionName, isStaticValues, parent, fields} = category
         this.slug = slug
         this.title = title
         this.collectionName = collectionName
+        this.parent = parent
+        this.isStaticValues = isStaticValues
         if (!fields) this.fields = []
         else this.fields = Object.keys(fields)
             .map((fieldName) => {
@@ -181,6 +211,8 @@ div.grid.gap-2.p-3
         const sendData = {
           title: this.title,
           slug: this.slug,
+          parent: this.parent,
+          isStaticValues: this.isStaticValues,
           collectionName: this.collectionName,
           fields: this.fieldsObject
         }

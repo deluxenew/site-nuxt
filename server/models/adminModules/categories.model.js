@@ -13,6 +13,13 @@ const categorySchema = new Schema({
   },
   parent: {
     type: String,
+    unique: false,
+    required: false,
+  },
+  isStaticValues: {
+    type: Boolean,
+    required: true,
+    default: false
   },
   collectionName: {
     type: String,
@@ -21,6 +28,7 @@ const categorySchema = new Schema({
   },
   fields: {
     type: Object,
+    required: false
   }
 })
 
