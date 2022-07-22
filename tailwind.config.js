@@ -4,8 +4,6 @@ module.exports = {
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
   ],
   theme: {
     screens: {
@@ -33,9 +31,12 @@ module.exports = {
         "0": "0px",
       },
       width: {
-        "0": "0px",
         "48": "48px",
-        "16": "16px"
+        "24": "24px",
+        "16": "16px",
+        "0": "0px",
+        "50": "50%",
+        "25": "25%"
       },
       height: {
         "48": "48px",

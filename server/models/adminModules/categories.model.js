@@ -26,6 +26,12 @@ const categorySchema = new Schema({
     unique: true,
     required: true
   },
+  minAccessLevel: {
+    type: Number,
+    required: true,
+    unique: false,
+    default: 0
+  },
   fields: {
     type: Object,
     required: false

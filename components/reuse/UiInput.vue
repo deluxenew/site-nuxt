@@ -22,7 +22,7 @@ export default {
   name: "UiInput",
   props: {
     value: {
-      type: String,
+      type: [String, Number],
       default: '',
     },
     id: {

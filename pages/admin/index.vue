@@ -31,6 +31,7 @@ div.grid.gap-2.p-3
       ui-input.mt-2(v-model='slug' label="Код категории" type='text')
       ui-input.mt-2(v-model='collectionName' label="Код модели" type='text')
       ui-select.mt-2(v-model='parent' :items="staticCategoriesList" label="Родительсткая категория")
+      ui-select.mt-2(v-model='minAccessLevel' :items="accessLevels" label="Уровень доступа")
       div.p-2 Статические данные?
       div.flex
         div.p-4.cursor-pointer(:class="{'bg-[#00ff00]': isStaticValues}" @click="isStaticValues = true")
@@ -96,6 +97,7 @@ div.grid.gap-2.p-3
         parent: '',
         isStaticValues: false,
         collectionName: "",
+        minAccessLevel: 0,
         fields: [],
         editCategory: false,
         showStaticCategories: false
@@ -103,6 +105,7 @@ div.grid.gap-2.p-3
     },
     async fetch() {
       await this.fetchAllCategories()
+      await this.fetchAllUserRoles()
     },
     computed: {
       items() {
@@ -111,7 +114,7 @@ div.grid.gap-2.p-3
       },
       staticCategoriesList() {
         return this.items
-            .filter(({isStaticValues}) => isStaticValues)
+            .filter(({isStaticValues}) => !isStaticValues)
             .map((el) => {
           return {
             id: el._id,
@@ -134,6 +137,17 @@ div.grid.gap-2.p-3
           if (!acc[value]) acc[value] = {...propsObj}
           return acc
         }, {})
+      },
+      userRoles() {
+        return this.$store.getters["users/USER_ROLES"] || []
+      },
+      accessLevels() {
+        return this.userRoles.map((el) => {
+          return {
+            ...el,
+            value: el.accessLevel
+          }
+        })
       }
     },
     methods: {
@@ -178,12 +192,13 @@ div.grid.gap-2.p-3
       openEditCategory(category) {
         if (!category) return
         this.editCategory = true
-        const {slug, title, collectionName, isStaticValues, parent, fields} = category
+        const {slug, title, collectionName, minAccessLevel, isStaticValues, parent, fields} = category
         this.slug = slug
         this.title = title
         this.collectionName = collectionName
         this.parent = parent
         this.isStaticValues = isStaticValues
+        this.minAccessLevel = minAccessLevel
         if (!fields) this.fields = []
         else this.fields = Object.keys(fields)
             .map((fieldName) => {
@@ -202,6 +217,9 @@ div.grid.gap-2.p-3
       async fetchAllCategories() {
         await this.$store.dispatch("admin/GET_ADMIN_CATEGORIES_ALL")
       },
+      async fetchAllUserRoles() {
+        await this.$store.dispatch("users/GET_USER_ROLES")
+      },
       async removeCategory({_id}) {
         await this.$api.removeCategory(_id)
         this.$modal.hide('dialog')
@@ -214,6 +232,7 @@ div.grid.gap-2.p-3
           parent: this.parent,
           isStaticValues: this.isStaticValues,
           collectionName: this.collectionName,
+          minAccessLevel: this.minAccessLevel,
           fields: this.fieldsObject
         }
         if (this.editCategory) await this.$api.editCategory(sendData)

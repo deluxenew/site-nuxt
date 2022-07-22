@@ -58,6 +58,9 @@ export default (axios) => ({
   },
 
   //admin users
+  getUserRoles() {
+    return axios.get(`/api/admin/category/roles/all`).then(({ data }) => data)
+  },
   getUsers() {
     return axios.get(`/api/admin/users/all`).then(({ data }) => data)
   },

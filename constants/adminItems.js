@@ -65,7 +65,9 @@ const props = [
 
 const componentNamesByType = {
   string: "UiInput",
-  array: 'UiItems'
+  array: 'UiItems',
+  number: "UiInput",
+  boolean: "UiCheckbox",
 }
 
 const getPropVariants = (v) => {

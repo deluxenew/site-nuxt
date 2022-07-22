@@ -1,5 +1,6 @@
 export const state = () => ({
   categories: [],
+
 })
 
 export const actions = {
