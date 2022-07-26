@@ -6,7 +6,7 @@ div.grid.gap-2.p-2.bg-green-100
       v-model="field.value"
       v-bind="field"
       @input="inputHandler"
-      :key="field.value"
+      :key="field.fieldName"
     )
 </template>
 
@@ -26,6 +26,7 @@ div.grid.gap-2.p-2.bg-green-100
     },
     components: {
       UiInput: () => import("../../components/reuse/UiInput"),
+      UiInputNumber: () => import("../../components/reuse/UiInputNumber"),
       UiItems: () => import("../../components/reuse/UiItems"),
       UiCheckbox: () => import("../../components/reuse/UiCheckbox"),
     },

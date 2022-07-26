@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex align-center input-text">
+  <div ref="select" class="relative flex align-center input-text">
     <input
       v-model="value"
       :id="id"
@@ -45,8 +45,8 @@ export default {
   components: {DropDown},
   props: {
     value: {
-      type: String,
-      default: '',
+      type: [String, Number],
+      default: '' || 0,
     },
     items: {
       type: Array,
@@ -116,9 +116,16 @@ export default {
       this.$emit("input", value)
       this.showDropDown = false
     },
+    setOutsideClick(e) {
+      if (!this.$refs.select.contains(e.target)) this.showDropDown = false
+    },
   },
   mounted() {
     this.init()
+   window.addEventListener("click", this.setOutsideClick)
+  },
+  beforeDestroy() {
+    window.removeEventListener("click", this.setOutsideClick)
   }
 }
 </script>

@@ -44,3 +44,24 @@ module.exports.edit = async (req, res) => {
     await Model.update({slug: body.slug, obj})
   }
 }
+
+module.exports.edit = async (req, res) => {
+  const {body} = req
+  // logger(res.statusCode)
+  const Model = await getModelByReqSlug(req)
+  const candidate = await Model.findOneAndReplace({slug: body.slug}, body, {new: true})
+  if (candidate) {
+    consola.ready({candidate})
+    res.status(201).json(candidate)
+  }
+}
+
+module.exports.remove = async (req, res) => {
+  const {params: { id: _id } } = req
+  // logger(res.statusCode)
+  const Model = await getModelByReqSlug(req)
+  const complete = await Model.deleteOne({_id: _id})
+  if (complete) {
+    res.status(201).json(complete)
+  }
+}

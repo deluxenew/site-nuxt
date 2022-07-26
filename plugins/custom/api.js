@@ -48,6 +48,9 @@ export default (axios) => ({
   addCategoryItem({item, route}) {
     return axios.post(`/api/admin/category/${route}/add`, item).then(({ data }) => data)
   },
+  removeCategoryItem(route, id) {
+    axios.delete(`/api/admin/category/${route}/remove/${id}`).then(({ data }) => data)
+  },
 
   // admin pages
   getPages() {

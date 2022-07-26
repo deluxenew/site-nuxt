@@ -66,7 +66,7 @@ const props = [
 const componentNamesByType = {
   string: "UiInput",
   array: 'UiItems',
-  number: "UiInput",
+  number: "UiInputNumber",
   boolean: "UiCheckbox",
 }
 

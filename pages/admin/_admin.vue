@@ -1,23 +1,33 @@
 <template lang="pug">
 div.wrapper
-  div.title {{categoryName}}
+  div.title.flex
+    | {{categoryName}}
+    div.p-2.text-base.cursor-pointer(@click="showForm")
+      | Добавить элемент
 
   div.flex.w-100.align-center.justify-center
-    div.p-1.cursor-pointer(v-for="item in category.items" :key="item._id" @click="clickItem(item)")
+    div.p-1.cursor-pointer(v-for="item in category.items" :key="item._id")
       div.p-4.bg-green-300
-        | {{item.title}}
-  div
-    div
-      category-item-fields(v-model="fieldsValues" :fields='category && category.fields')
-      ui-button(
-        text="Добавить"
-        @click="addItem"
-      )
+        | {{item.title || item.name}}
+      div.flex.justify-center.w-100
+
+        div.flex.align-center.justify-center.w-48.cursor-pointer(@click="clickItem(item)")
+          fa-icon(:icon="['fac', 'edit']")
+        div.flex.align-center.justify-center.w-48.cursor-pointer(@click="showDialog(item)")
+          fa-icon(:icon="['fac', 'remove']")
+  div(v-if="fieldsValues")
+    category-item-fields(v-model="fieldsValues" :fields='category && category.fields')
+    ui-button(
+      text="Добавить"
+      @click="addItem"
+    )
+  v-dialog
 </template>
 
 <script>
   import CategoryItemFields from "../../components/forms/CategoryItemFields";
   import UiButton from "../../components/reuse/UiButton";
+
   export default {
     name: "AdminPageView",
     components: {UiButton, CategoryItemFields},
@@ -26,9 +36,7 @@ div.wrapper
     fetchDelay: 0,
     data() {
       return {
-        title: "",
-        slug: "",
-        fieldsValues: {}
+        fieldsValues: null
       }
     },
     computed: {
@@ -43,7 +51,7 @@ div.wrapper
       },
       items() {
         return this.category && this.category.items
-      }
+      },
     },
     async fetch() {
       await this.getCategoryFull()
@@ -52,12 +60,37 @@ div.wrapper
       clickItem(item) {
         this.fieldsValues = item
       },
+      showForm() {
+        this.fieldsValues = {}
+      },
       async getCategoryFull() {
         await this.$store.dispatch(`admin/GET_CATEGORY`, { route: this.route })
       },
       async addItem() {
         await this.$store.dispatch(`admin/ADD_CATEGORY_ITEM`, {item: this.fieldsValues, route: this.route })
-      }
+      },
+      showDialog(item) {
+        const vm = this
+        this.$modal.show('dialog', {
+          title: 'Удаление!',
+          text: `Вы действительно хотите удалить "${item.title}"?`,
+          buttons: [
+            {
+              title: 'Удалить',
+              default: true,
+              handler: () => { vm.removeItem(item) }
+            },
+            {
+              title: 'Отмена',
+              handler: () => {vm.$modal.hide('dialog')}
+            }
+          ]
+        })
+      },
+      async removeItem({_id}) {
+        await this.$api.removeCategoryItem(this.route, _id)
+        this.$modal.hide('dialog')
+      },
     }
   }
 </script>

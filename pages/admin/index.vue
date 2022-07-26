@@ -1,12 +1,8 @@
 <template lang="pug">
 div.grid.gap-2.p-3
   div.title Палень урапвления
-  div.p-2 Показываем категории со статическими данными
-    div.flex
-      div.p-4.cursor-pointer(:class="{'bg-[#00ff00]': showStaticCategories}" @click="showStaticCategories = true")
-        | Да
-      div.p-4.cursor-pointer(:class="{'bg-[#ff0000]': !showStaticCategories}" @click="showStaticCategories = false")
-        | Нет
+  div.p-2
+    ui-checkbox(v-model="showStaticCategories" label="Показываем категории со статическими данными")
   div.w-100.flex.flex-wrap.gap-4.mt-4
     div.item(
       v-for='item in items'
@@ -32,12 +28,8 @@ div.grid.gap-2.p-3
       ui-input.mt-2(v-model='collectionName' label="Код модели" type='text')
       ui-select.mt-2(v-model='parent' :items="staticCategoriesList" label="Родительсткая категория")
       ui-select.mt-2(v-model='minAccessLevel' :items="accessLevels" label="Уровень доступа")
-      div.p-2 Статические данные?
-      div.flex
-        div.p-4.cursor-pointer(:class="{'bg-[#00ff00]': isStaticValues}" @click="isStaticValues = true")
-          | Да
-        div.p-4.cursor-pointer(:class="{'bg-[#ff0000]': !isStaticValues}" @click="isStaticValues = false")
-          | Нет
+      div.p-2
+        ui-checkbox(v-model="isStaticValues" label="Статические данные?")
     div.text-xl.pt-3 Поля
     div.grid.gap-4.p-2.bg-green-200
       div(v-for='(field, j) in fields' :key='j')
@@ -74,6 +66,7 @@ div.grid.gap-2.p-3
   import UiSelect from "../../components/reuse/UiSelect";
 
   import { props, getPropVariants } from "../../constants/adminItems"
+  import UiCheckbox from "../../components/reuse/UiCheckbox";
   const propExample = {
     key: "",
     value: ""
@@ -85,7 +78,7 @@ div.grid.gap-2.p-3
   }
 
   export default {
-    components: {UiSelect, UiButton, UiInput},
+    components: {UiCheckbox, UiSelect, UiButton, UiInput},
     layout: "admin",
     name: "index",
     fetchOnServer: false,
