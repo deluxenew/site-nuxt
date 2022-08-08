@@ -15,7 +15,7 @@ div.wrapper
           fa-icon(:icon="['fac', 'edit']")
         div.flex.align-center.justify-center.w-48.cursor-pointer(@click="showDialog(item)")
           fa-icon(:icon="['fac', 'remove']")
-  div(v-if="fieldsValues")
+  div(v-show="fieldsValues")
     category-item-fields(v-model="fieldsValues" :fields='category && category.fields')
     ui-button(
       text="Добавить"

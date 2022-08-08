@@ -80,6 +80,11 @@ export default {
       return this.classes
     }
   },
+  watch: {
+    value() {
+      this.indent = this.$refs.label.clientWidth
+    },
+  },
   methods: {
     blur() {
       this.init()

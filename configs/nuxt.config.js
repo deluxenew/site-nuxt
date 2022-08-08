@@ -193,6 +193,15 @@ module.exports = {
         },
       },
     }),
+    // extend(config, ctx) {
+    //   // const pugRule = config.module.rule('pug');
+    //   // pugRule.uses.clear();
+    //   // pugRule.oneOfs.clear();
+    //   config.module.rules.push({
+    //     test: /\.pug$/,
+    //     loader: '@webdiscus/pug-loader',
+    //   })
+    // }
   },
   pwa: {
     manifest: {
