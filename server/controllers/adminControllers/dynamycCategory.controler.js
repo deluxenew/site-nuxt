@@ -51,7 +51,7 @@ module.exports.edit = async (req, res) => {
   const Model = await getModelByReqSlug(req)
   const candidate = await Model.findOneAndReplace({slug: body.slug}, body, {new: true})
   if (candidate) {
-    consola.ready({candidate})
+    // consola.ready({candidate})
     res.status(201).json(candidate)
   }
 }

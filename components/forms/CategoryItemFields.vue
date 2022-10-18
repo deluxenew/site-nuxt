@@ -8,10 +8,12 @@ div.grid.gap-2.p-2.bg-green-100
       @input="inputHandler"
       :key="field.fieldName"
     )
+
 </template>
 
 <script>
   import { getComponentNameByFieldType, getDefaultFieldValue } from "../../constants/adminItems"
+
   export default {
     name: "CategoryItemFields",
     props: {
@@ -25,6 +27,7 @@ div.grid.gap-2.p-2.bg-green-100
       }
     },
     components: {
+      UiButton: () => import("../../components/reuse/UiButton"),
       UiInput: () => import("../../components/reuse/UiInput"),
       UiInputNumber: () => import("../../components/reuse/UiInputNumber"),
       UiItems: () => import("../../components/reuse/UiItems"),
@@ -75,7 +78,7 @@ div.grid.gap-2.p-2.bg-green-100
                 fieldName
               }
             })
-      }
+      },
     }
   }
 </script>

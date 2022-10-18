@@ -1,4 +1,6 @@
 const User = require('../models/user.model')
+// const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
+// const User = getDynamicModelFields("users")
 const excludedFields = ['tokens', 'password', '__v', '_id']
 const { omit } = require('../common/helper')
 

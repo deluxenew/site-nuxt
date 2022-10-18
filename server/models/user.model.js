@@ -17,7 +17,11 @@ const userSchema = new Schema({
   tokens: {
     type: Array,
     default: () => []
-  }
+  },
+  accessLevel: {
+    type: Number,
+    default: 0,
+  },
 })
 
 module.exports = model('User', userSchema)

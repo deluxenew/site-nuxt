@@ -21,6 +21,7 @@ div.wrapper
       text="Добавить"
       @click="addItem"
     )
+    ui-button(@click="save" text="Сохранить")
   v-dialog
 </template>
 
@@ -47,10 +48,10 @@ div.wrapper
         return this.$store.getters[`admin/CATEGORY`](this.route) || {}
       },
       categoryName() {
-        return this.category && this.category.title || ""
+        return this.category.title || ""
       },
       items() {
-        return this.category && this.category.items
+        return this.category.items || []
       },
     },
     async fetch() {
@@ -68,6 +69,9 @@ div.wrapper
       },
       async addItem() {
         await this.$store.dispatch(`admin/ADD_CATEGORY_ITEM`, {item: this.fieldsValues, route: this.route })
+      },
+      async save() {
+        await this.$store.dispatch(`admin/EDIT_CATEGORY_ITEM`, {item: this.fieldsValues, route: this.route })
       },
       showDialog(item) {
         const vm = this
