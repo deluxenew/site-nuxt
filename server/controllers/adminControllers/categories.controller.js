@@ -29,7 +29,7 @@ module.exports.edit = async (req, res) => {
   // logger(res.statusCode)
   const candidate = await CategoryModel.findOneAndReplace({slug: body.slug}, body, {new: true})
   if (candidate) {
-    consola.ready({candidate})
+    // consola.ready({candidate})
     res.status(201).json(candidate)
   }
 }

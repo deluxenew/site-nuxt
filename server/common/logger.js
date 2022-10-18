@@ -7,7 +7,7 @@ const trowUnnamedError = () => {
 }
 
 const setLog = (code, category) => {
-  consola.ready(`${code}, ${response[category]["code_" + code]}`)
+  // consola.ready(`${code}, ${response[category]["code_" + code]}`)
   if (process.env.COMMON_LOGS_ENV) consola.ready(`${code}, ${response[category]}`)
 }
 

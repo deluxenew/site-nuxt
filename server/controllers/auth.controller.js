@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
-const {omit, isTokenValid} = require('../common/helper')
+const { omit, isTokenValid } = require('../common/helper')
 
 const excludedFields = ['tokens', 'password', '__v', '_id']
+
+const TOKEN_KEY = process.env.TOKEN_KEY
 
 module.exports.me = async (req, res) => {
   const rawToken = req.header("Authorization")
@@ -34,7 +36,7 @@ module.exports.login = async (req, res) => {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, 'str123scan', {expiresIn: 60 * 60})
+      }, TOKEN_KEY, {expiresIn: 60 * 60})
 
       const headerUserAgent = req.headers["user-agent"]
 
@@ -42,7 +44,7 @@ module.exports.login = async (req, res) => {
         login: candidate.login,
         userId: candidate._id,
         userAgent: headerUserAgent
-      }, 'str123scan', {expiresIn: 60 * 60})
+      }, TOKEN_KEY, {expiresIn: 60 * 60})
 
       const findUserAgent = tokens.find(({userAgent}) => userAgent === headerUserAgent)
       if (!findUserAgent) {

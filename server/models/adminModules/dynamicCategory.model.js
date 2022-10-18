@@ -4,7 +4,9 @@ const { getPropValue, getPropName } =  require('../../../constants/adminItems')
 
 const dynamicCategory = async function(route) {
   const shortCategory = await models.Category.findOne({slug: route})
+
   if (shortCategory) {
+    consola.ready({shortCategory})
     const {fields, collectionName} = shortCategory
     // consola.ready({fields})
     if (!collectionName) return null

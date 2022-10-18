@@ -8,7 +8,7 @@ div.grid.gap-2
         ui-button(@click="remove(item)" text="Удалить")
         ui-button(@click="add" text="Добавить")
         ui-button(@click="edit(item)" text="Редактировать")
-  ui-button(@click="save" text="Сохранить")
+
 </template>
 
 <script>
@@ -45,7 +45,7 @@ div.grid.gap-2
       edit(item) {
         this.$emit("edit", item)
       },
-      save() {
+      async save() {
 
       }
     }

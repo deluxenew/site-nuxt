@@ -25,7 +25,12 @@ export const actions = {
     const categoryItem = await this.$api.addCategoryItem({item, route})
     if (categoryItem) {
       commit("SET_CATEGORY_ITEM", {item: categoryItem, route})
-
+    }
+  },
+  async EDIT_CATEGORY_ITEM({commit}, {item, route}) {
+    const categoryItem = await this.$api.editCategoryItem({item, route})
+    if (categoryItem) {
+      commit("SET_CATEGORY_ITEM", {item: categoryItem, route})
     }
   }
 }
