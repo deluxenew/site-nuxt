@@ -21,7 +21,6 @@ const userSchema = new Schema({
   accessLevel: {
     type: Number,
     default: 0,
-    required: true
   },
 })
 

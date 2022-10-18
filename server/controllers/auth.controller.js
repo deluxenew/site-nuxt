@@ -5,12 +5,10 @@ const { omit, isTokenValid } = require('../common/helper')
 
 const excludedFields = ['tokens', 'password', '__v', '_id']
 
-const TOKEN_KEY = process.env.TOKEN_KEY
-
 module.exports.me = async (req, res) => {
   const rawToken = req.header("Authorization")
   const token = rawToken.replace("Bearer ", "");
-  const {userId} = jwt.verify(token, process.env.TOKEN_KEY);
+  const {userId} = jwt.verify(token, "str123scan");
   console.log({userId})
   const candidate = await User.findOne({'_id': userId})
 
@@ -36,7 +34,7 @@ module.exports.login = async (req, res) => {
       const token = jwt.sign({
         login: candidate.login,
         userId: candidate._id
-      }, TOKEN_KEY, {expiresIn: 60 * 60})
+      }, "str123scan", {expiresIn: 60 * 60})
 
       const headerUserAgent = req.headers["user-agent"]
 
@@ -44,7 +42,7 @@ module.exports.login = async (req, res) => {
         login: candidate.login,
         userId: candidate._id,
         userAgent: headerUserAgent
-      }, TOKEN_KEY, {expiresIn: 60 * 60})
+      }, "str123scan", {expiresIn: 60 * 60})
 
       const findUserAgent = tokens.find(({userAgent}) => userAgent === headerUserAgent)
       if (!findUserAgent) {

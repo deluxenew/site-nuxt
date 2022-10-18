@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-// const User = require("../models/user.model");
-const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
-const User = getDynamicModelFields("users")
+const User = require("../models/user.model");
+// const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
+// const User = getDynamicModelFields("users")
 
 const auth = async (req, res, next) => {
   try {

@@ -24,6 +24,10 @@ const dynamicCategory = async function(route) {
 }
 
 module.exports.categories = models.Category || dynamicCategory("categories")
+module.exports.pages = models.Page || dynamicCategory("pages")
+module.exports.users = models.User || dynamicCategory("users")
+module.exports.services = models.Service || dynamicCategory("services")
+
 
 module.exports.getDynamicModelFields = (route) => dynamicCategory(route)
 
