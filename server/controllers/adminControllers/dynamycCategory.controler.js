@@ -33,20 +33,6 @@ module.exports.add = async (req, res) => {
 
 module.exports.edit = async (req, res) => {
   const {body} = req
-  logger(res.statusCode)
-  const Model = await getModelByReqSlug(req)
-  const candidate = await Model.findOne({slug: body.slug})
-  if (candidate) {
-    const obj = {...candidate}
-    for (let i in body) {
-      obj[i] = body[i]
-    }
-    await Model.update({slug: body.slug, obj})
-  }
-}
-
-module.exports.edit = async (req, res) => {
-  const {body} = req
   // logger(res.statusCode)
   const Model = await getModelByReqSlug(req)
   const candidate = await Model.findOneAndReplace({slug: body.slug}, body, {new: true})
