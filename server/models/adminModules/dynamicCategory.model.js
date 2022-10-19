@@ -3,6 +3,7 @@ const consola = require('consola')
 const { getPropValue, getPropName } =  require('../../../constants/adminItems')
 
 const dynamicCategory = async function(route) {
+  consola.ready({route})
   const shortCategory = await models.Category.findOne({slug: route})
 
   if (shortCategory) {
@@ -23,11 +24,7 @@ const dynamicCategory = async function(route) {
   }
 }
 
-module.exports.categories = models.Category || dynamicCategory("categories")
-module.exports.pages = models.Page || dynamicCategory("pages")
-module.exports.users = models.User || dynamicCategory("users")
-module.exports.services = models.Service || dynamicCategory("services")
+module.exports.categories = async () => models.Category || await dynamicCategory("categories")
 
-
-module.exports.getDynamicModelFields = (route) => dynamicCategory(route)
+module.exports.getDynamicModelFields = async (route) => models[route] || await dynamicCategory(route)
 

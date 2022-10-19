@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
-const User = require('../models/user.model')
+const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
 const { omit, isTokenValid } = require('../common/helper')
 
 const excludedFields = ['tokens', 'password', '__v', '_id']
 
 module.exports.me = async (req, res) => {
+  const User = await getDynamicModelFields("users")
+  if (!User) return
   const rawToken = req.header("Authorization")
   const token = rawToken.replace("Bearer ", "");
   const {userId} = jwt.verify(token, "str123scan");
@@ -25,6 +27,8 @@ module.exports.me = async (req, res) => {
 }
 
 module.exports.login = async (req, res) => {
+  const User = await getDynamicModelFields("users")
+  if (!User) return
   const candidate = await User.findOne({login: req.body.login})
 
   if (candidate) {
@@ -72,6 +76,8 @@ module.exports.login = async (req, res) => {
 
 module.exports.logoutAll = async (req, res) => {
   // console.log(req)
+  const User = await getDynamicModelFields("users")
+  if (!User) return
   const {user: {login}} = req
 
   const findUser = await User.findOne({login})
@@ -90,6 +96,8 @@ module.exports.logoutAll = async (req, res) => {
 }
 
 module.exports.logout = async (req, res) => {
+  const User = await getDynamicModelFields("users")
+  if (!User) return
   const {user: {login}, userAgent} = req
   const findUser = await User.findOne({login})
 
@@ -109,6 +117,8 @@ module.exports.logout = async (req, res) => {
 }
 
 module.exports.register = async (req, res) => {
+  const User = await getDynamicModelFields("users")
+  if (!User) return
   const { body: { login, name, password: sendPassword } } = req
   const salt = bcrypt.genSaltSync(10)
   const password = bcrypt.hashSync(sendPassword, salt)

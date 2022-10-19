@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+transition(name="fade" mode="out-in")
   nuxt
 </template>
 

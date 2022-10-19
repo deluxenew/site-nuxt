@@ -1,4 +1,4 @@
-const {resInterceptors} = require('../../common/helper')
+const { resInterceptors } = require('../../common/helper')
 const dynamicCategory = require('../../models/adminModules/dynamicCategory.model')
 const logger = require('../../common/logger')
 

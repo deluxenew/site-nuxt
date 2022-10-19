@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
-// const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
-// const User = getDynamicModelFields("users")
+const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
+
 
 const auth = async (req, res, next) => {
+  const User = await getDynamicModelFields("users")
   try {
+    if (!User) return
     const token = req.header("Authorization").replace("Bearer ", "");
     const { userId } = jwt.verify(token,  process.env.TOKEN_KEY);
     const user = await User.findOne({ '_id': userId });

@@ -1,11 +1,12 @@
-const User = require('../models/user.model')
-// const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
-// const User = getDynamicModelFields("users")
+const { getDynamicModelFields } = require('../models/adminModules/dynamicCategory.model')
+
 const excludedFields = ['tokens', 'password', '__v', '_id']
 const { omit } = require('../common/helper')
 
 
 module.exports.profile = async (req, res) => {
+  const User = await getDynamicModelFields("users")
+  if (!User) return
   const {params: { id: userId } } = req
   const candidate = await User.findOne({'_id': userId})
   if (candidate) {
