@@ -1,5 +1,5 @@
 const jwtDecode = require("jwt-decode");
-
+const logger = require('./logger')
 
 const omit = (obj, props) => {
   const inProps = (key, props) => {
@@ -28,6 +28,7 @@ const isTokenValid = (token) => {
 
 const resInterceptors = (res, body) => {
   const { statusCode } = res
+  logger(statusCode)
   return res.status(statusCode).json(body)
 }
 
