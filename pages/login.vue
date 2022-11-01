@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AuthRegisterModal from "../components/modals/AuthRegisterModal";
+import AuthRegisterModal from "COMPONENTS/modals/AuthRegisterModal";
 
 export default {
   name: "login",

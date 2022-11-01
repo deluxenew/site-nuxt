@@ -3,14 +3,13 @@ const { Nuxt, Builder } = require('nuxt')
 const app = require('./app')
 
 const config = require('../configs/nuxt.config.js')
-config.dev = process.env.NODE_ENV !== 'production'
 
 async function start () {
   const nuxt = new Nuxt(config)
   const { host, port } = nuxt.options.server
 
   await nuxt.ready()
-  if (config.dev) {
+  if (config.isDev) {
     const builder = new Builder(nuxt)
     await builder.build()
   }

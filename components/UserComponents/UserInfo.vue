@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import editField from '~/components/modals/edit/EditField'
+  import editField from 'COMPONENTS/modals/edit/EditField'
 
   export default {
     name: "UserInfo",

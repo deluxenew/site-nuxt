@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import UiInput from "../reuse/UiInput";
+import UiInput from "COMPONENTS/reuse/UiInput";
 
 export default {
   name: "CalcProjectForm",

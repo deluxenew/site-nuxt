@@ -68,9 +68,9 @@
       }
     },
     components: {
-      ModalWrapper: () => import('~/components/modals/ModalWrapper'),
-      UiButton: () => import('~/components/reuse/UiButton'),
-      UiInput: () => import('~/components/reuse/UiInput'),
+      ModalWrapper: () => import('COMPONENTS/modals/ModalWrapper'),
+      UiButton: () => import('COMPONENTS/reuse/UiButton'),
+      UiInput: () => import('COMPONENTS/reuse/UiInput'),
     },
     data() {
       return {

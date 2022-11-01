@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import FooterComponent from "../components/footer/FooterComponent";
-import HeaderComponent from "../components/header/HeaderComponent";
+import FooterComponent from "COMPONENTS/footer/FooterComponent";
+import HeaderComponent from "COMPONENTS/header/HeaderComponent";
 
 export default {
   name: 'noAccess',

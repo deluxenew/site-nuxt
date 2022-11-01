@@ -1,9 +1,9 @@
 export const views = {
   content: {
     components: {
-      // test: () => import('~/components/reuse/test'),
-      WelcomeBlock: () => import ('~/components/viewBoxes/WelcomeBlock'),
-      UserInfo: () => import ('~/components/UserComponents/UserInfo'),
+      // test: () => import('COMPONENTS/reuse/test'),
+      WelcomeBlock: () => import ('COMPONENTS/viewBoxes/WelcomeBlock'),
+      UserInfo: () => import ('COMPONENTS/UserComponents/UserInfo'),
     },
     props: {
 
@@ -11,8 +11,8 @@ export const views = {
   },
   pageTemplates: {
     components: {
-      PageView: () => import ('~/components/views/PageView'),
-      SingleScreen: () => import ('~/components/views/SingleScreen'),
+      PageView: () => import ('COMPONENTS/views/PageView'),
+      SingleScreen: () => import ('COMPONENTS/views/SingleScreen'),
     },
     props: {
 
@@ -20,8 +20,8 @@ export const views = {
   },
   ui: {
     components: {
-      UiBlock: () => import('~/components/reuse/UiBlock'),
-      PageSectionsNavigate: () => import('~/components/reuse/PageSectionsNavigate'),
+      UiBlock: () => import('COMPONENTS/reuse/UiBlock'),
+      PageSectionsNavigate: () => import('COMPONENTS/reuse/PageSectionsNavigate'),
     },
     props: {
 

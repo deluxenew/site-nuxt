@@ -32,8 +32,8 @@
 export default {
   name: "UiForm",
   components: {
-    UiInput: () => import('~/components/reuse/UiInput.vue'),
-    UiButton: () => import('~/components/reuse/UiButton.vue')
+    UiInput: () => import('COMPONENTS/reuse/UiInput.vue'),
+    UiButton: () => import('COMPONENTS/reuse/UiButton.vue')
   },
   props: {
     value: {

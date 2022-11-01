@@ -12,7 +12,7 @@ div.grid.gap-2.p-2.bg-green-100
 </template>
 
 <script>
-  import { getComponentNameByFieldType, getDefaultFieldValue } from "../../constants/adminItems"
+  import { getComponentNameByFieldType, getDefaultFieldValue } from "CONSTANTS/adminItems"
 
   export default {
     name: "CategoryItemFields",
@@ -27,11 +27,11 @@ div.grid.gap-2.p-2.bg-green-100
       }
     },
     components: {
-      UiButton: () => import("../../components/reuse/UiButton"),
-      UiInput: () => import("../../components/reuse/UiInput"),
-      UiInputNumber: () => import("../../components/reuse/UiInputNumber"),
-      UiItems: () => import("../../components/reuse/UiItems"),
-      UiCheckbox: () => import("../../components/reuse/UiCheckbox"),
+      UiButton: () => import("COMPONENTS/reuse/UiButton"),
+      UiInput: () => import("COMPONENTS/reuse/UiInput"),
+      UiInputNumber: () => import("COMPONENTS/reuse/UiInputNumber"),
+      UiItems: () => import("COMPONENTS/reuse/UiItems"),
+      UiCheckbox: () => import("COMPONENTS/reuse/UiCheckbox"),
     },
     data() {
       return {

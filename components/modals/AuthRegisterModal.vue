@@ -69,10 +69,10 @@
 export default {
   name: "AuthRegisterModal",
   components: {
-    TabsComponent: () => import('~/components/contentComponents/TabsComponent'),
-    ModalWrapper: () => import('~/components/modals/ModalWrapper'),
-    UiButton: () => import('~/components/reuse/UiButton.vue'),
-    UiForm: () => import('~/components/reuse/UiForm.vue')
+    TabsComponent: () => import('COMPONENTS/contentComponents/TabsComponent'),
+    ModalWrapper: () => import('COMPONENTS/modals/ModalWrapper'),
+    UiButton: () => import('COMPONENTS/reuse/UiButton.vue'),
+    UiForm: () => import('COMPONENTS/reuse/UiForm.vue')
   },
   props: {
     handleFn: {

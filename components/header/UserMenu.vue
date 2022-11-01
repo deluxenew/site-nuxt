@@ -54,8 +54,8 @@
 
 <script>
 
-import {userMenu} from "../../constants/userMenu";
-import UiButton from "../reuse/UiButton";
+import {userMenu} from "CONSTANTS/userMenu";
+import UiButton from "COMPONENTS/reuse/UiButton";
 
 export default {
   name: "UserMenu",

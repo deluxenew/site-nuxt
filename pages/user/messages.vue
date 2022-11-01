@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import {views} from "~/constants/views";
+  import {views} from "CONSTANTS/views";
 
   const {content: {components: content}, pageTemplates: {components: templates}, ui: {components: ui}} = views
   const components = {...content, ...templates, ...ui}

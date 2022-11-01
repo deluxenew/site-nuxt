@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import UiBlock from "../../reuse/UiBlock";
+  import UiBlock from "COMPONENTS/reuse/UiBlock";
   export default {
     name: "CRUDPanel",
     components: {UiBlock},

@@ -24,8 +24,8 @@
 
 <script>
 
-import YandexMapComponent from "../reuse/YandexMapComponent";
-import { contacts } from "../../constants/contacts";
+import YandexMapComponent from "COMPONENTS/reuse/YandexMapComponent";
+import { contacts } from "CONSTANTS/contacts";
 
 export default {
   name: "ContactsComponent",

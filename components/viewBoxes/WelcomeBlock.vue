@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {views} from "~/constants/views";
+import {views} from "CONSTANTS/views";
 
 const {
   content: {components: content},

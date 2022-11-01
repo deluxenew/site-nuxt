@@ -56,12 +56,12 @@
 </template>
 
 <script>
-  import AuthRegisterModal from "~/components/modals/AuthRegisterModal";
+  import AuthRegisterModal from "COMPONENTS/modals/AuthRegisterModal";
   import HeaderItemComponent from "./items/HeaderItemComponent";
   import HeaderMenu from "./HeaderMenu";
   import UserMenu from "./UserMenu";
   import ContactsComponent from "./ContactsComponent";
-  import CalcProjectForm from "~/components/forms/CalcProjectForm";
+  import CalcProjectForm from "COMPONENTS/forms/CalcProjectForm";
 
   export default {
     name: "HeaderComponent",
@@ -71,7 +71,7 @@
       ContactsComponent,
       HeaderItemComponent,
       CalcProjectForm,
-      DropDown: () => import('~/components/reuse/DropDown'),
+      DropDown: () => import('COMPONENTS/reuse/DropDown'),
       AuthRegisterModal
     },
     props: {

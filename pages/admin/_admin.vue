@@ -26,8 +26,8 @@ div.wrapper
 </template>
 
 <script>
-  import CategoryItemFields from "../../components/forms/CategoryItemFields";
-  import UiButton from "../../components/reuse/UiButton";
+  import CategoryItemFields from "COMPONENTS/forms/CategoryItemFields";
+  import UiButton from "COMPONENTS/reuse/UiButton";
 
   export default {
     name: "AdminPageView",

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import {mainMenu} from "../../constants/mainMenu";
+import {mainMenu} from "CONSTANTS/mainMenu";
 import ProjectIcon from "../customSvgIcons/ProjectIcon";
 
 export default {

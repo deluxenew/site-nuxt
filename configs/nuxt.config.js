@@ -1,12 +1,13 @@
 const debug = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+const { resolve } = require('path')
 
 module.exports = {
+  isDev: debug,
   telemetry: false,
   ssr: true,
   server: {
     port: 3000, // default: 3000
     host: 'localhost',
-    // timing: false
   },
   head: {
     title: 'Строительство из дерева и камня',
@@ -33,6 +34,7 @@ module.exports = {
     { mode: 'client', src: '~/plugins/vue-js-modal' },
     { mode: 'client', src: '~/plugins/vue-notifications' },
     { mode: 'client', src: '~/plugins/persistedstate' },
+    { mode: 'client', src: '~/plugins/constants' },
   ],
   styleResources: {
     scss: [
@@ -144,6 +146,10 @@ module.exports = {
     'nuxt-compress'
   ],
   build: {
+    extend(config) {
+      config.resolve.alias['COMPONENTS'] = '@@/components'
+      config.resolve.alias['CONSTANTS'] = '@@/constants'
+    },
     babel: {
       presets({ envName }) {
         return [

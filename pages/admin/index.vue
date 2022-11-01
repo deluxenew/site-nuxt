@@ -1,6 +1,6 @@
 <template lang="pug">
 div.grid.gap-2.p-3
-  div.title Палень урапвления
+  div.title Палень урапвления "{{$siteName}}"
   div.p-2
     ui-checkbox(v-model="showStaticCategories" label="Показываем категории со статическими данными")
   div.w-100.flex.flex-wrap.gap-4.mt-4
@@ -9,8 +9,8 @@ div.grid.gap-2.p-3
       :key='item.slug'
     )
       nuxt-link(
-        tag='div'
-        :to="'admin/' + item.slug"
+        tag='a'
+        :to="baseRoute + item.slug"
       )
         div.p-4.text-4.transition-all(class='bg-[#50d71e] hover:bg-[#50df1e] cursor-[url(https://cdn.custom-cursor.com/db/5388/32/tree-felling-cursor-b.png),_pointer]')
           | {{item.title}}
@@ -61,12 +61,12 @@ div.grid.gap-2.p-3
 </template>
 
 <script>
-  import UiInput from "../../components/reuse/UiInput";
-  import UiButton from "../../components/reuse/UiButton";
-  import UiSelect from "../../components/reuse/UiSelect";
+  import UiInput from "COMPONENTS/reuse/UiInput";
+  import UiButton from "COMPONENTS/reuse/UiButton";
+  import UiSelect from "COMPONENTS/reuse/UiSelect";
 
-  import { props, getPropVariants } from "../../constants/adminItems"
-  import UiCheckbox from "../../components/reuse/UiCheckbox";
+  import { props, getPropVariants } from "CONSTANTS/adminItems"
+  import UiCheckbox from "COMPONENTS/reuse/UiCheckbox";
   const propExample = {
     key: "",
     value: ""
@@ -101,6 +101,9 @@ div.grid.gap-2.p-3
       await this.fetchAllUserRoles()
     },
     computed: {
+      baseRoute() {
+        return this.$route.path
+      },
       items() {
         return this.$store.getters["admin/ADMIN_CATEGORIES_ALL"]
             .filter(({isStaticValues}) => (!isStaticValues && !this.showStaticCategories) || this.showStaticCategories) || []
