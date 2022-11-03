@@ -23,7 +23,6 @@
     "bcrypt": "^5.0.1",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
-    "chalk": "^5.1.2",
     "consola": "^2.15.3",
     "cookie": "^0.4.1",
     "core-js": "^3.23.3",
@@ -61,6 +60,7 @@
     "stylelint-config-standard": "17.0.0",
     "stylelint-processor-html": "1.0.0",
     "stylelint-scss": "2.5.0",
-    "stylelint-webpack-plugin": "1.2.3"
+    "stylelint-webpack-plugin": "1.2.3",
+    "vue-template-pug-remove-indent-loader": "^0.1.3"
   }
 }

@@ -151,6 +151,10 @@ module.exports = {
     extend(config) {
       config.resolve.alias['COMPONENTS'] = '@@/components'
       config.resolve.alias['CONSTANTS'] = '@@/constants'
+      config.module.rules.push({
+        test: /\.vue$/,
+        loader: require.resolve("vue-template-pug-remove-indent-loader"),
+      })
     },
     babel: {
       presets({ envName }) {
@@ -201,15 +205,6 @@ module.exports = {
         },
       },
     }),
-    // extend(config, ctx) {
-    //   // const pugRule = config.module.rule('pug');
-    //   // pugRule.uses.clear();
-    //   // pugRule.oneOfs.clear();
-    //   config.module.rules.push({
-    //     test: /\.pug$/,
-    //     loader: '@webdiscus/pug-loader',
-    //   })
-    // }
   },
   pwa: {
     manifest: {
