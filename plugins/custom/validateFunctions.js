@@ -14,9 +14,9 @@ export const emailValidateFn = (val, require) => {
   };
 }
 
-export const passwordValidateFn = (val, require) =>  {
+export const passwordValidateFn = (val, require) => {
   requireFieldCheck(val, require)
-  const messageError = (val, re) =>  {
+  const messageError = (val, re) => {
     const cyr = /[^0-9a-zA-Z\-_]/
     if (cyr.test(val.toLowerCase())) return "Недопустимые символы";
     return re;
@@ -28,7 +28,7 @@ export const passwordValidateFn = (val, require) =>  {
   };
 }
 
-export const nameValidateFn = (val, require) =>  {
+export const nameValidateFn = (val, require) => {
   requireFieldCheck(val, require)
   return {
     result: val.length >= 3,

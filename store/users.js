@@ -3,7 +3,7 @@ export const state = () => ({
 })
 
 export const actions = {
-  async GET_USER_ROLES({commit}) {
+  async GET_USER_ROLES({ commit }) {
     const items = await this.$api.getUserRoles()
     console.log(items)
     if (items) {
@@ -20,5 +20,5 @@ export const mutations = {
 }
 
 export const getters = {
-  USER_ROLES: ({userRoles}) => userRoles
+  USER_ROLES: ({ userRoles }) => userRoles
 }

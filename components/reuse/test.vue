@@ -8,22 +8,22 @@
 </template>
 
 <script>
-export default {
-  name: "test",
-  props: {
-    title: {
-      type: String,
-      default: ''
+  export default {
+    name: "test",
+    props: {
+      title: {
+        type: String,
+        default: ''
+      },
+      width: {
+        type: Number,
+        default: 1600
+      },
+      height: {
+        type: Number,
+        default: 1200
+      },
     },
-    width: {
-      type: Number,
-      default: 1600
-    },
-    height: {
-      type: Number,
-      default: 1200
-    },
-  },
-}
+  }
 </script>
 

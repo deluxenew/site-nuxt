@@ -41,37 +41,37 @@
 </template>
 
 <script>
-import FooterComponent from "COMPONENTS/footer/FooterComponent";
-import HeaderComponent from "COMPONENTS/header/HeaderComponent";
+  import FooterComponent from "COMPONENTS/footer/FooterComponent";
+  import HeaderComponent from "COMPONENTS/header/HeaderComponent";
 
-export default {
-  name: "default",
-  transition: 'bounce-fast',
-  components: {FooterComponent, HeaderComponent},
-  data() {
-    return {
-      topMenu: [
-        {
-          itemName: 'contacts',
-          iconName: 'contacts',
-          title: 'Контакты',
-          arrowDown: true,
-        },
-        {
-          itemName: 'calc',
-          iconName: 'calculator',
-          title: 'Калькулятор',
-          arrowDown: true,
-        },
-        {
-          itemName: 'menu',
-          iconName: 'burger',
-          title: 'Меню',
-          arrowDown: true,
-        }
-      ]
+  export default {
+    name: "default",
+    transition: 'bounce-fast',
+    components: { FooterComponent, HeaderComponent },
+    data() {
+      return {
+        topMenu: [
+          {
+            itemName: 'contacts',
+            iconName: 'contacts',
+            title: 'Контакты',
+            arrowDown: true,
+          },
+          {
+            itemName: 'calc',
+            iconName: 'calculator',
+            title: 'Калькулятор',
+            arrowDown: true,
+          },
+          {
+            itemName: 'menu',
+            iconName: 'burger',
+            title: 'Меню',
+            arrowDown: true,
+          }
+        ]
+      }
     }
   }
-}
 </script>
 

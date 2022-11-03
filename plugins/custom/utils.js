@@ -1,4 +1,4 @@
-import {fieldsList} from './formFields'
+import { fieldsList } from './formFields'
 
 export default (isDev) => ({
   formatError(err) {
@@ -33,21 +33,21 @@ export default (isDev) => ({
     return fieldsList[val]
   },
   getFormValues(form) {
-    return form.steps.reduce((obj, {rows}) => {
+    return form.steps.reduce((obj, { rows }) => {
       rows
         .flat()
-        .forEach(({id, value}) => {
+        .forEach(({ id, value }) => {
           obj[id] = value
         })
       return obj
     }, {})
   },
   getRequiredFields(form) {
-    return form.steps.reduce((arr, {rows}) => {
+    return form.steps.reduce((arr, { rows }) => {
       rows
         .flat()
-        .forEach(({id, required}) => {
-         if (required) arr.push(id)
+        .forEach(({ id, required }) => {
+          if (required) arr.push(id)
         })
       return arr
     }, [])

@@ -3,9 +3,12 @@ const propTypes = [
   { title: "Число", value: "number", type: Number, defaultValue: 0 },
   { title: "Массив", value: "array", type: Array, defaultValue: [] },
   { title: "Объект", value: "object", type: Object, defaultValue: {} },
-  { title: "Да/Нет", value: "boolean", type: Boolean, defaultValue: false},
+  { title: "Да/Нет", value: "boolean", type: Boolean, defaultValue: false },
   { title: "Дата", value: "date", type: Date, defaultValue: Date.now },
-  { title: "Функция", value: "function", type: Function, defaultValue: () => {} },
+  {
+    title: "Функция", value: "function", type: Function, defaultValue: () => {
+    }
+  },
 ]
 
 const booleanVariants = [
@@ -46,7 +49,10 @@ const props = [
   },
   {
     title: "Ссылка на поле модели", value: "ref", variants: [
-      { title: "Функция", value: "function", type: Function, defaultValue: () => {} },
+      {
+        title: "Функция", value: "function", type: Function, defaultValue: () => {
+        }
+      },
       { title: "Надпись", value: "string", type: String, defaultValue: "" },
     ]
   },
@@ -71,7 +77,7 @@ const componentNamesByType = {
 }
 
 const getPropVariants = (v) => {
-  const findProp = props.find(({value}) => value === v)
+  const findProp = props.find(({ value }) => value === v)
   if (findProp) return findProp.variants
   return null
 }
@@ -85,7 +91,7 @@ module.exports.propTypes = [
 ]
 
 module.exports.getPropValue = (key, v) => {
-  const findProp = props.find(({value}) => value === key)
+  const findProp = props.find(({ value }) => value === key)
   if (findProp && findProp.variants) {
     const propValue = findProp.variants.find(({ value }) => value === v)
     if (propValue) return propValue.type
@@ -101,8 +107,8 @@ module.exports.getComponentNameByFieldType = (type) => {
 }
 
 module.exports.getDefaultFieldValue = (key, v) => {
-  const findProp = props.find(({value}) => value === key)
+  const findProp = props.find(({ value }) => value === key)
   if (findProp && findProp.variants) {
-    return findProp.variants.find(({value}) => value === v)
+    return findProp.variants.find(({ value }) => value === v)
   }
 }

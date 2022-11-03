@@ -43,9 +43,10 @@
 
 <script>
   import UiBlock from "COMPONENTS/reuse/UiBlock";
+
   export default {
     name: "CRUDPanel",
-    components: {UiBlock},
+    components: { UiBlock },
     props: {
       title: {
         type: String,
@@ -59,14 +60,22 @@
         type: Object,
         default: () => {
           return {
-            addItem: () => {},
-            addItems: () => {},
-            getItems: () => {},
-            getItem: () => {},
-            editItem: () => {},
-            editItems: () => {},
-            removeItem: () => {},
-            removeItems: () => {},
+            addItem: () => {
+            },
+            addItems: () => {
+            },
+            getItems: () => {
+            },
+            getItem: () => {
+            },
+            editItem: () => {
+            },
+            editItems: () => {
+            },
+            removeItem: () => {
+            },
+            removeItems: () => {
+            },
           }
         }
       },

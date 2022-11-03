@@ -12,10 +12,10 @@
 </template>
 
 <script>
-  import {views} from "CONSTANTS/views";
+  import { views } from "CONSTANTS/views";
 
-  const {content: {components: content}, pageTemplates: {components: templates}} = views
-  const components = {...content, ...templates}
+  const { content: { components: content }, pageTemplates: { components: templates } } = views
+  const components = { ...content, ...templates }
 
   export default {
     name: 'UserIndexPage',
@@ -68,16 +68,12 @@
           {
             navTitle: 'Компании',
             slotName: 'four',
-            componentsProps: {
-
-            }
+            componentsProps: {}
           },
           {
             navTitle: 'Инфо',
             slotName: 'five',
-            componentsProps: {
-
-            }
+            componentsProps: {}
           }]
       }
     },

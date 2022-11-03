@@ -18,22 +18,22 @@
       <span class="text">{{ contacts.address }}</span>
     </div>
 
-    <yandex-map-component />
+    <yandex-map-component/>
   </div>
 </template>
 
 <script>
 
-import YandexMapComponent from "COMPONENTS/reuse/YandexMapComponent";
-import { contacts } from "CONSTANTS/contacts";
+  import YandexMapComponent from "COMPONENTS/reuse/YandexMapComponent";
+  import { contacts } from "CONSTANTS/contacts";
 
-export default {
-  name: "ContactsComponent",
-  components: {YandexMapComponent},
-  data() {
-    return {
-      contacts
+  export default {
+    name: "ContactsComponent",
+    components: { YandexMapComponent },
+    data() {
+      return {
+        contacts
+      }
     }
   }
-}
 </script>

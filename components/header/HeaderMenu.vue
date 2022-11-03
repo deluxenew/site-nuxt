@@ -49,22 +49,22 @@
 </template>
 
 <script>
-import {mainMenu} from "CONSTANTS/mainMenu";
-import ProjectIcon from "../customSvgIcons/ProjectIcon";
+  import { mainMenu } from "CONSTANTS/mainMenu";
+  import ProjectIcon from "../customSvgIcons/ProjectIcon";
 
-export default {
-  name: "HeaderMenu",
-  components: {ProjectIcon},
-  props: {},
-  data() {
-    return {
-      items: mainMenu,
-    }
-  },
-  methods: {
-    async itemClick({children}) {
-      this.items = children
+  export default {
+    name: "HeaderMenu",
+    components: { ProjectIcon },
+    props: {},
+    data() {
+      return {
+        items: mainMenu,
+      }
     },
+    methods: {
+      async itemClick({ children }) {
+        this.items = children
+      },
+    }
   }
-}
 </script>

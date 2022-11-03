@@ -29,55 +29,56 @@
 </template>
 
 <script>
-export default {
-  name: "UiForm",
-  components: {
-    UiInput: () => import('COMPONENTS/reuse/UiInput.vue'),
-    UiButton: () => import('COMPONENTS/reuse/UiButton.vue')
-  },
-  props: {
-    value: {
-      type: Object,
-      default: () => {}
+  export default {
+    name: "UiForm",
+    components: {
+      UiInput: () => import('COMPONENTS/reuse/UiInput.vue'),
+      UiButton: () => import('COMPONENTS/reuse/UiButton.vue')
     },
-    id: {
-      type: String,
-      default: '',
-    },
-    title: {
-      type: String,
-      default: '',
-    },
-    loading: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  data() {
-    return {
-      errorBox: [],
-    }
-  },
-  computed: {
-    modelForm: {
-      get() {
-        return this.value
+    props: {
+      value: {
+        type: Object,
+        default: () => {
+        }
       },
-      set(v) {
-        this.$emit('input', v)
+      id: {
+        type: String,
+        default: '',
+      },
+      title: {
+        type: String,
+        default: '',
+      },
+      loading: {
+        type: Boolean,
+        default: false,
       }
     },
-  },
-  methods: {
-    sendData() {
+    data() {
+      return {
+        errorBox: [],
+      }
+    },
+    computed: {
+      modelForm: {
+        get() {
+          return this.value
+        },
+        set(v) {
+          this.$emit('input', v)
+        }
+      },
+    },
+    methods: {
+      sendData() {
 
-    },
-    setError(v) {
-      const idx = this.errorBox.findIndex(({fieldName}) => fieldName === v.fieldName)
-      if (idx) this.errorBox.splice(idx, 1, v)
-      else this.errorBox.push(v)
-    },
+      },
+      setError(v) {
+        const idx = this.errorBox.findIndex(({ fieldName }) => fieldName === v.fieldName)
+        if (idx) this.errorBox.splice(idx, 1, v)
+        else this.errorBox.push(v)
+      },
+    }
   }
-}
 </script>
 

@@ -36,8 +36,7 @@ async function connect() {
     await mongoose.connect(mongoConnectString)
 
     console.log('MONGO_DB_CONNECTED')
-  }
-  catch (e) {
+  } catch (e) {
     console.log(e)
   }
 }

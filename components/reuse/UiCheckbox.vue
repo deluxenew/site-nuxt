@@ -1,10 +1,10 @@
 <template lang="pug">
-div.flex.cursor-pointer.p-2(
-  @click="setClick"
-)
-  div.p-1.flex.align-center.justify-center.w-24.h-24
-    fa-icon(:icon="['fab', 'check']" swapOpacity border :style="stylesIcon")
-  div {{label}}
+  div.flex.cursor-pointer.p-2(
+    @click="setClick"
+  )
+    div.p-1.flex.align-center.justify-center.w-24.h-24
+      fa-icon(:icon="['fab', 'check']" swapOpacity border :style="stylesIcon")
+    div {{label}}
 </template>
 
 <script>

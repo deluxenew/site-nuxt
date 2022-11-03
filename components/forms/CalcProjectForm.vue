@@ -11,17 +11,17 @@
 </template>
 
 <script>
-import UiInput from "COMPONENTS/reuse/UiInput";
+  import UiInput from "COMPONENTS/reuse/UiInput";
 
-export default {
-  name: "CalcProjectForm",
-  components: {UiInput},
-  data() {
-    return {
-      text: '',
-    }
-  },
-}
+  export default {
+    name: "CalcProjectForm",
+    components: { UiInput },
+    data() {
+      return {
+        text: '',
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

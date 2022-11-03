@@ -5,26 +5,20 @@ export const views = {
       WelcomeBlock: () => import ('COMPONENTS/viewBoxes/WelcomeBlock'),
       UserInfo: () => import ('COMPONENTS/UserComponents/UserInfo'),
     },
-    props: {
-
-    }
+    props: {}
   },
   pageTemplates: {
     components: {
       PageView: () => import ('COMPONENTS/views/PageView'),
       SingleScreen: () => import ('COMPONENTS/views/SingleScreen'),
     },
-    props: {
-
-    }
+    props: {}
   },
   ui: {
     components: {
       UiBlock: () => import('COMPONENTS/reuse/UiBlock'),
       PageSectionsNavigate: () => import('COMPONENTS/reuse/PageSectionsNavigate'),
     },
-    props: {
-
-    }
+    props: {}
   }
 }

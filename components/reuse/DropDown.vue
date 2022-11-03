@@ -16,24 +16,24 @@
 </template>
 
 <script>
-export default {
-  name: "DropDown",
-  props: {
-    customStyle: {
-      type: Object,
-      default: () => ({
-        top: 0,
-        height: 0,
-      }),
+  export default {
+    name: "DropDown",
+    props: {
+      customStyle: {
+        type: Object,
+        default: () => ({
+          top: 0,
+          height: 0,
+        }),
+      },
+      animationName: {
+        type: String,
+        default: 'slide-top'
+      },
+      show: {
+        type: Boolean,
+        default: false,
+      }
     },
-    animationName: {
-      type: String,
-      default: 'slide-top'
-    },
-    show: {
-      type: Boolean,
-      default: false,
-    }
-  },
-}
+  }
 </script>

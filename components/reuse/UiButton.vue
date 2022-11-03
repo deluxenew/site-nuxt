@@ -13,36 +13,36 @@
 </template>
 
 <script>
-import UiLoader from "./UiLoader";
+  import UiLoader from "./UiLoader";
 
-export default {
-  name: "UiButton",
-  components: {UiLoader},
-  props: {
-    loading: {
-      type: Boolean,
-      default: false
+  export default {
+    name: "UiButton",
+    components: { UiLoader },
+    props: {
+      loading: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      text: {
+        type: String,
+        default: ''
+      },
+      iconName: {
+        type: String,
+        default: ''
+      }
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    text: {
-      type: String,
-      default: ''
-    },
-    iconName: {
-      type: String,
-      default: ''
-    }
-  },
-  computed: {
-    classes() {
-      return {
-        'with-icon': this.iconName,
-        'transparent': this.loading,
+    computed: {
+      classes() {
+        return {
+          'with-icon': this.iconName,
+          'transparent': this.loading,
+        }
       }
     }
   }
-}
 </script>

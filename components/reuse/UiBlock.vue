@@ -32,72 +32,72 @@
 </template>
 
 <script>
-import UiTooltip from "./UiTooltip";
+  import UiTooltip from "./UiTooltip";
 
-export default {
-  name: "UiBlock",
-  components: {UiTooltip},
-  props: {
-    id: {
-      type: String,
-      default: '',
-    },
-    title: {
-      type: String,
-      default: '',
-    },
-    description: {
-      type: String,
-      default: '',
-    },
-    expandedId: {
-      type: String,
-      default: '',
-    },
-    total: {
-      type: Number,
-      default: 0,
-    },
-    showTitle: {
-      type: Boolean,
-      default: true,
-    },
-    verticalGrow: {
-      type: Number,
-      default: 1,
-    },
-    horizontalGrow: {
-      type: Number,
-      default: 1,
-    }
-  },
-  data() {
-    return {
-      titleWidth: 0,
-      openHelp: false,
-    }
-  },
-  computed: {
-    classes() {
-      return {
-        expanded: this.isExpanded,
-        collapsed: this.isCollapsed
+  export default {
+    name: "UiBlock",
+    components: { UiTooltip },
+    props: {
+      id: {
+        type: String,
+        default: '',
+      },
+      title: {
+        type: String,
+        default: '',
+      },
+      description: {
+        type: String,
+        default: '',
+      },
+      expandedId: {
+        type: String,
+        default: '',
+      },
+      total: {
+        type: Number,
+        default: 0,
+      },
+      showTitle: {
+        type: Boolean,
+        default: true,
+      },
+      verticalGrow: {
+        type: Number,
+        default: 1,
+      },
+      horizontalGrow: {
+        type: Number,
+        default: 1,
       }
     },
-    isExpanded() {
-      return this.expandedId === this.id
+    data() {
+      return {
+        titleWidth: 0,
+        openHelp: false,
+      }
     },
-    isCollapsed() {
-      return this.expandedId !== this.id && this.expandedId
+    computed: {
+      classes() {
+        return {
+          expanded: this.isExpanded,
+          collapsed: this.isCollapsed
+        }
+      },
+      isExpanded() {
+        return this.expandedId === this.id
+      },
+      isCollapsed() {
+        return this.expandedId !== this.id && this.expandedId
+      }
+    },
+    methods: {
+      toggleExpand() {
+        this.$emit('toggleExpand', this.expandedId === this.id ? '' : this.id)
+      },
+    },
+    mounted() {
+      this.titleWidth = this.$refs.title.clientWidth
     }
-  },
-  methods: {
-    toggleExpand() {
-      this.$emit('toggleExpand', this.expandedId === this.id ? '' : this.id)
-    },
-  },
-  mounted() {
-    this.titleWidth = this.$refs.title.clientWidth
   }
-}
 </script>

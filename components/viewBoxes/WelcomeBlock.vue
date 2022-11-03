@@ -11,7 +11,7 @@
         :total="blocks.length"
         :expandedId="expandedId"
         @toggleExpand="toggleExpand"
-       >
+      >
         <component
           :is="block.component"
           :slot="block.id"
@@ -22,37 +22,37 @@
 </template>
 
 <script>
-import {views} from "CONSTANTS/views";
+  import { views } from "CONSTANTS/views";
 
-const {
-  content: {components: content},
-  ui: {components: ui},
-} = views
-const components = {...content, ...ui}
+  const {
+    content: { components: content },
+    ui: { components: ui },
+  } = views
+  const components = { ...content, ...ui }
 
 
-export default {
-  name: "WelcomeBlock",
-  components,
-  props: {
-    title: {
-      type: String,
-      default: 'Строительство домов'
+  export default {
+    name: "WelcomeBlock",
+    components,
+    props: {
+      title: {
+        type: String,
+        default: 'Строительство домов'
+      },
+      blocks: {
+        type: Array,
+        default: () => []
+      },
     },
-    blocks: {
-      type: Array,
-      default: () => []
+    data() {
+      return {
+        expandedId: '',
+      }
     },
-  },
-  data() {
-    return {
-      expandedId: '',
-    }
-  },
-  methods: {
-    toggleExpand(v) {
-      this.expandedId = v
+    methods: {
+      toggleExpand(v) {
+        this.expandedId = v
+      }
     }
   }
-}
 </script>

@@ -4,33 +4,33 @@ export const state = () => ({
 })
 
 export const actions = {
-  async GET_ADMIN_CATEGORIES_ALL({commit}) {
+  async GET_ADMIN_CATEGORIES_ALL({ commit }) {
     const items = await this.$api.getCategories()
     if (items) {
       commit("SET_CATEGORIES", items)
       return items
     }
   },
-  async GET_CATEGORY({dispatch, commit, state}, {route}) {
+  async GET_CATEGORY({ dispatch, commit, state }, { route }) {
     const categoryIdx = state.categories.findIndex((cat) => cat.slug === route)
     if (categoryIdx === -1) {
       await dispatch("GET_ADMIN_CATEGORIES_ALL")
     }
-    const category = await this.$api.getCategoryFull({route})
+    const category = await this.$api.getCategoryFull({ route })
     if (category) {
-      commit("SET_CATEGORY", {category, route})
+      commit("SET_CATEGORY", { category, route })
     }
   },
-  async ADD_CATEGORY_ITEM({commit}, {item, route}) {
-    const categoryItem = await this.$api.addCategoryItem({item, route})
+  async ADD_CATEGORY_ITEM({ commit }, { item, route }) {
+    const categoryItem = await this.$api.addCategoryItem({ item, route })
     if (categoryItem) {
-      commit("SET_CATEGORY_ITEM", {item: categoryItem, route})
+      commit("SET_CATEGORY_ITEM", { item: categoryItem, route })
     }
   },
-  async EDIT_CATEGORY_ITEM({commit}, {item, route}) {
-    const categoryItem = await this.$api.editCategoryItem({item, route})
+  async EDIT_CATEGORY_ITEM({ commit }, { item, route }) {
+    const categoryItem = await this.$api.editCategoryItem({ item, route })
     if (categoryItem) {
-      commit("SET_CATEGORY_ITEM", {item: categoryItem, route})
+      commit("SET_CATEGORY_ITEM", { item: categoryItem, route })
     }
   }
 }
@@ -39,7 +39,7 @@ export const mutations = {
   SET_CATEGORIES: (state, items) => {
     state.categories = items
   },
-  SET_CATEGORY: (state, {category, route}) => {
+  SET_CATEGORY: (state, { category, route }) => {
     const categoryIdx = state.categories.findIndex((cat) => cat.slug === route)
     if (categoryIdx > -1) {
       state.categories.splice(categoryIdx, 1, {
@@ -48,7 +48,7 @@ export const mutations = {
       })
     }
   },
-  SET_CATEGORY_ITEM: (state, {item, route}) => {
+  SET_CATEGORY_ITEM: (state, { item, route }) => {
     const categoryIdx = state.categories.findIndex((cat) => cat.slug === route)
     if (categoryIdx > -1) {
       state.categories[categoryIdx].items.push(item)

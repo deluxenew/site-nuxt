@@ -1,13 +1,13 @@
 <template lang="pug">
-div.grid.gap-2.p-2.bg-green-100
-  div(v-for="field in fieldValues" :key="field.fieldName")
-    component(
-      :is="field.componentName"
-      v-model="field.value"
-      v-bind="field"
-      @input="inputHandler"
-      :key="field.fieldName"
-    )
+  div.grid.gap-2.p-2.bg-green-100
+    div(v-for="field in fieldValues" :key="field.fieldName")
+      component(
+        :is="field.componentName"
+        v-model="field.value"
+        v-bind="field"
+        @input="inputHandler"
+        :key="field.fieldName"
+      )
 
 </template>
 
@@ -19,11 +19,13 @@ div.grid.gap-2.p-2.bg-green-100
     props: {
       value: {
         type: Object,
-        default: () => {}
+        default: () => {
+        }
       },
       fields: {
         type: Object,
-        default: () => {}
+        default: () => {
+        }
       }
     },
     components: {
@@ -41,7 +43,7 @@ div.grid.gap-2.p-2.bg-green-100
     watch: {
       value(v) {
         Object.keys(v).forEach((el) => {
-          const field = this.fieldValues.find(({fieldName}) => fieldName === el)
+          const field = this.fieldValues.find(({ fieldName }) => fieldName === el)
           if (!field) return
           field.value = v[el]
         })
@@ -53,13 +55,11 @@ div.grid.gap-2.p-2.bg-green-100
     mounted() {
       this.fieldValues = this.setInnerFields(this.fields)
     },
-    computed: {
-
-    },
+    computed: {},
     methods: {
       inputHandler() {
         this.$emit('input', this.fieldValues.reduce((acc, el) => {
-          const {value, fieldName} = el
+          const { value, fieldName } = el
           if (!acc[fieldName]) acc[fieldName] = value
           acc[fieldName] = value
           return acc

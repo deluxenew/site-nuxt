@@ -54,27 +54,27 @@
 
 <script>
 
-import {userMenu} from "CONSTANTS/userMenu";
-import UiButton from "COMPONENTS/reuse/UiButton";
+  import { userMenu } from "CONSTANTS/userMenu";
+  import UiButton from "COMPONENTS/reuse/UiButton";
 
-export default {
-  name: "UserMenu",
-  components: {UiButton},
-  props: {},
-  data() {
-    return {
-      items: userMenu,
+  export default {
+    name: "UserMenu",
+    components: { UiButton },
+    props: {},
+    data() {
+      return {
+        items: userMenu,
+      }
+    },
+    methods: {
+      async itemClick({ children }) {
+        this.items = children
+      },
+      async logout() {
+        await this.$store.dispatch('logout')
+        this.$emit('close')
+      },
     }
-  },
-  methods: {
-    async itemClick({children}) {
-      this.items = children
-    },
-    async logout() {
-      await this.$store.dispatch('logout')
-      this.$emit('close')
-    },
   }
-}
 </script>
 

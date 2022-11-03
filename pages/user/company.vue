@@ -6,10 +6,10 @@
 
 <script>
 
-export default {
-  name: "company",
-  middleware: 'isAuth',
-  layout: 'personal',
-  transition: 'bounce-fast'
-}
+  export default {
+    name: "company",
+    middleware: 'isAuth',
+    layout: 'personal',
+    transition: 'bounce-fast'
+  }
 </script>

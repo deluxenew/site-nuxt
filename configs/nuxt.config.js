@@ -17,7 +17,11 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Недорогое строительство под ключ с использованием современных материалов и технологий.' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Недорогое строительство под ключ с использованием современных материалов и технологий.'
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -99,9 +103,7 @@ module.exports = {
       },
     ],
   ],
-  router: {
-
-  },
+  router: {},
   axios: {
     baseURL: `https://${process.env.SERVER_URL}:${process.env.PORT}`,
     withCredentials: true,
@@ -130,10 +132,10 @@ module.exports = {
           type: 'Bearer',
         },
         endpoints: {
-          login: {url: '/api/auth/user/login', method: 'post', propertyName: 'jwt-token'},
-          refresh: {url: '/api/auth/refresh', method: 'post', propertyName: 'refresh_token'},
-          logout: {url: '/api/auth/user/logout', method: 'post'},
-          user: {url: '/api/auth/user/me', method: 'get', propertyName: ''}
+          login: { url: '/api/auth/user/login', method: 'post', propertyName: 'jwt-token' },
+          refresh: { url: '/api/auth/refresh', method: 'post', propertyName: 'refresh_token' },
+          logout: { url: '/api/auth/user/logout', method: 'post' },
+          user: { url: '/api/auth/user/me', method: 'get', propertyName: '' }
         },
 
         tokenRequired: true,

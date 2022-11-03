@@ -127,6 +127,7 @@
       border-radius: 50%;
     }
   }
+
   .vm--top-right-slot {
     width: 0;
     height: 100%;

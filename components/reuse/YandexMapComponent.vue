@@ -24,19 +24,19 @@
 </template>
 
 <script>
-const settings = {
-  apiKey: '421059e0-77b3-486f-adee-ba1f6780d773',
-  lang: 'ru_RU',
-  version: '2.1'
-}
+  const settings = {
+    apiKey: '421059e0-77b3-486f-adee-ba1f6780d773',
+    lang: 'ru_RU',
+    version: '2.1'
+  }
 
-export default {
-  name: "YandexMapComponent",
-  data() {
-    return {
-      settings: settings,
-    }
-  },
-}
+  export default {
+    name: "YandexMapComponent",
+    data() {
+      return {
+        settings: settings,
+      }
+    },
+  }
 </script>
 

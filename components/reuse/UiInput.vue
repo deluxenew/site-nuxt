@@ -12,95 +12,96 @@
       @focus="focus"
     >
     <label ref="label" :for="id">
-     {{ label }}
+      {{ label }}
     </label>
   </div>
 </template>
 
 <script>
-export default {
-  name: "UiInput",
-  props: {
-    value: {
-      type: [String, Number],
-      default: '',
-    },
-    id: {
-      type: String,
-      default: '',
-    },
-    name: {
-      type: String,
-      default: '',
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    placeholder: {
-      type: String,
-      default: '',
-    },
-    classes: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'text',
-    },
-    required: {
-      type: Boolean,
-      default: false,
-    },
-    error: {
-      type: Boolean,
-      default: false,
-    },
-    validateFunction: {
-      type: Function,
-      default: () => {}
-    }
-  },
-  data() {
-    return {
-      indent: 0
-    }
-  },
-  computed: {
-    text: {
-      get() {
-        return this.value
+  export default {
+    name: "UiInput",
+    props: {
+      value: {
+        type: [String, Number],
+        default: '',
       },
-      set(v) {
-        this.$emit('input', v)
+      id: {
+        type: String,
+        default: '',
+      },
+      name: {
+        type: String,
+        default: '',
+      },
+      label: {
+        type: String,
+        default: '',
+      },
+      placeholder: {
+        type: String,
+        default: '',
+      },
+      classes: {
+        type: String,
+        default: '',
+      },
+      type: {
+        type: String,
+        default: 'text',
+      },
+      required: {
+        type: Boolean,
+        default: false,
+      },
+      error: {
+        type: Boolean,
+        default: false,
+      },
+      validateFunction: {
+        type: Function,
+        default: () => {
+        }
       }
     },
-    customClasses() {
-      return this.classes
-    }
-  },
-  watch: {
-    value() {
-      this.indent = this.$refs.label.clientWidth
+    data() {
+      return {
+        indent: 0
+      }
     },
-  },
-  methods: {
-    blur() {
+    computed: {
+      text: {
+        get() {
+          return this.value
+        },
+        set(v) {
+          this.$emit('input', v)
+        }
+      },
+      customClasses() {
+        return this.classes
+      }
+    },
+    watch: {
+      value() {
+        this.indent = this.$refs.label.clientWidth
+      },
+    },
+    methods: {
+      blur() {
+        this.init()
+        this.$emit('setError', { fieldName: this.name, value: this.validateFunction(this.value, this.required) })
+      },
+      init() {
+        this.indent = this.$refs.label.clientWidth
+      },
+      focus() {
+        this.indent = 0
+      }
+    },
+    mounted() {
       this.init()
-      this.$emit('setError', {fieldName: this.name, value: this.validateFunction(this.value, this.required)})
-    },
-    init() {
-      this.indent = this.$refs.label.clientWidth
-    },
-    focus() {
-      this.indent = 0
     }
-  },
-  mounted() {
-    this.init()
   }
-}
 </script>
 
 <style lang="scss" scoped>

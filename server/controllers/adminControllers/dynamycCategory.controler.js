@@ -17,9 +17,9 @@ module.exports.all = async (req, res) => {
 }
 
 module.exports.add = async (req, res) => {
-  const {body} = req
+  const { body } = req
   const Model = await getModelByReqSlug(req)
-  const candidate = await Model.findOne({slug: body.slug})
+  const candidate = await Model.findOne({ slug: body.slug })
 
   if (!candidate) {
     const category = new Model(body)
@@ -29,9 +29,9 @@ module.exports.add = async (req, res) => {
 }
 
 module.exports.edit = async (req, res) => {
-  const {body} = req
+  const { body } = req
   const Model = await getModelByReqSlug(req)
-  const candidate = await Model.findOneAndReplace({slug: body.slug}, body, {new: true})
+  const candidate = await Model.findOneAndReplace({ slug: body.slug }, body, { new: true })
 
   if (candidate) {
     resInterceptors(res, candidate)
@@ -39,9 +39,9 @@ module.exports.edit = async (req, res) => {
 }
 
 module.exports.remove = async (req, res) => {
-  const {params: { id: _id } } = req
+  const { params: { id: _id } } = req
   const Model = await getModelByReqSlug(req)
-  const complete = await Model.deleteOne({_id: _id})
+  const complete = await Model.deleteOne({ _id: _id })
 
   if (complete) {
     resInterceptors(res, complete)

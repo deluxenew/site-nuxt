@@ -8,17 +8,17 @@
 </template>
 
 <script>
-export default {
-  name: "FooterComponent",
-  data() {
-    return {
-      openFooter: false
-    }
-  },
-  methods: {
-    getFooter() {
-      this.openFooter = !this.openFooter
-    }
-  },
-}
+  export default {
+    name: "FooterComponent",
+    data() {
+      return {
+        openFooter: false
+      }
+    },
+    methods: {
+      getFooter() {
+        this.openFooter = !this.openFooter
+      }
+    },
+  }
 </script>

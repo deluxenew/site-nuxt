@@ -1,11 +1,25 @@
 export default (axios) => ({
+  // dynamic
+  getAllDynamic({ url }) {
+    return axios.get(url).then(({ data }) => data)
+  },
+  addItemDynamic({ url, item }) {
+    return axios.post(url, item).then(({ data }) => data)
+  },
+  editItemDynamic({ url, item }) {
+    return axios.put(url, item).then(({ data }) => data)
+  },
+  deleteItemDynamic({ url, item }) {
+    return axios.delete(url, item).then(({ data }) => data)
+  },
+
   me() {
     return axios.get('/api/auth/user/me').then(({ data }) => data)
   },
-  login({login, password}) {
+  login({ login, password }) {
     return axios.post('/api/auth/user/login', { login, password }).then(({ data }) => data)
   },
-  register({name, login, password}) {
+  register({ name, login, password }) {
     return axios.post('/api/auth/user/register', { name, login, password }).then(({ data }) => data)
   },
   logoutAll() {
@@ -29,10 +43,10 @@ export default (axios) => ({
     return axios.post('/api/admin/categories/add', category).then(({ data }) => data)
   },
   editCategory(category) {
-    axios.put('/api/admin/categories/edit', category).then(({ data }) => data)
+    return axios.put('/api/admin/categories/edit', category).then(({ data }) => data)
   },
   removeCategory(id) {
-    axios.delete(`/api/admin/categories/remove/${id}`).then(({ data }) => data)
+    return axios.delete(`/api/admin/categories/remove/${id}`).then(({ data }) => data)
   },
   getCategoryBySlug(slug) {
     return axios.get(`/api/admin/categories/?slug=${slug}`).then(({ data }) => data)
@@ -42,17 +56,17 @@ export default (axios) => ({
   },
 
   // admin
-  getCategoryFull({route}) {
+  getCategoryFull({ route }) {
     return axios.get(`/api/admin/category/${route}/all`).then(({ data }) => data)
   },
-  addCategoryItem({item, route}) {
+  addCategoryItem({ item, route }) {
     return axios.post(`/api/admin/category/${route}/add`, item).then(({ data }) => data)
   },
-  editCategoryItem({route, item}) {
+  editCategoryItem({ route, item }) {
     return axios.put(`/api/admin/category/${route}/edit`, item).then(({ data }) => data)
   },
   removeCategoryItem(route, id) {
-   return  axios.delete(`/api/admin/category/${route}/remove/${id}`).then(({ data }) => data)
+    return axios.delete(`/api/admin/category/${route}/remove/${id}`).then(({ data }) => data)
   },
 
   // admin pages

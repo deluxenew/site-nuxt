@@ -1,6 +1,6 @@
 <template lang="pug">
-transition(name="fade" mode="out-in")
-  nuxt
+  transition(name="fade" mode="out-in")
+    nuxt
 </template>
 
 <script>

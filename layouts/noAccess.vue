@@ -41,51 +41,51 @@
 </template>
 
 <script>
-import FooterComponent from "COMPONENTS/footer/FooterComponent";
-import HeaderComponent from "COMPONENTS/header/HeaderComponent";
+  import FooterComponent from "COMPONENTS/footer/FooterComponent";
+  import HeaderComponent from "COMPONENTS/header/HeaderComponent";
 
-export default {
-  name: 'noAccess',
-  components: {FooterComponent, HeaderComponent},
-  head() {
-    return {
-      title: 'У Вас нет доступа к этой странице',
-      meta: [
+  export default {
+    name: 'noAccess',
+    components: { FooterComponent, HeaderComponent },
+    head() {
+      return {
+        title: 'У Вас нет доступа к этой странице',
+        meta: [
+          {
+            name: 'viewport',
+            content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0'
+          }
+        ]
+      }
+    },
+    data: () => ({
+      menuVisible: false,
+      topMenu: [
         {
-          name: 'viewport',
-          content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0'
+          itemName: 'menu',
+          iconName: 'burger',
+          title: 'Меню',
+          arrowDown: true,
         }
       ]
-    }
-  },
-  data: () => ({
-    menuVisible: false,
-    topMenu: [
-      {
-        itemName: 'menu',
-        iconName: 'burger',
-        title: 'Меню',
-        arrowDown: true,
+    }),
+    computed: {
+      isAuth() {
+        return this.$store.getters["IS_AUTH"]
       }
-    ]
-  }),
-  computed: {
-    isAuth() {
-      return this.$store.getters["IS_AUTH"]
-    }
-  },
-  methods: {
-    menuToggle() {
-      this.menuVisible = !this.menuVisible;
-    }
-  },
+    },
+    methods: {
+      menuToggle() {
+        this.menuVisible = !this.menuVisible;
+      }
+    },
     async mounted() {
       await this.$nextTick()
-    this.$auth.$storage.watchState('loggedIn', isLogin => {
-      if (isLogin) this.$router.push('/user')
-    });
-  },
-}
+      this.$auth.$storage.watchState('loggedIn', isLogin => {
+        if (isLogin) this.$router.push('/user')
+      });
+    },
+  }
 </script>
 
 

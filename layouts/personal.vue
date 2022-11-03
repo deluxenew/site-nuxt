@@ -46,7 +46,7 @@
   export default {
     name: "personal",
     transition: 'bounce-fast',
-    components: {FooterComponent, HeaderComponent},
+    components: { FooterComponent, HeaderComponent },
     data() {
       return {
         pageHeight: 0,

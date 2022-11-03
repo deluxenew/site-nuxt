@@ -27,43 +27,43 @@
       </label>
       <div class="back"></div>
     </nav>
-  <section :key="tab + 'sec'" v-for="tab in Object.keys(tabs)">
-    <transition name="fade" mode="out-in">
-      <slot v-if="tab === checked" :name="checked" />
-    </transition>
-  </section>
+    <section :key="tab + 'sec'" v-for="tab in Object.keys(tabs)">
+      <transition name="fade" mode="out-in">
+        <slot v-if="tab === checked" :name="checked"/>
+      </transition>
+    </section>
   </div>
 </template>
 
 <script>
-export default {
-  name: "TabsComponent",
-  props: {
-    value: {
-      type: String,
-      default: ''
-    },
-    tabs: {
-      type: Object,
-      default: () => ({})
-    },
-  },
-  data() {
-    return {
-      ind: 0
-    }
-  },
-  computed: {
-    checked: {
-      get() {
-        return this.value
+  export default {
+    name: "TabsComponent",
+    props: {
+      value: {
+        type: String,
+        default: ''
       },
-      set(v) {
-        this.$emit('input', v)
+      tabs: {
+        type: Object,
+        default: () => ({})
+      },
+    },
+    data() {
+      return {
+        ind: 0
+      }
+    },
+    computed: {
+      checked: {
+        get() {
+          return this.value
+        },
+        set(v) {
+          this.$emit('input', v)
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">

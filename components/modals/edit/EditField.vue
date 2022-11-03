@@ -82,7 +82,6 @@
         return this.$store.getters["IS_LOADING"]
       },
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
