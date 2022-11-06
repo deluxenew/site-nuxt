@@ -1,6 +1,6 @@
 <template lang="pug">
   div.grid.gap-2.p-3
-    div.title Палень урапвления "{{$siteName}}"
+    div.title Палень урапвления "{{ siteName }}"
     div.p-2
       ui-checkbox(v-model="showStaticCategories" label="Показываем категории со статическими данными")
     div.w-100.flex.flex-wrap.gap-4.mt-4
@@ -10,7 +10,7 @@
       )
         nuxt-link(
           tag='a'
-          :to="baseRoute + item.slug"
+          :to="baseRoute + item.slug + '/'"
         )
           div.p-4.text-4.transition-all(class='bg-[#50d71e] hover:bg-[#50df1e] cursor-[url(https://cdn.custom-cursor.com/db/5388/32/tree-felling-cursor-b.png),_pointer]')
             | {{item.title}}
@@ -83,6 +83,7 @@
     layout: "admin",
     name: "index",
     fetchOnServer: false,
+    middleware: ["isAuth"],
     fetchDelay: 0,
     data() {
       return {
@@ -102,6 +103,9 @@
       await this.fetchAllUserRoles()
     },
     computed: {
+      siteName() {
+        return this.$siteName
+      },
       baseRoute() {
         return this.$route.path
       },

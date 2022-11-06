@@ -33,6 +33,7 @@
     name: "AdminPageView",
     components: { UiButton, CategoryItemFields },
     layout: "admin",
+    middleware: ["isAuth"],
     fetchOnServer: false,
     fetchDelay: 0,
     data() {

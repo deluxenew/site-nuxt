@@ -18,6 +18,7 @@
     "@nuxtjs/auth-next": "^5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "5.12.5",
     "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/redirect-module": "^0.3.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",

@@ -15,8 +15,8 @@ export const userMenu = [
   },
   {
     id: 3,
-    title: "Настройки",
-    link: "/user/settings",
+    title: "Админка",
+    link: "/admin/",
     iconName: "home",
   },
   {

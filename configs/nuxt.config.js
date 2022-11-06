@@ -45,12 +45,19 @@ module.exports = {
       '@/assets/vars/variables.scss',
     ]
   },
+  redirect: [ {
+    from: '^(?!.*\\?).*(?<!\\/)$',
+    to: (from, req) => {
+      return req.url + '/';
+    }
+  }],
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/auth-next',
     'vue-yandex-maps/nuxt',
+    '@nuxtjs/redirect-module',
     ['nuxt-font-loader-strategy', {
       ignoreLighthouse: true,
       ignoredEffectiveTypes: ['2g', 'slow-2g'],
@@ -103,7 +110,10 @@ module.exports = {
       },
     ],
   ],
-  router: {},
+  router:  {
+
+  },
+  serverMiddleware: ['~/serverMiddleware/selectiveSSR'],
   axios: {
     baseURL: `https://${process.env.SERVER_URL}:${process.env.PORT}`,
     withCredentials: true,
