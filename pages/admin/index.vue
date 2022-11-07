@@ -44,7 +44,7 @@
             div.grid.gap-2
               div.grid.gap-2.grid-cols-2(v-for='(prop, i) in field.props' :key='i')
                 div
-                  ui-select(v-model='prop.key' :items="props" type='text' label='Код')
+                  ui-select(v-model='prop.key' :items="getFilteredItems(field.value, prop.items)" type='text' label='Код')
                 div.flex
                   ui-select(v-model='prop.value' :items="getPropVariants(prop.key)" type='text' label='Значение')
                   div.flex.align-center.justify-center.w-48.cursor-pointer.p-2(
@@ -70,7 +70,8 @@
 
   const propExample = {
     key: "",
-    value: ""
+    value: "",
+    items: [...props]
   }
   const fieldExample = {
     key: "",
@@ -123,9 +124,6 @@
                 value: el.slug,
               }
             })
-      },
-      props() {
-        return [...props]
       },
       fieldsObject() {
         return this.fields.reduce((acc, el) => {
@@ -206,18 +204,22 @@
         this.minAccessLevel = minAccessLevel
         if (!fields) this.fields = []
         else this.fields = Object.keys(fields)
-            .map((fieldName) => {
+            .map((fieldValue) => {
               return {
-                value: fieldName,
-                props: Object.keys(fields[fieldName])
-                    .map((propName) => {
+                value: fieldValue,
+                props: Object.keys(fields[fieldValue])
+                    .map((propKey) => {
                       return {
-                        key: propName,
-                        value: fields[fieldName][propName]
+                        key: propKey,
+                        value: fields[fieldValue][propKey],
+                        items: [...props]
                       }
                     })
               }
             })
+      },
+      getFilteredItems(fieldValue, items) {
+        return items && items.filter(({ value }) => !this.fieldsObject[fieldValue][value])
       },
       async fetchAllCategories() {
         await this.$store.dispatch("admin/GET_ADMIN_CATEGORIES_ALL")
