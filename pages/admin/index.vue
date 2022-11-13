@@ -199,7 +199,7 @@
         this.slug = slug
         this.title = title
         this.collectionName = collectionName
-        this.parent = parent
+        this.parent = !!parent ? parent : ''
         this.isStaticValues = isStaticValues
         this.minAccessLevel = minAccessLevel
         if (!fields) this.fields = []

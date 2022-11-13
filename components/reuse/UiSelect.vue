@@ -28,6 +28,7 @@
       <div class="flex flex-col">
         <div
           class="p-4 cursor-pointer hover:bg-[#50df1e]"
+          :class="{'bg-[#00ff00]': item.value === value}"
           v-for="item in items"
           @click="clickItem(item)"
         >

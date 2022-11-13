@@ -12,7 +12,8 @@
 
     <template slot="modal-body">
       <div class="row">
-        <UiInput
+        <component
+          :is="componentName"
           v-model="model"
           v-bind="$utils.formFieldByName(fieldName)"
           :label="fieldLabel"
@@ -41,6 +42,10 @@
   export default {
     name: "EditField",
     props: {
+      componentName: {
+        type: String,
+        default: "UiInput"
+      },
       fieldName: {
         type: String,
         default: '',
@@ -71,6 +76,7 @@
       ModalWrapper: () => import('COMPONENTS/modals/ModalWrapper'),
       UiButton: () => import('COMPONENTS/reuse/UiButton'),
       UiInput: () => import('COMPONENTS/reuse/UiInput'),
+      UiImageCrop: () => import('COMPONENTS/reuse/UiImageCrop')
     },
     data() {
       return {

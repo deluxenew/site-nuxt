@@ -71,6 +71,7 @@
           this.$modal.show(
               editField,
               {
+                componentName: item === "avatar" ? "UiImageCrop" : "UiInput",
                 fieldName: item,
                 title: `Редактирование поля \"${this.user[item].title}\"`,
                 fieldLabel: this.user[item].title,
